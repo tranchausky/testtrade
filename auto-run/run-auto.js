@@ -1,5 +1,3 @@
-<html>
-<script>
 function setTimeoutAgain()
 {
 	
@@ -8,20 +6,28 @@ function setTimeoutAgain()
 		
 	   var se = getSecond()
 	   //console.log('run-'+se)
-	   if(se ==30){
-		   //console.log('30')
+	   
+	   if(se ==4){
+		   setHistory()
+		   changeWay()
 	   }
+	   
 	   if(se ==7){
+		   var numberSet =getValueSet()
+		   setPrice(numberSet)
+	   }
+	   if(se ==8){
 		   //console.log(se)
 		   build()
 	   }
-	   if(se ==3){
-		   setPrice()
+	   if(se ==30){
+		   //console.log('30')
 	   }
 		setTimeoutAgain()
    },1000);
 }
 var isWIN=true;
+var glb_whatWay=true; //up/down
 var tem={};
 tem.old=getMoney();
 tem.new=0;
@@ -34,8 +40,8 @@ function reloadIsWin(){
 	tem.old = tem.new
 	return status
 }
-function setPrice(){
-	jQuery('#InputNumber').val('3').trigger('focus')
+function setPrice(number){
+	jQuery('#InputNumber').val(number).trigger('focus')
    jQuery('#rightContent .btnSuccess').trigger('focus')
 }
 function getMoney(){
@@ -51,18 +57,12 @@ function build(){
 		jQuery('#rightContent .btnSuccess').trigger('click')
 	}
 	
+	//glb_whatWay check to up/down
+	
 	setPrice()
 	//console.log("is win: "+reloadIsWin())
 }
-function autoBuildCase(){
-	if(colorAt(0)==false && colorAt(1)==false && colorAt(2)==false){
-		return false;
-	}
-	if(colorAt(0)==false && colorAt(1)==false){
-		return true;
-	}
-	return true
-}
+
 
 function addZero(i) {
   if (i < 10) {
@@ -117,8 +117,32 @@ function getValueSet(){
 	return valueSet
 }
 
+//set value if lost/win
+function setHistory(){
+	//console.log(se)
+   atLastWin = reloadIsWin()
+   if(atLastWin ==false){
+	   numberLastFalse++
+   }else{
+	   numberLastFalse=0
+   }
+   //resert value, alot of lost, back to 0
+   if(numberLastFalse == lostValueSet.length-1){
+	   numberLastFalse=0
+   }
+}
+
+function changeWay(){
+	var way = true;
+	if(colorAt(0)==false && colorAt(1)==false && colorAt(2)==false){
+		way = false;
+	}
+	if(colorAt(0)==false && colorAt(1)==false){
+		way = true;
+	}
+	glb_whatWay =way
+}
+
 setTimeoutAgain()
 
 //check have internet
-</script>
-</html>
