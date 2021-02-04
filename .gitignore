@@ -4,7 +4,6 @@ Resources/doc/_build/*
 nbproject
 .idea
 coverage
-composer.lock
 /vendor
 composer.phar
 .php_cs.cache
