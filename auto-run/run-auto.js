@@ -169,8 +169,8 @@ function changeWay(){
 
 setTimeoutAgain()
 
-function clog(value){
-	console.log(value)
+function clog(vl){
+	console.log(vl)
 }
 
 //check have internet
