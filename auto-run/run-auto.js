@@ -4,21 +4,21 @@ function setTimeoutAgain()
    {
 
        var se = getSecond()
-       console.log('run-'+se)
+       clog('run-'+se)
 
        if(se ==4){
-       		console.log('run-setHistory-changeWay')
+       		clog('run-setHistory-changeWay')
            setHistory()
            changeWay()
        }
 
        if(se ==7){
-       		console.log('run- set prices')
+       		clog('run- set prices')
            var numberSet =getValueSet()
            setPrice(numberSet)
        }
        if(se ==15){
-           console.log('Build')
+           clog('Build')
            build()
        }
        if(se ==30){
@@ -67,17 +67,17 @@ function build(){
     switch (glb_whatWay){
     	case true:
     		//up
-    		console.log('buy up')
+    		clog('buy up')
     		jQuery('#rightContent .btnSuccess').trigger('click')
     		break;
     	case false:
     		//down
-    		console.log('buy down')
+    		clog('buy down')
     		jQuery('#rightContent .btnDown').trigger('click')
     		break;
     	default:
     		//no action buy
-    		console.log('no buy')
+    		clog('no buy')
     		break;
     }
     
@@ -168,5 +168,9 @@ function changeWay(){
 }
 
 setTimeoutAgain()
+
+function clog(value){
+	console.log(value)
+}
 
 //check have internet
