@@ -4,19 +4,21 @@ function setTimeoutAgain()
    {
 
        var se = getSecond()
-       //console.log('run-'+se)
+       console.log('run-'+se)
 
        if(se ==4){
+       		console.log('run-setHistory-changeWay')
            setHistory()
            changeWay()
        }
 
        if(se ==7){
+       		console.log('run- set prices')
            var numberSet =getValueSet()
            setPrice(numberSet)
        }
-       if(se ==8){
-           //console.log(se)
+       if(se ==15){
+           console.log('Build')
            build()
        }
        if(se ==30){
@@ -51,15 +53,34 @@ function getMoney(){
     return tien
 }
 function build(){
-    var isOff = jQuery('#rightContent .btnSuccess').hasClass('colorDisable')
-    if(isOff == false){
-        jQuery('#rightContent .btnSuccess').trigger('click')
-    }
+    //var isOff = jQuery('#rightContent .btnSuccess').hasClass('colorDisable')
+    //if(isOff == false){
+    //    jQuery('#rightContent .btnSuccess').trigger('click')
+    //}
 
     //glb_whatWay check to up/down
 
-    setPrice()
+    //setPrice()
     //console.log("is win: "+reloadIsWin())
+    
+    
+    switch (glb_whatWay){
+    	case true:
+    		//up
+    		console.log('buy up')
+    		jQuery('#rightContent .btnSuccess').trigger('click')
+    		break;
+    	case false:
+    		//down
+    		console.log('buy down')
+    		jQuery('#rightContent .btnDown').trigger('click')
+    		break;
+    	default:
+    		//no action buy
+    		console.log('no buy')
+    		break;
+    }
+    
 }
 
 
@@ -82,7 +103,8 @@ var clGreen='#31BAA0'
 var clRed='#FC5F5F'
 //true=green, false=red
 function colorAt(at){
-    var postion = $('.highcharts-series-group').eq(0).find('path').eq(at)
+	var last=52-at
+    var postion = $('.highcharts-series-group').eq(0).find('path').eq(last)
     var attr = postion.attr('fill')
 
     if(attr==clRed){
@@ -132,11 +154,14 @@ function setHistory(){
 }
 
 function changeWay(){
-    var way = true;
+    var way = null;
     if(colorAt(0)==false && colorAt(1)==false && colorAt(2)==false){
-        way = false;
+     	way = false;
     }
     if(colorAt(0)==false && colorAt(1)==false){
+        way = true;
+    }
+    if(colorAt(0)==true && colorAt(1)==true && colorAt(2)==true){
         way = true;
     }
     glb_whatWay =way
