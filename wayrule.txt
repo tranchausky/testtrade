@@ -1,17 +1,17 @@
-if(colorAt(0)==false && colorAt(1)==false && colorAt(2)==false){
-     	way = false;
-    }
-    if(colorAt(0)==false && colorAt(1)==false){
-        way = true;
-    }
-    if(colorAt(0)==true && colorAt(1)==true && colorAt(2)==true){
-        way = true;
-    }
-    
-Neu cai sau cung la xuong, cai sau cung -1 la xuong, cai sau cung -2 xuong 
--> chon xuong
-Neu cai sau cung la xuong, cai sau cung -1 la xuong
--> chon xuong
-Neu cai sau cung la len, cai sau cung -1 la len, cai sau cung -2 len
--> chon len
-Con lai khong danh gi ca
+
+FLow rule
+
+1/xanh
+xdxxx->x
+xxxd->x
+xxxx->x
+dxd->x
+xxd->x
+
+2/do
+dxxdd->d
+dddx->d
+dddd->d
+xdx->d
+ddx->d
+

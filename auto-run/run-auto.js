@@ -6,24 +6,26 @@ function setTimeoutAgain()
        var se = getSecond()
        clog('run-'+se)
 
-       if(se ==4){
-       		clog('run-setHistory-changeWay')
-           setHistory()
-           changeWay()
-       }
+       //if(se ==4){
+       		//clog('run-setHistory')
+       //    setHistory()
+           
+       //}
 
-       if(se ==7){
-       		clog('run- set prices')
-           var numberSet =getValueSet()
-           setPrice(numberSet)
-       }
-       if(se ==15){
+       //if(se ==7){
+       		//clog('run- set prices')
+           //var numberSet =getValueSet()
+           //setPrice(numberSet)
+       //}
+       
+       if(se ==25){
            clog('Build')
-           build()
+           changeWay()
+           
        }
-       if(se ==30){
+       //if(se ==30){
            //console.log('30')
-       }
+       //}
         setTimeoutAgain()
    },1000);
 }
@@ -155,16 +157,44 @@ function setHistory(){
 
 function changeWay(){
     var way = null;
-    if(colorAt(0)==false && colorAt(1)==false && colorAt(2)==false){
+    
+    //1-true
+    if(colorAt(0)==true && colorAt(1)==false && colorAt(2)==true && colorAt(3)==true && colorAt(4)==true){
+     	way = true;
+    }
+    if(colorAt(0)==true && colorAt(1)==true && colorAt(2)==true && colorAt(3)==false){
+     	way = true;
+    }
+    if(colorAt(0)==true && colorAt(1)==true && colorAt(2)==true && colorAt(3)==true){
+     	way = true;
+    }
+    if(colorAt(0)==false && colorAt(1)==true && colorAt(2)==false){
+     	way = true;
+    }
+    if(colorAt(0)==true && colorAt(1)==true && colorAt(2)==false){
+     	way = true;
+    }
+    //2 false
+    
+    if(colorAt(0)==false && colorAt(1)==true && colorAt(2)==false && colorAt(3)==false && colorAt(4)==false){
      	way = false;
     }
-    if(colorAt(0)==false && colorAt(1)==false){
-        way = true;
+    if(colorAt(0)==false && colorAt(1)==false && colorAt(2)==false && colorAt(3)==true){
+     	way = false;
     }
-    if(colorAt(0)==true && colorAt(1)==true && colorAt(2)==true){
-        way = true;
+    if(colorAt(0)==false && colorAt(1)==false && colorAt(2)==false && colorAt(3)==false){
+     	way = false;
     }
-    glb_whatWay =way
+    if(colorAt(0)==true && colorAt(1)==false && colorAt(2)==true){
+     	way = false;
+    }
+    if(colorAt(0)==false && colorAt(1)==false && colorAt(2)==true){
+     	way = false;
+    }
+    
+    glb_whatWay = way
+    build()
+    
 }
 
 setTimeoutAgain()
