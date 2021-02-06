@@ -3,6 +3,7 @@ FLow rule
 
 1/xanh
 xdxxx->x
+dxxxx ->x ----
 xxxd->x
 xxxx->x
 xxx->x
@@ -11,9 +12,12 @@ xxd->x
 
 2/do
 dxxdd->d
+xdddd->d ---
 dddx->d
 dddd->d
 ddd->d
 xdx->d
 ddx->d
+
+
 

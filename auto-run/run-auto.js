@@ -4,7 +4,7 @@ function setTimeoutAgain()
    {
 
        var se = getSecond()
-       clog('run-'+se)
+       //clog('run-'+se)
 
        //if(se ==4){
        		//clog('run-setHistory')
@@ -20,7 +20,8 @@ function setTimeoutAgain()
        
        if(se ==27){
            clog('Build')
-           changeWay()
+           //changeWay()
+           build(changeWay())
            
        }
        //if(se ==30){
@@ -54,7 +55,7 @@ function getMoney(){
     tien = parseFloat(tien.substring(1));
     return tien
 }
-function build(){
+function build(isWay){
     //var isOff = jQuery('#rightContent .btnSuccess').hasClass('colorDisable')
     //if(isOff == false){
     //    jQuery('#rightContent .btnSuccess').trigger('click')
@@ -64,9 +65,8 @@ function build(){
 
     //setPrice()
     //console.log("is win: "+reloadIsWin())
-    
-    
-    switch (glb_whatWay){
+	clog('is--isWay:'+isWay)
+    switch (isWay){
     	case true:
     		//up
     		clog('buy up')
@@ -160,46 +160,67 @@ function changeWay(){
     
     //1-true
     if(colorAt(0)==true && colorAt(1)==false && colorAt(2)==true && colorAt(3)==true && colorAt(4)==true){
-     	way = true;
+     	clog('xdxxx->x')
+     	return true;
+    }
+    if(colorAt(0)==false && colorAt(1)==true && colorAt(2)==true && colorAt(3)==true && colorAt(4)==true){
+     	clog('dxxxx->x')
+     	return true;
     }
     if(colorAt(0)==true && colorAt(1)==true && colorAt(2)==true && colorAt(3)==false){
-     	way = true;
+    	clog('xxxd->x')
+     return true;
     }
     if(colorAt(0)==true && colorAt(1)==true && colorAt(2)==true && colorAt(3)==true){
-     	way = true;
+    	clog('xxxx->x')
+     	return  true;
     }
     if(colorAt(0)==true && colorAt(1)==true && colorAt(2)==true){
-     	way = true;
+    	clog('xxx->x')
+     	return true;
     }
     if(colorAt(0)==false && colorAt(1)==true && colorAt(2)==false){
-     	way = true;
+    	clog('dxd->x')
+     	return true;
     }
     if(colorAt(0)==true && colorAt(1)==true && colorAt(2)==false){
-     	way = true;
+    	clog('xxd->x')
+     	return true;
     }
     //2 false
     
     if(colorAt(0)==false && colorAt(1)==true && colorAt(2)==false && colorAt(3)==false && colorAt(4)==false){
-     	way = false;
+    	clog('dxddd->d')
+     	return false;
+    }
+    if(colorAt(0)==true && colorAt(1)==false && colorAt(2)==false && colorAt(3)==false && colorAt(4)==false){
+    	clog('xdddd->d')
+     	return false;
     }
     if(colorAt(0)==false && colorAt(1)==false && colorAt(2)==false && colorAt(3)==true){
-     	way = false;
+    	clog('dddx->d')
+     	return false;
     }
     if(colorAt(0)==false && colorAt(1)==false && colorAt(2)==false && colorAt(3)==false){
-     	way = false;
+    	clog('dddd->d')
+     	return false;
     }
     if(colorAt(0)==false && colorAt(1)==false && colorAt(2)==false){
-     	way = false;
+    	clog('ddd->d')
+     	return false;
     }
     if(colorAt(0)==true && colorAt(1)==false && colorAt(2)==true){
-     	way = false;
+    	clog('xdx->d')
+     	return false;
     }
     if(colorAt(0)==false && colorAt(1)==false && colorAt(2)==true){
-     	way = false;
+    	clog('ddx->d')
+     	return false;
     }
+    return way;
+    //glb_whatWay = way
+    //return way
     
-    glb_whatWay = way
-    build()
     
 }
 
