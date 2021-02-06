@@ -5,6 +5,7 @@ FLow rule
 xdxxx->x
 xxxd->x
 xxxx->x
+xxx->x
 dxd->x
 xxd->x
 
@@ -12,6 +13,7 @@ xxd->x
 dxxdd->d
 dddx->d
 dddd->d
+ddd->d
 xdx->d
 ddx->d
 

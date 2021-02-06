@@ -168,6 +168,9 @@ function changeWay(){
     if(colorAt(0)==true && colorAt(1)==true && colorAt(2)==true && colorAt(3)==true){
      	way = true;
     }
+    if(colorAt(0)==true && colorAt(1)==true && colorAt(2)==true){
+     	way = true;
+    }
     if(colorAt(0)==false && colorAt(1)==true && colorAt(2)==false){
      	way = true;
     }
@@ -183,6 +186,9 @@ function changeWay(){
      	way = false;
     }
     if(colorAt(0)==false && colorAt(1)==false && colorAt(2)==false && colorAt(3)==false){
+     	way = false;
+    }
+    if(colorAt(0)==false && colorAt(1)==false && colorAt(2)==false){
      	way = false;
     }
     if(colorAt(0)==true && colorAt(1)==false && colorAt(2)==true){
