@@ -237,7 +237,7 @@ function changeWayV2() {
         3: "xdxxd->x",
         4: "xxdxxd->x",
         5: "xxxdxxd->x",
-        6:"dxd->x"
+        6:"dxd->x",
         7: "xdx->d",
         8: "ddd->d",
         9: "dddx->d",
@@ -246,7 +246,7 @@ function changeWayV2() {
         12: "ddxddx->d",
         13: "dddxddx->d",
         14: "d->x",
-        15: "d->x"
+        15: "x->d"
     };
 
     for (var property in listRule) {

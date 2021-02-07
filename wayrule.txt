@@ -17,4 +17,4 @@ FLow rule
         12: "ddxddx->d",
         13: "dddxddx->d",
         14: "d->x",
-        15: "d->x"
+        15: "x->d"
