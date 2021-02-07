@@ -1,23 +1,20 @@
 
 FLow rule
 
-1/xanh
-xdxxx->x
-dxxxx ->x ----
-xxxd->x
-xxxx->x
-xxx->x
-dxd->x
-xxd->x
 
-2/do
-dxxdd->d
-xdddd->d ---
-dddx->d
-dddd->d
-ddd->d
-xdx->d
-ddx->d
-
-
-
+ 		0: "xxx->x",
+        1: "xxxd->x",
+        2: "xxxxd->x",
+        3: "xdxxd->x",
+        4: "xxdxxd->x",
+        5: "xxxdxxd->x",
+        6:"dxd->x",
+        7: "xdx->d",
+        8: "ddd->d",
+        9: "dddx->d",
+        10: "ddddx->d",
+        11: "dxddx->d",
+        12: "ddxddx->d",
+        13: "dddxddx->d",
+        14: "d->x",
+        15: "d->x"
