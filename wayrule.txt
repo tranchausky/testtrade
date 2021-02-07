@@ -8,7 +8,7 @@ FLow rule
         3: "xdxxd->x",
         4: "xxdxxd->x",
         5: "xxxdxxd->x",
-        6:"dxd->x",
+        6: "dxd->x",
         7: "xdx->d",
         8: "ddd->d",
         9: "dddx->d",

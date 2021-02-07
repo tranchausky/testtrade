@@ -15,7 +15,7 @@ function setTimeoutAgain() {
         //setPrice(numberSet)
         //}
 
-        if (se == 25) {
+        if (se == 27) {
             clog("Build");
             //changeWay()
             // build(changeWay())
