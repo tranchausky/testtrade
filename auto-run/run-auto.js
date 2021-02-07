@@ -230,24 +230,32 @@ function changeWay() {
 }
 
 function changeWayV2() {
-    var listRule = {
-        0: "xxx->x",
-        1: "xxxd->x",
-        2: "xxxxd->x",
-        3: "xdxxd->x",
-        4: "xxdxxd->x",
-        5: "xxxdxxd->x",
-        6:"dxd->x",
-        7: "xdx->d",
-        8: "ddd->d",
-        9: "dddx->d",
-        10: "ddddx->d",
-        11: "dxddx->d",
-        12: "ddxddx->d",
-        13: "dddxddx->d",
-        14: "d->x",
-        15: "x->d"
-    };
+    var listRule = [
+"xxdd->''",
+"ddxxdd->''",
+"ddxx->''",
+"xxddxx->''",
+"xxd->''",
+"ddx->''",
+
+"xxx->x",
+"xxxd->x",
+"xxxxd->x",
+"xdxxd->x",
+"xxdxxd->x",
+"xxxdxxd->x",
+"dxd->x",
+
+"xdx->d",
+"ddd->d",
+"dddx->d",
+"ddddx->d",
+"dxddx->d",
+"ddxddx->d",
+"dddxddx->d",
+"d->x",
+"x->d"
+];
 
     for (var property in listRule) {
         var rule = listRule[property];
