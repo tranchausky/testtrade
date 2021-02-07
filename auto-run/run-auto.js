@@ -105,8 +105,12 @@ var clGreen='#31BAA0'
 var clRed='#FC5F5F'
 //true=green, false=red
 function colorAt(at){
-	var last=52-at
-    var postion = $('.highcharts-series-group').eq(0).find('path').eq(last)
+
+ var lenght = $('.highcharts-series-group').eq(0).find('g').eq(0).find('path').length-1
+	var last=lenght-parseInt(at)
+    //var postion = $('.highcharts-series-group').eq(0).find('path').eq(last)
+    var postion = $('.highcharts-series-group').eq(0).find('g').eq(0).find('path').eq(last)
+    
     var attr = postion.attr('fill')
 
     if(attr==clRed){
@@ -114,6 +118,13 @@ function colorAt(at){
     }
     return true;
     //return attr;
+}
+function test(){
+	console.log(colorAt(0))
+    console.log(colorAt(1))
+    console.log(colorAt(2))
+    console.log(colorAt(3))
+    console.log(colorAt(4))
 }
 
 //status last win/lost
@@ -163,10 +174,13 @@ function changeWay(){
      	clog('xdxxx->x')
      	return true;
     }
+    
     if(colorAt(0)==false && colorAt(1)==true && colorAt(2)==true && colorAt(3)==true && colorAt(4)==true){
      	clog('dxxxx->x')
      	return true;
     }
+    
+    
     if(colorAt(0)==true && colorAt(1)==true && colorAt(2)==true && colorAt(3)==false){
     	clog('xxxd->x')
      return true;
