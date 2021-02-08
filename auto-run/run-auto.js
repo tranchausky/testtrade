@@ -3,7 +3,7 @@ function setTimeoutAgain() {
         var se = getSecond();
         //clog('run-'+se)
 
-        if(se ==4){
+        if(se ==22){
             clog('run-setHistory')
             setHistory()
 
@@ -131,16 +131,16 @@ var numberLastFalse = 0;
 var lostValueSet = {
     0: 1,
     1: 2,
-    3: 4,
-    4: 8,
-    5: 16,
-    6: 32,
-    7: 64
+    2: 4,
+    3: 8,
+    4: 16,
+    5: 32,
+    6: 64
 };
 //get money back
 function getValueSet() {
     var valueSet = 1;
-    if (atLastWin == false) {
+    if (atLastWin != true) {
         valueSet = lostValueSet[numberLastFalse];
     }
     return valueSet;
@@ -270,7 +270,7 @@ function changeWayV2() {
 "xxxxxx->d"
 ];
 
-listRule = array.sort((a,b) => b.length - a.length);
+listRule = listRule.sort((a,b) => b.length - a.length);
 
     for (var property in listRule) {
         var rule = listRule[property];
