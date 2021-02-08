@@ -3,17 +3,17 @@ function setTimeoutAgain() {
         var se = getSecond();
         //clog('run-'+se)
 
-        //if(se ==4){
-        //clog('run-setHistory')
-        //    setHistory()
+        if(se ==4){
+            clog('run-setHistory')
+            setHistory()
 
-        //}
+        }
 
-        //if(se ==7){
+        if(se ==7){
         //clog('run- set prices')
-        //var numberSet =getValueSet()
-        //setPrice(numberSet)
-        //}
+            var numberSet =getValueSet()
+            setPrice(numberSet)
+        }
 
         if (se == 27) {
             clog("Build");
@@ -34,9 +34,12 @@ tem.old = getMoney();
 tem.new = 0;
 function reloadIsWin() {
     tem.new = getMoney();
-    var status = false;
+    var status = 'no-change';
     if (tem.new > tem.old) {
         status = true;
+    }
+    if (tem.new < tem.old) {
+        status = false;
     }
     tem.old = tem.new;
     return status;
@@ -133,8 +136,7 @@ var lostValueSet = {
     4: 8,
     5: 16,
     6: 32,
-    7: 64,
-    8: 128,
+    7: 64
 };
 //get money back
 function getValueSet() {
@@ -149,11 +151,19 @@ function getValueSet() {
 function setHistory() {
     //console.log(se)
     atLastWin = reloadIsWin();
-    if (atLastWin == false) {
-        numberLastFalse++;
-    } else {
-        numberLastFalse = 0;
+    
+    switch (atLastWin){
+        case false:
+            numberLastFalse++;
+            break;
+        case true:
+            numberLastFalse = 0;
+            break;
+        default:
+            break;
     }
+    console.log('last_event:'+ atLastWin)
+    console.log('number lost:'+ numberLastFalse)
     //resert value, alot of lost, back to 0
     if (numberLastFalse == lostValueSet.length - 1) {
         numberLastFalse = 0;
