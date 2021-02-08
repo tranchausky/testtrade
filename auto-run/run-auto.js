@@ -8,11 +8,10 @@ function setTimeoutAgain() {
             setHistory()
 
         }
-
-        if(se ==7){
+        if(se ==25){
         //clog('run- set prices')
-            var numberSet =getValueSet()
-            setPrice(numberSet)
+            var numberSet =getValueSet();
+            setPrice(numberSet);
         }
 
         if (se == 27) {
@@ -241,14 +240,14 @@ function changeWay() {
 
 function changeWayV2() {
     var listRule = [
-"xxdd->''",
-"ddxxdd->''",
-"ddxx->''",
-"xxddxx->''",
-"xxd->''",
-"ddx->''",
-"dxx->''",
-"xdd->''",
+"xxdd->0",
+"ddxxdd->0",
+"ddxx->0",
+"xxddxx->0",
+"xxd->0",
+"ddx->0",
+"dxx->0",
+"xdd->0",
 
 "xxx->x",
 "xxxd->x",
@@ -257,6 +256,8 @@ function changeWayV2() {
 "xxdxxd->x",
 "xxxdxxd->x",
 "dxd->x",
+"dxxxx->x",
+"dddddd->x",
 
 "xdx->d",
 "ddd->d",
@@ -264,8 +265,12 @@ function changeWayV2() {
 "ddddx->d",
 "dxddx->d",
 "ddxddx->d",
-"dddxddx->d"
+"dddxddx->d",
+"xdddd->d",
+"xxxxxx->d"
 ];
+
+listRule = array.sort((a,b) => b.length - a.length);
 
     for (var property in listRule) {
         var rule = listRule[property];
@@ -294,15 +299,6 @@ function getListColor() {
     var listColor = [];
 
     var size = $(".highcharts-series-group").eq(0).find("g").eq(0).find("path").length - 1;
-    //var last = lenght - parseInt(i);
-    //var postion = $('.highcharts-series-group').eq(0).find('path').eq(last)
-    //var postion = $('.highcharts-series-group').eq(0).find('g').eq(0).find('path').eq(last)
-
-    //var attr = postion.attr('fill')
-
-    //if(attr==clRed){
-    //    return false
-    //}
 
     for (var i = size; i >= 0; i--) {
         var postion = $(".highcharts-series-group").eq(0).find("g").eq(0).find("path").eq(i);

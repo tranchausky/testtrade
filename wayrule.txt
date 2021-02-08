@@ -2,14 +2,14 @@
 FLow rule
 
 [
-"xxdd->''",
-"ddxxdd->''",
-"ddxx->''",
-"xxddxx->''",
-"xxd->''",
-"ddx->''",
-"dxx->''",
-"xdd->''",
+"xxdd->0",
+"ddxxdd->0",
+"ddxx->0",
+"xxddxx->0",
+"xxd->0",
+"ddx->0",
+"dxx->0",
+"xdd->0",
 
 "xxx->x",
 "xxxd->x",
@@ -18,6 +18,8 @@ FLow rule
 "xxdxxd->x",
 "xxxdxxd->x",
 "dxd->x",
+"dxxxx->x",  ---
+"dddddd->x", ---
 
 "xdx->d",
 "ddd->d",
@@ -26,6 +28,8 @@ FLow rule
 "dxddx->d",
 "ddxddx->d",
 "dddxddx->d",
+"xdddd->d", ---
+"xxxxxx->d" ---
 
 ];
 
