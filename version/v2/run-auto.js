@@ -271,8 +271,7 @@ function changeWayV2() {
 "xxx->x",
 "xxxd->x",
 "xxxxd->x",
-"xdxxd->x",
-"xxdxxd->x",
+
 "xxxdxxd->x",
 "dxd->x",
 "dxxxx->x",
@@ -282,8 +281,8 @@ function changeWayV2() {
 "ddd->d",
 "dddx->d",
 "ddddx->d",
-"dxddx->d",
-"ddxddx->d",
+
+
 "dddxddx->d",
 "xdddd->d",
 "xxxxxx->d"
