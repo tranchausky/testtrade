@@ -27,7 +27,7 @@ function setTimeoutAgain() {
             //}
         }
 
-        if (se == 28 && tem.is_show_first ==true) {
+        if (se == 27 && tem.is_show_first ==true) {
             clog("Build");
             //changeWay()
             // build(changeWay())
@@ -48,7 +48,7 @@ tem.first = getMoney();
 tem.is_show_first = true;
 tem.time_old = new Date().toLocaleTimeString();
 tem.time_win = '';
-tem.total_play = '';
+tem.total_play = 0;
 
 
 function reloadIsWin() {
@@ -86,8 +86,8 @@ function build(isWay) {
     //console.log("is win: "+reloadIsWin())
 
 
-    var moneycurrent = parseFloat($('#InputNumber').val())
-    tem.total_play = tem.total_play + moneycurrent;
+    var moneycurrent = $('#InputNumber').val()
+    
 
     clog("is--isWay:" + isWay);
     switch (isWay) {
@@ -95,11 +95,13 @@ function build(isWay) {
             //up
             clog("buy up");
             jQuery("#rightContent .btnSuccess").trigger("click");
+            tem.total_play = parseFloat(tem.total_play) + parseFloat(moneycurrent);
             break;
         case 'd':
             //down
             clog("buy down");
             jQuery("#rightContent .btnDown").trigger("click");
+            tem.total_play = parseFloat(tem.total_play) + parseFloat(moneycurrent);
             break;
         default:
             //no action buy
