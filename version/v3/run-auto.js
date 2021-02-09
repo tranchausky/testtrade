@@ -27,7 +27,7 @@ function setTimeoutAgain() {
             //}
         }
 
-        if (se == 27 && tem.is_show_first ==true) {
+        if (se == 28 && tem.is_show_first ==true) {
             clog("Build");
             //changeWay()
             // build(changeWay())
@@ -48,6 +48,7 @@ tem.first = getMoney();
 tem.is_show_first = true;
 tem.time_old = new Date().toLocaleTimeString();
 tem.time_win = '';
+tem.total_play = '';
 
 
 function reloadIsWin() {
@@ -83,6 +84,11 @@ function build(isWay) {
 
     //setPrice()
     //console.log("is win: "+reloadIsWin())
+
+
+    var moneycurrent = parseFloat($('#InputNumber').val())
+    tem.total_play = tem.total_play + moneycurrent;
+
     clog("is--isWay:" + isWay);
     switch (isWay) {
         case 'x':
@@ -100,6 +106,7 @@ function build(isWay) {
             clog("no buy");
             break;
     }
+    console.log('play total money: '+tem.total_play)
 }
 
 function addZero(i) {
@@ -261,8 +268,8 @@ function changeWayV2() {
     var listRule = [
 "d->d",
 "x->x",
-"dxdxd->x",
-"xdxdx->d"
+"dxdx->d",
+"xdxd->x"
 ];
 
 listRule = listRule.sort((a,b) => b.length - a.length);
