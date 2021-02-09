@@ -24,5 +24,5 @@ fileref.setAttribute("src", "https://tranquil-fjord-14350.herokuapp.com/version/
 document.getElementsByTagName("head")[0].appendChild(fileref)
 
 
-lást version
-console.log('run it version: Tue Feb  9 16:56:06 +07 2021')
+last version
+console.log('run it version: Tue Feb  9 18:10:34 +07 2021')
