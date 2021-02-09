@@ -13,13 +13,13 @@ function setTimeoutAgain() {
            // var numberSet =getValueSet();
           //  setPrice(numberSet);
         //}
-        var is_build = true;
+        //var is_build = true;
         if(se ==20 && tem.is_show_first ==true){
             //stop win if get 50 usd
             var current = getMoney();
             console.log('change money from '+tem.first +' to ' +current+' ='+ ( current-tem.first) )
             if(current - tem.first > 50 ){
-                is_build = false;
+                //is_build = false;
                 tem.is_show_first =false;
                 tem.time_win = new Date().toLocaleTimeString();
                 clog('Win over 50usd from '+tem.first +' to '+current)
@@ -27,7 +27,7 @@ function setTimeoutAgain() {
             }
         }
 
-        if (se == 27 && is_build ==true) {
+        if (se == 27 && tem.is_show_first ==true) {
             clog("Build");
             //changeWay()
             // build(changeWay())
