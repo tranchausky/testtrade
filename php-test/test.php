@@ -4,6 +4,9 @@
 $server = $url ["host"];
 $username = $url ["user"];
 $password = $url ["pass"];
+
+var_dump($url);die;
+
 $db = substr ($url ["path"], 1);
 
 $link = mysqli_connect ($server, $username, $password, $db);
