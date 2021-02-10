@@ -1,8 +1,16 @@
 <pre>
-<?php
+<? php $url = parse_url (getenv ("CLEARDB_DATABASE_URL"));
 
-var_dump($_ENV['CLEARDB_DATABASE_URL']);
+$server = $url ["host"];
+$username = $url ["user"];
+$password = $url ["pass"];
+$db = substr ($url ["path"], 1);
 
-//$path = getenv('PATH');
-//var_dump($path);
+$link = mysqli_connect ($server, $username, $password, $db);
+$result = mysqli_query ($link,"select * from user");
+
+while ($user = mysqli_fetch_array ($result)) {
+echo $user ['id'],":" ;, $user ['name'],"<br>" ;;
+}
+?>
 
