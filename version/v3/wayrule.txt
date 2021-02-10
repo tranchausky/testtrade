@@ -25,4 +25,4 @@ document.getElementsByTagName("head")[0].appendChild(fileref)
 
 
 last version
-console.log('run it version: Tue Feb  9 18:10:34 +07 2021')
+console.log('run it version: Wed Feb 10 12:31:37 +07 2021')
