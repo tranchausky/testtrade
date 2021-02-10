@@ -4,8 +4,8 @@ FLow rule
 [
 "d->d",
 "x->x",
-"dxdx->d",
-"xdxd->x"
+"dxdx->x",
+"xdxd->d"
 ];
 
 

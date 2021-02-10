@@ -270,8 +270,8 @@ function changeWayV2() {
     var listRule = [
 "d->d",
 "x->x",
-"dxdx->d",
-"xdxd->x"
+"dxdx->x",
+"xdxd->d"
 ];
 
 listRule = listRule.sort((a,b) => b.length - a.length);
