@@ -28,7 +28,7 @@ $database = new Medoo([
 	'port' => $GLOBALS['database']['port'],
 ]);
 
-function getDataBase($database,$table,$where,$select){
+function getDataBase($database,$table,$where=null,$select=null){
 	$table_default= $table;
 
 	$select_default = [
@@ -42,7 +42,7 @@ function getDataBase($database,$table,$where,$select){
 	$select_default = $select;
 
 	$where_default= $where;
-	$data = $database->select($table_default, $select_default, $where_default);
+	$data = $database->debug()->select($table_default, $select_default, $where_default);
 	return $data;
 }
 
@@ -65,7 +65,7 @@ function updateDataBase($database,$table,$where,$data_save){
 
 
 
-$datas = getDataBase($database,'tb_logs',[],[]);
+$datas = getDataBase($database,'tb_logs',[],['id']);
 
 var_dump($datas);
 	
