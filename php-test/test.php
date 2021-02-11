@@ -1,19 +1,71 @@
-<pre>
-<? php $url = parse_url (getenv ("CLEARDB_DATABASE_URL"));
+<?php
 
-$server = $url ["host"];
-$username = $url ["user"];
-$password = $url ["pass"];
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-var_dump($url);die;
+require_once 'Medoo.php';
 
-$db = substr ($url ["path"], 1);
+use Medoo\Medoo;
 
-$link = mysqli_connect ($server, $username, $password, $db);
-$result = mysqli_query ($link,"select * from user");
 
-while ($user = mysqli_fetch_array ($result)) {
-echo $user ['id'],":" ;, $user ['name'],"<br>" ;;
+$GLOBALS['database'] =[];
+$GLOBALS['database']['mysql'] ='mysql';
+$GLOBALS['database']['port'] =3306;
+$GLOBALS['database']['database_name'] ='heroku_70bfc511ebb62d1';
+$GLOBALS['database']['server'] ='us-cdbr-east-03.cleardb.com';
+$GLOBALS['database']['username'] ='b3ed1b424d4edd';
+$GLOBALS['database']['password'] ='defef1da';
+
+
+$database = new Medoo([
+	'database_type' => $GLOBALS['database']['mysql'],
+	'database_name' => $GLOBALS['database']['database_name'],
+	'server' => $GLOBALS['database']['server'],
+	'username' => $GLOBALS['database']['username'],
+	'password' => $GLOBALS['database']['password'],
+	'charset' => 'utf8mb4',
+	'collation' => 'utf8mb4_general_ci',
+	'port' => $GLOBALS['database']['port'],
+]);
+
+function getDataBase($database,$table,$where,$select){
+	$table_default= $table;
+
+	$select_default = [
+		'id','link'
+	];
+	$where_default = [
+		'status'=>'url',
+		'LIMIT' => [0,100]
+	];
+
+	$select_default = $select;
+
+	$where_default= $where;
+	$data = $database->select($table_default, $select_default, $where_default);
+	return $data;
 }
-?>
 
+function insertDataBase($database,$table,$datas){
+	$table_default= $table;
+	$info = $database->insert($table_default,$datas);
+	return $info;
+}
+
+function updateDataBase($database,$table,$where,$data_save){
+	$table_default= $table;
+	$where_default = [
+		'id'=>'1'
+	];
+	$where_default = $where;
+
+	$data = $database->update($table_default, $data_save, $where_default);
+	return $data;
+}
+
+
+
+$datas = getDataBase($database,'tb_logs',[],[]);
+
+var_dump($datas);
+	
