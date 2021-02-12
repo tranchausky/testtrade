@@ -1,0 +1,44 @@
+
+FLow rule
+
+[
+"xxdd->0",
+"ddxxdd->0",
+"ddxx->0",
+"xxddxx->0",
+"xxd->0",
+"ddx->0",
+"dxx->0",
+"xdd->0",
+
+"xxx->x",
+"xxxd->x",
+"xxxxd->x",
+"xdxxd->x",
+"xxdxxd->x",
+"xxxdxxd->x",
+"dxd->x",
+"dxxxx->x",  ---
+"dddddd->x", ---
+
+"xdx->d",
+"ddd->d",
+"dddx->d",
+"ddddx->d",
+"dxddx->d",
+"ddxddx->d",
+"dddxddx->d",
+"xdddd->d", ---
+"xxxxxx->d" ---
+
+];
+
+var lostValueSet = {
+  	0: 1,
+    1: 2,
+    2: 4,
+    3: 8,
+    4: 16,
+    5: 32,
+    6: 64
+};
