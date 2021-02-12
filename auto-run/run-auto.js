@@ -3,18 +3,30 @@ function setTimeoutAgain() {
         var se = getSecond();
         //clog('run-'+se)
 
-        if(se ==22){
+        if(se ==5 && tem.is_show_first ==true){
             clog('run-setHistory')
             setHistory()
-
         }
-        if(se ==25){
+        if(se ==10 && tem.is_show_first ==true){
         //clog('run- set prices')
-            var numberSet =getValueSet();
-            setPrice(numberSet);
+            
+
+            var current = getMoney();
+            console.log('change money from '+tem.first +' to ' +current+' ='+ ( current-tem.first) )
+            if(current - tem.first > tem.maxWin ){
+
+                //is_build = false;
+                tem.is_show_first =false;
+                tem.time_win = new Date().toLocaleTimeString();
+                clog('Win over 50usd from '+tem.first +' to '+current)
+                clog("from "+ tem.time_old +' to '+tem.time_win) 
+            }else{
+                var numberSet =getValueSet();
+                setPrice(numberSet);
+            }
         }
 
-        if (se == 27) {
+        if (se == 27 && tem.is_show_first ==true) {
             clog("Build");
             //changeWay()
             // build(changeWay())
@@ -31,6 +43,12 @@ var glb_whatWay = true; //up/down
 var tem = {};
 tem.old = getMoney();
 tem.new = 0;
+tem.first = getMoney();
+tem.is_show_first = true;
+tem.time_old = new Date().toLocaleTimeString();
+tem.time_win = '';
+tem.maxWin = 50;
+
 function reloadIsWin() {
     tem.new = getMoney();
     var status = 'no-change';
@@ -43,8 +61,9 @@ function reloadIsWin() {
     tem.old = tem.new;
     return status;
 }
-function setPrice(number) {
-    jQuery("#InputNumber").val(number).trigger("focus");
+function setPrice(conso) {
+    conso = conso.toString();
+    jQuery("#InputNumber").val(conso).trigger("focus");
     jQuery("#rightContent .btnSuccess").trigger("focus");
 }
 function getMoney() {
@@ -115,13 +134,6 @@ function colorAt(at) {
     return true;
     //return attr;
 }
-function test() {
-    console.log(colorAt(0));
-    console.log(colorAt(1));
-    console.log(colorAt(2));
-    console.log(colorAt(3));
-    console.log(colorAt(4));
-}
 
 //status last win/lost
 var atLastWin = false;
@@ -134,8 +146,7 @@ var lostValueSet = {
     2: 4,
     3: 8,
     4: 16,
-    5: 32,
-    6: 64
+    5: 32
 };
 //get money back
 function getValueSet() {
@@ -164,7 +175,7 @@ function setHistory() {
     console.log('last_event:'+ atLastWin)
     console.log('number lost:'+ numberLastFalse)
     //resert value, alot of lost, back to 0
-    if (numberLastFalse == lostValueSet.length - 1) {
+    if (numberLastFalse >= lostValueSet.length - 1) {
         numberLastFalse = 0;
     }
 }

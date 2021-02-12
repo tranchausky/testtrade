@@ -28,9 +28,8 @@ FLow rule
 "dxddx->d",
 "ddxddx->d",
 "dddxddx->d",
-"xdddd->d", ---
-"xxxxxx->d" ---
-
+"xdddd->d",
+"xxxxxx->d"
 ];
 
 var lostValueSet = {
@@ -39,6 +38,5 @@ var lostValueSet = {
     2: 4,
     3: 8,
     4: 16,
-    5: 32,
-    6: 64
+    5: 32
 };
