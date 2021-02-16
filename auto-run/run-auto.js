@@ -9,7 +9,6 @@ function setTimeoutAgain() {
         }
         if(se ==10 && tem.is_show_first ==true){
         //clog('run- set prices')
-            
 
             var current = getMoney();
             console.log('change money from '+tem.first +' to ' +current+' ='+ ( current-tem.first) )
@@ -28,6 +27,8 @@ function setTimeoutAgain() {
 
         if (se == 27 && tem.is_show_first ==true) {
             clog("Build");
+            var numberSet =getValueSet();
+            setPrice(numberSet);
             //changeWay()
             // build(changeWay())
             build(changeWayV2());
@@ -267,8 +268,8 @@ function changeWayV2() {
 "xxdxxd->x",
 "xxxdxxd->x",
 "dxd->x",
-"dxxxx->x",
-"dddddd->x",
+"dxxx->x",
+"dxxdxxxx->x",
 
 "xdx->d",
 "ddd->d",
@@ -277,8 +278,7 @@ function changeWayV2() {
 "dxddx->d",
 "ddxddx->d",
 "dddxddx->d",
-"xdddd->d",
-"xxxxxx->d"
+"xddxdddd->x"
 ];
 
 listRule = listRule.sort((a,b) => b.length - a.length);

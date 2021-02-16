@@ -18,8 +18,8 @@ FLow rule
 "xxdxxd->x",
 "xxxdxxd->x",
 "dxd->x",
-"dxxxx->x",  ---
-"dddddd->x", ---
+"dxxx->x",
+"dxxdxxxx->x",
 
 "xdx->d",
 "ddd->d",
@@ -28,8 +28,7 @@ FLow rule
 "dxddx->d",
 "ddxddx->d",
 "dddxddx->d",
-"xdddd->d",
-"xxxxxx->d"
+"xddxdddd->x"
 ];
 
 var lostValueSet = {
