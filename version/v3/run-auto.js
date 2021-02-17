@@ -268,8 +268,8 @@ function changeWay() {
 
 function changeWayV2() {
 var listRule = [
-    "d->d",
-    "x->x",
+    "d->x",
+    "x->d",
     "dddd->d",
     "xxxx->x"
 ];
