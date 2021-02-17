@@ -27,7 +27,7 @@ function setTimeoutAgain() {
             //}
         }
 
-        if (se == 27 && tem.is_show_first ==true) {
+        if (se == 28 && tem.is_show_first ==true) {
             clog("Build");
             //changeWay()
             // build(changeWay())
@@ -267,11 +267,11 @@ function changeWay() {
 }
 
 function changeWayV2() {
-    var listRule = [
-"d->d",
-"x->x",
-"dxdx->x",
-"xdxd->d"
+var listRule = [
+    "d->d",
+    "x->x",
+    "dddd->d",
+    "xxxx->x"
 ];
 
 listRule = listRule.sort((a,b) => b.length - a.length);
