@@ -1,33 +1,33 @@
 function setTimeoutAgain() {
-    var t = setTimeout(function () {
+    var t = setTimeout(function() {
         var se = getSecond();
         //clog('run-'+se)
 
-        if(se ==22){
+        if (se == 22) {
             //clog('run-setHistory')
             setHistory()
 
         }
-       // if(se ==25){
+        // if(se ==25){
         //clog('run- set prices')
-           // var numberSet =getValueSet();
-          //  setPrice(numberSet);
+        // var numberSet =getValueSet();
+        //  setPrice(numberSet);
         //}
         //var is_build = true;
-        if(se ==20 && tem.is_show_first ==true){
+        if (se == 20 && tem.is_show_first == true) {
             //stop win if get 50 usd
             var current = getMoney();
-            console.log('change money from '+tem.first +' to ' +current+' ='+ ( current-tem.first) )
-            //if(current - tem.first > 50 ){
+            console.log('change money from ' + tem.first + ' to ' + current + ' =' + (current - tem.first))
+                //if(current - tem.first > 50 ){
                 //is_build = false;
                 //tem.is_show_first =false;
-                tem.time_win = new Date().toLocaleTimeString();
+            tem.time_win = new Date().toLocaleTimeString();
             //    clog('Win over 50usd from '+tem.first +' to '+current)
-                clog("from "+ tem.time_old +' to '+tem.time_win) 
-            //}
+            clog("from " + tem.time_old + ' to ' + tem.time_win)
+                //}
         }
 
-        if (se == 28 && tem.is_show_first ==true) {
+        if (se == 28 && tem.is_show_first == true) {
             clog("Build");
             //changeWay()
             // build(changeWay())
@@ -63,10 +63,18 @@ function reloadIsWin() {
     tem.old = tem.new;
     return status;
 }
+
 function setPrice(number) {
-    jQuery("#InputNumber").val(number).trigger("focus");
-    jQuery("#rightContent .btnSuccess").trigger("focus");
+    conso = conso.toString();
+    jQuery("#InputNumber").val(conso);
+    $(function() {
+        $('#InputNumber').keydown();
+        $('#InputNumber').keypress();
+        $('#InputNumber').keyup();
+        $('#InputNumber').blur();
+    });
 }
+
 function getMoney() {
     var tien = jQuery(".balance b").text();
 
@@ -74,6 +82,7 @@ function getMoney() {
     tien = parseFloat(tien.substring(1));
     return tien;
 }
+
 function build(isWay) {
     //var isOff = jQuery('#rightContent .btnSuccess').hasClass('colorDisable')
     //if(isOff == false){
@@ -87,7 +96,7 @@ function build(isWay) {
 
 
     var moneycurrent = $('#InputNumber').val()
-    
+
 
     clog("is--isWay:" + isWay);
     switch (isWay) {
@@ -108,7 +117,7 @@ function build(isWay) {
             clog("no buy");
             break;
     }
-    console.log('play total money: '+tem.total_play)
+    console.log('play total money: ' + tem.total_play)
 }
 
 function addZero(i) {
@@ -117,6 +126,7 @@ function addZero(i) {
     }
     return i;
 }
+
 function getSecond() {
     var d = new Date();
     //var x = document.getElementById("demo");
@@ -143,6 +153,7 @@ function colorAt(at) {
     return true;
     //return attr;
 }
+
 function test() {
     console.log(colorAt(0));
     console.log(colorAt(1));
@@ -178,8 +189,8 @@ function getValueSet() {
 function setHistory() {
     //console.log(se)
     atLastWin = reloadIsWin();
-    
-    switch (atLastWin){
+
+    switch (atLastWin) {
         case false:
             numberLastFalse++;
             break;
@@ -189,9 +200,9 @@ function setHistory() {
         default:
             break;
     }
-    console.log('last_event:'+ atLastWin)
-    //console.log('number lost:'+ numberLastFalse)
-    //resert value, alot of lost, back to 0
+    console.log('last_event:' + atLastWin)
+        //console.log('number lost:'+ numberLastFalse)
+        //resert value, alot of lost, back to 0
     if (numberLastFalse == lostValueSet.length - 1) {
         numberLastFalse = 0;
     }
@@ -267,14 +278,14 @@ function changeWay() {
 }
 
 function changeWayV2() {
-var listRule = [
-    "d->x",
-    "x->d",
-    "dddd->d",
-    "xxxx->x"
-];
+    var listRule = [
+        "d->x",
+        "x->d",
+        "dddd->d",
+        "xxxx->x"
+    ];
 
-listRule = listRule.sort((a,b) => b.length - a.length);
+    listRule = listRule.sort((a, b) => b.length - a.length);
 
     for (var property in listRule) {
         var rule = listRule[property];
@@ -285,8 +296,7 @@ listRule = listRule.sort((a,b) => b.length - a.length);
             var colors = getListColor();
             var isCheck = true;
             for (var propertyOne in listCheck) {
-                if (colors[propertyOne] == listCheck[propertyOne]) {
-                } else {
+                if (colors[propertyOne] == listCheck[propertyOne]) {} else {
                     isCheck = false;
                 }
             }
@@ -312,10 +322,10 @@ function getListColor() {
         if (attr == clRed) {
             way = 'd';
         }
-        
+
         listColor.push(way);
     }
-	//console.log(listColor)
+    //console.log(listColor)
     return listColor;
 }
 
@@ -326,4 +336,3 @@ function clog(vl) {
 }
 
 //check have internet
-

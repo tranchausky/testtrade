@@ -1,34 +1,13 @@
 
 FLow rule
 
-[
-"xxdd->0",
-"ddxxdd->0",
-"ddxx->0",
-"xxddxx->0",
-"xxd->0",
-"ddx->0",
-"dxx->0",
-"xdd->0",
-
-"xxx->x",
-"xxxd->x",
-"xxxxd->x",
-"xdxxd->x",
-"xxdxxd->x",
-"xxxdxxd->x",
-"dxd->x",
-"dxxx->x",
-"dxxdxxxx->x",
-
-"xdx->d",
-"ddd->d",
-"dddx->d",
-"ddddx->d",
-"dxddx->d",
-"ddxddx->d",
-"dddxddx->d",
-"xddxdddd->x"
+ var listRule = [
+    "xd->x",
+    "dx->x",
+    "dd->x",
+    "xx->d",
+    "xxx->x",
+    "ddd->d"
 ];
 
 var lostValueSet = {
@@ -40,7 +19,6 @@ var lostValueSet = {
     5: 32
 };
 
-Limit win 50 usd will stop trade.
 
 Open web
 Goto wefinex

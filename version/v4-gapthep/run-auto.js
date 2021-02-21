@@ -1,16 +1,16 @@
 function setTimeoutAgain() {
-    var t = setTimeout(function () {
+    var t = setTimeout(function() {
         var se = getSecond();
         //clog('run-'+se)
 
-        if(se ==22){
+        if (se == 22) {
             clog('run-setHistory')
             setHistory()
 
         }
-        if(se ==25){
-        //clog('run- set prices')
-            var numberSet =getValueSet();
+        if (se == 25) {
+            //clog('run- set prices')
+            var numberSet = getValueSet();
             setPrice(numberSet);
         }
 
@@ -31,6 +31,7 @@ var glb_whatWay = true; //up/down
 var tem = {};
 tem.old = getMoney();
 tem.new = 0;
+
 function reloadIsWin() {
     tem.new = getMoney();
     var status = 'no-change';
@@ -43,10 +44,18 @@ function reloadIsWin() {
     tem.old = tem.new;
     return status;
 }
+
 function setPrice(number) {
-    jQuery("#InputNumber").val(number).trigger("focus");
-    jQuery("#rightContent .btnSuccess").trigger("focus");
+    conso = conso.toString();
+    jQuery("#InputNumber").val(conso);
+    $(function() {
+        $('#InputNumber').keydown();
+        $('#InputNumber').keypress();
+        $('#InputNumber').keyup();
+        $('#InputNumber').blur();
+    });
 }
+
 function getMoney() {
     var tien = jQuery(".balance b").text();
 
@@ -54,6 +63,7 @@ function getMoney() {
     tien = parseFloat(tien.substring(1));
     return tien;
 }
+
 function build(isWay) {
     //var isOff = jQuery('#rightContent .btnSuccess').hasClass('colorDisable')
     //if(isOff == false){
@@ -89,6 +99,7 @@ function addZero(i) {
     }
     return i;
 }
+
 function getSecond() {
     var d = new Date();
     //var x = document.getElementById("demo");
@@ -115,6 +126,7 @@ function colorAt(at) {
     return true;
     //return attr;
 }
+
 function test() {
     console.log(colorAt(0));
     console.log(colorAt(1));
@@ -150,8 +162,8 @@ function getValueSet() {
 function setHistory() {
     //console.log(se)
     atLastWin = reloadIsWin();
-    
-    switch (atLastWin){
+
+    switch (atLastWin) {
         case false:
             numberLastFalse++;
             break;
@@ -161,9 +173,9 @@ function setHistory() {
         default:
             break;
     }
-    console.log('last_event:'+ atLastWin)
-    console.log('number lost:'+ numberLastFalse)
-    //resert value, alot of lost, back to 0
+    console.log('last_event:' + atLastWin)
+    console.log('number lost:' + numberLastFalse)
+        //resert value, alot of lost, back to 0
     if (numberLastFalse == lostValueSet.length - 1) {
         numberLastFalse = 0;
     }
@@ -240,37 +252,37 @@ function changeWay() {
 
 function changeWayV2() {
     var listRule = [
-"xxdd->0",
-"ddxxdd->0",
-"ddxx->0",
-"xxddxx->0",
-"xxd->0",
-"ddx->0",
-"dxx->0",
-"xdd->0",
+        "xxdd->0",
+        "ddxxdd->0",
+        "ddxx->0",
+        "xxddxx->0",
+        "xxd->0",
+        "ddx->0",
+        "dxx->0",
+        "xdd->0",
 
-"xxx->x",
-"xxxd->x",
-"xxxxd->x",
-"xdxxd->x",
-"xxdxxd->x",
-"xxxdxxd->x",
-"dxd->x",
-"dxxxx->x",
-"dddddd->x",
+        "xxx->x",
+        "xxxd->x",
+        "xxxxd->x",
+        "xdxxd->x",
+        "xxdxxd->x",
+        "xxxdxxd->x",
+        "dxd->x",
+        "dxxxx->x",
+        "dddddd->x",
 
-"xdx->d",
-"ddd->d",
-"dddx->d",
-"ddddx->d",
-"dxddx->d",
-"ddxddx->d",
-"dddxddx->d",
-"xdddd->d",
-"xxxxxx->d"
-];
+        "xdx->d",
+        "ddd->d",
+        "dddx->d",
+        "ddddx->d",
+        "dxddx->d",
+        "ddxddx->d",
+        "dddxddx->d",
+        "xdddd->d",
+        "xxxxxx->d"
+    ];
 
-listRule = listRule.sort((a,b) => b.length - a.length);
+    listRule = listRule.sort((a, b) => b.length - a.length);
 
     for (var property in listRule) {
         var rule = listRule[property];
@@ -281,8 +293,7 @@ listRule = listRule.sort((a,b) => b.length - a.length);
             var colors = getListColor();
             var isCheck = true;
             for (var propertyOne in listCheck) {
-                if (colors[propertyOne] == listCheck[propertyOne]) {
-                } else {
+                if (colors[propertyOne] == listCheck[propertyOne]) {} else {
                     isCheck = false;
                 }
             }
@@ -308,7 +319,7 @@ function getListColor() {
         if (attr == clRed) {
             way = 'd';
         }
-        
+
         listColor.push(way);
     }
     //console.log(listColor)
@@ -322,4 +333,3 @@ function clog(vl) {
 }
 
 //check have internet
-
