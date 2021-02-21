@@ -25,7 +25,9 @@ Goto wefinex
 F12/Right Click ->Inspect
 Pase here to console
 
-2s cuoi danh
+3s cuoi danh
+
+//check lost more > 3
 
 
 var fileref=document.createElement('script')

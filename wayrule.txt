@@ -14,9 +14,7 @@ var lostValueSet = {
   	0: 1,
     1: 2,
     2: 4,
-    3: 8,
-    4: 16,
-    5: 32
+    3: 6
 };
 
 
@@ -25,7 +23,8 @@ Goto wefinex
 F12/Right Click ->Inspect
 Pase here to console
 
-2s cuoi danh
+3s cuoi danh
+//check lost more > 3
 
 var fileref=document.createElement('script')
 fileref.setAttribute("type","text/javascript")

@@ -36,13 +36,13 @@ function setTimeoutAgain() {
                     clog('run-setHistory');
                     setHistory();
                 }
-                if (info.time > 15 && info.time <= 24 && tem.status.setPrice == 0) {
+                if (info.time > 15 && info.time <= 20 && tem.status.setPrice == 0) {
                     clog('run- set prices')
                     tem.status.setPrice = 1;
                     var numberSet = getValueSet();
                     setPrice(numberSet);
                 }
-                if (info.time > 0 && info.time <= 2 && tem.status.Build == 0) {
+                if (info.time > 0 && info.time <= 3 && tem.status.Build == 0) {
                     tem.status.Build = 1;
                     clog("Build");
                     build(changeWayV2());
@@ -208,9 +208,7 @@ var lostValueSet = {
     0: 1,
     1: 2,
     2: 4,
-    3: 8,
-    4: 16,
-    5: 32
+    3: 6
 };
 //get money back
 function getValueSet() {
@@ -239,7 +237,7 @@ function setHistory() {
     clog('last_event:' + atLastWin)
     clog('number lost:' + numberLastFalse)
         //resert value, alot of lost, back to 0
-    if (numberLastFalse >= lostValueSet.length - 1) {
+    if (numberLastFalse > parseInt(lostValueSet.length) - 1) {
         numberLastFalse = 0;
     }
 }
