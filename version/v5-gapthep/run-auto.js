@@ -45,7 +45,18 @@ function setTimeoutAgain() {
                 if (info.time > 0 && info.time <= 3 && tem.status.Build == 0) {
                     tem.status.Build = 1;
                     clog("Build");
-                    build(changeWayV2());
+                    var way = changeWayV2();
+                    build(way);
+                    var wayupdate = ''
+                    if (way == 'd') {
+                        wayupdate = 'x'
+                    }
+                    if (way == 'x') {
+                        wayupdate = 'd'
+                    }
+                    var numberSet = getValueSet();
+                    setPrice(numberSet);
+                    build(wayupdate);
                 }
                 break;
             default:
@@ -214,7 +225,13 @@ var lostValueSet = {
 function getValueSet() {
     var valueSet = 1;
     if (atLastWin != true) {
-        valueSet = lostValueSet[numberLastFalse];
+        if (typeof lostValueSet[numberLastFalse] !== 'undefined') {
+            valueSet = lostValueSet[numberLastFalse];
+        } else {
+            numberLastFalse = 0;
+            valueSet = 1;
+        }
+
     }
     return valueSet;
 }

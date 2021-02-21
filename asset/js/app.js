@@ -120,10 +120,16 @@ var lostValueSet = [
     //get money back
 function getValueSet() {
     var valueSet = 1;
-    if (atLastWin == false) {
-        valueSet = lostValueSet[numberLastFalse])
-}
-return valueSet
+    if (atLastWin != true) {
+        if (typeof lostValueSet[numberLastFalse] !== 'undefined') {
+            valueSet = lostValueSet[numberLastFalse];
+        } else {
+            numberLastFalse = 0;
+            valueSet = 1;
+        }
+
+    }
+    return valueSet;
 }
 
 //set value if lost/win

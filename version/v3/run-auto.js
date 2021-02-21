@@ -180,7 +180,13 @@ var lostValueSet = {
 function getValueSet() {
     var valueSet = 1;
     if (atLastWin != true) {
-        valueSet = lostValueSet[numberLastFalse];
+        if (typeof lostValueSet[numberLastFalse] !== 'undefined') {
+            valueSet = lostValueSet[numberLastFalse];
+        } else {
+            numberLastFalse = 0;
+            valueSet = 1;
+        }
+
     }
     return valueSet;
 }
