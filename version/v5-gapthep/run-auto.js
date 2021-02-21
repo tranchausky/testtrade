@@ -45,18 +45,8 @@ function setTimeoutAgain() {
                 if (info.time > 0 && info.time <= 3 && tem.status.Build == 0) {
                     tem.status.Build = 1;
                     clog("Build");
-                    var way = changeWayV2();
-                    build(way);
-                    var wayupdate = ''
-                    if (way == 'd') {
-                        wayupdate = 'x'
-                    }
-                    if (way == 'x') {
-                        wayupdate = 'd'
-                    }
-                    var numberSet = getValueSet();
-                    setPrice(numberSet);
-                    build(wayupdate);
+                    build(changeWayV2());
+
                 }
                 break;
             default:
