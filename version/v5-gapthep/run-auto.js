@@ -42,7 +42,7 @@ function setTimeoutAgain() {
                     var numberSet = getValueSet();
                     setPrice(numberSet);
                 }
-                if (info.time > 0 && info.time <= 4 && tem.status.Build == 0) {
+                if (info.time > 0 && info.time <= 2 && tem.status.Build == 0) {
                     tem.status.Build = 1;
                     clog("Build");
                     build(changeWayV2());
