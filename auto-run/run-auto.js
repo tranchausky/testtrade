@@ -247,7 +247,7 @@ function setHistory() {
 function changeWayV2() {
     var listRule = [
         "xd->x",
-        "dx->x",
+        "dx->d",
         "dd->x",
         "xx->d",
         "xxx->x",
