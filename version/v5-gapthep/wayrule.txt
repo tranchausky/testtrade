@@ -2,10 +2,10 @@
 FLow rule
 
 var listRule = [
-  "xx->d",
-  "dd->x",
-  "xxxx->x",
-  "dddd->d"
+    "xxx->d",
+    "ddd->x",
+    "xxxx->x",
+    "dddd->d"
 ];
 
 var lostValueSet = {

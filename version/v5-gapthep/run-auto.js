@@ -249,8 +249,8 @@ function setHistory() {
     }
 }
 var listRule = [
-    "xx->d",
-    "dd->x",
+    "xxx->d",
+    "ddd->x",
     "xxxx->x",
     "dddd->d"
 ];
