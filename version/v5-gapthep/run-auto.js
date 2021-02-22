@@ -248,16 +248,14 @@ function setHistory() {
         numberLastFalse = 0;
     }
 }
+var listRule = [
+    "xx->d",
+    "dd->x",
+    "xxxx->x",
+    "dddd->d"
+];
 
 function changeWayV2() {
-    var listRule = [
-        "xd->d",
-        "dx->x",
-        "dd->x",
-        "xx->d",
-        "xxx->x",
-        "ddd->d"
-    ];
 
     listRule = listRule.sort((a, b) => b.length - a.length);
 
