@@ -250,9 +250,35 @@ function setHistory() {
 }
 var listRule = [
     "xxx->d",
+    "xxxdx->d",
+    "xxxdd->d",
+    "xxxdxdx->d",
+    "xxxdxdd->d",
+    "xxxdddx->d",
+    "xxxdddd->d",
+    "xxxdxdxdx->d",
+    "xxxdxdxdd->d",
+    "xxxdxdddd->d",
+    "xxxdxdddx->d",
+    "xxxdddxdx->d",
+    "xxxdddxdd->d",
+    "xxxdddddx->d",
+    "xxxdddddd->d",
     "ddd->x",
-    "xxxx->x",
-    "dddd->d"
+    "dddxd->x",
+    "dddxx->x",
+    "dddxdxd->x",
+    "dddxdxx->x",
+    "dddxxxd->x",
+    "dddxxxx->x",
+    "dddxdxdxd->x",
+    "dddxdxdxx->x",
+    "dddxdxxxx->x",
+    "dddxdxxxd->x",
+    "dddxxxdxd->x",
+    "dddxxxdxx->x",
+    "dddxxxxxd->x",
+    "dddxxxxxx->x",
 ];
 
 function changeWayV2() {

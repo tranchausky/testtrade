@@ -247,11 +247,38 @@ function setHistory() {
         numberLastFalse = 0;
     }
 }
+
 var listRule = [
     "xxx->x",
+    "xxxdx->x",
+    "xxxdd->x",
+    "xxxdxdx->x",
+    "xxxdxdd->x",
+    "xxxdddx->x",
+    "xxxdddd->x",
+    "xxxdxdxdx->x",
+    "xxxdxdxdd->x",
+    "xxxdxdddd->x",
+    "xxxdxdddx->x",
+    "xxxdddxdx->x",
+    "xxxdddxdd->x",
+    "xxxdddddx->x",
+    "xxxdddddd->x",
     "ddd->d",
-    "xxxx->x",
-    "dddd->d"
+    "dddxd->d",
+    "dddxx->d",
+    "dddxdxd->d",
+    "dddxdxx->d",
+    "dddxxxd->d",
+    "dddxxxx->d",
+    "dddxdxdxd->d",
+    "dddxdxdxx->d",
+    "dddxdxxxx->d",
+    "dddxdxxxd->d",
+    "dddxxxdxd->d",
+    "dddxxxdxx->d",
+    "dddxxxxxd->d",
+    "dddxxxxxx->d",
 ];
 
 function changeWayV2() {
