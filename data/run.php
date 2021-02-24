@@ -43,9 +43,12 @@ function getSetDevice(){
 
 function logevent($idDevice=''){
 	$data = $_POST;
-	var_dump($data['v']);
+	if(!isset($data['v'])){
+		die;
+	}
+	//var_dump($data['v']);
 	$str = base64_decode($data['v']);
-	var_dump($str);
+	//var_dump($str);
 	$arr =json_decode($str, true);
 	//var_dump($arr);die;
 	//var_dump(base64_decode($value));
