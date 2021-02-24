@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h1>The XMLHttpRequest Object</h1>
+
+    <button type="button" onclick="loadDoc()">Request data</button>
+
+    <p id="demo"></p>
+
+    <script>
+        function loadDoc() {
+
+            var datasend = {}
+            datasend.way = 'xxx->x';
+            datasend.log = 'asfaklfajsfkljalsfd';
+            var obj = JSON.stringify(datasend)
+
+            var strSend = b64EncodeUnicode(obj);
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("demo").innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("POST", "https://tranquil-fjord-14350.herokuapp.com/version/v6-log/run.php", true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            //xhttp.send("fname=Henry&lname=Ford");
+            xhttp.send("v=" + strSend);
+        }
+
+        function b64EncodeUnicode(str) {
+            return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
+                return String.fromCharCode('0x' + p1);
+            }));
+        }
+    </script>
+
+</body>
+
+</html>
