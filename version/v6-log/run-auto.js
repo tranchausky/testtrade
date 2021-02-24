@@ -343,7 +343,7 @@ function postLog() {
             //document.getElementById("demo").innerHTML = this.responseText;
         }
     };
-    xhttp.open("POST", "./run.php", true);
+    xhttp.open("POST", "https://tranquil-fjord-14350.herokuapp.com/version/v6-log/run.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     //xhttp.send("fname=Henry&lname=Ford");
     xhttp.send("v=" + strSend);
