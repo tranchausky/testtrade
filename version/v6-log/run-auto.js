@@ -243,6 +243,8 @@ function setHistory() {
             break;
     }
     tem.isLastWin = atLastWin;
+    postLog()
+
     clog('last_event:' + atLastWin)
     clog('number lost:' + numberLastFalse)
         //resert value, alot of lost, back to 0
@@ -272,7 +274,7 @@ var listRule = [
 function changeWayV2() {
 
     listRule = listRule.sort((a, b) => b.length - a.length);
-
+    tem.waychoose = '';
     for (var property in listRule) {
         var rule = listRule[property];
         var arrRule = rule.split("->");
