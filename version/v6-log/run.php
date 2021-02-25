@@ -14,9 +14,15 @@ $db->exec("INSERT INTO cars(name, price) VALUES('Hummer', 41400)");
 $db->exec("INSERT INTO cars(name, price) VALUES('Volkswagen', 21600)");
 */
 
+
+
 function cors() {
     
-	header('Access-Control-Allow-Origin: *');
+	header("Access-Control-Allow-Origin: *");
+	header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    header('HTTP/1.1 200');
     
     //echo "You have CORS!";
 }
