@@ -14,7 +14,14 @@ $db->exec("INSERT INTO cars(name, price) VALUES('Hummer', 41400)");
 $db->exec("INSERT INTO cars(name, price) VALUES('Volkswagen', 21600)");
 */
 
-$GLOBALS['db'] = new SQLite3('test.db');
+
+
+$file_save = 'data.db';
+if(!file_exists($file_save)){
+	copy("test.db",$file_save);
+}
+
+$GLOBALS['db'] = new SQLite3($file_save);
 
 
 $idDevice = getSetDevice();

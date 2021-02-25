@@ -235,15 +235,17 @@ function setHistory() {
     switch (atLastWin) {
         case false:
             numberLastFalse++;
+			postLog()
             break;
         case true:
             numberLastFalse = 0;
+			postLog()
             break;
         default:
             break;
     }
     tem.isLastWin = atLastWin;
-    postLog()
+    
 
     clog('last_event:' + atLastWin)
     clog('number lost:' + numberLastFalse)
@@ -331,7 +333,7 @@ function postLog() {
     var datasend = {}
     datasend.way = tem.waychoose;
     datasend.is_win = tem.isLastWin;
-    datasend.version = tem.isLastWin;
+    datasend.version = '';
     datasend.log = tem;
     var obj = JSON.stringify(datasend)
 
