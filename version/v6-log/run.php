@@ -26,7 +26,7 @@ function cors() {
     
     //echo "You have CORS!";
 }
-cors()
+cors();
 
 
 $file_save = 'data.db';
