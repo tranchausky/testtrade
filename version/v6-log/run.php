@@ -16,7 +16,7 @@ $db->exec("INSERT INTO cars(name, price) VALUES('Volkswagen', 21600)");
 
 function cors() {
     
-	header('Access-Control-Allow-Credentials: true');   
+	header('Access-Control-Allow-Origin: *');
     
     //echo "You have CORS!";
 }
