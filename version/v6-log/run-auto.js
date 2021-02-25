@@ -232,6 +232,8 @@ function setHistory() {
     //console.log(se)
     atLastWin = reloadIsWin();
 
+	tem.isLastWin = atLastWin;
+	
     switch (atLastWin) {
         case false:
             numberLastFalse++;
@@ -244,7 +246,7 @@ function setHistory() {
         default:
             break;
     }
-    tem.isLastWin = atLastWin;
+    
     
 
     clog('last_event:' + atLastWin)
@@ -271,6 +273,39 @@ var listRule = [
     "ddxdddxxx->x",
     "xdddddxxx->x",
     "ddddddxxx->x",
+	 "ddd->d",
+    "dxddd->d",
+    "xxddd->d",
+    "dxdxddd->d",
+    "xxdxddd->d",
+    "dxxxddd->d",
+    "xxxxddd->d",
+    "dxdxdxddd->d",
+    "xxdxdxddd->d",
+    "xxxxdxddd->d",
+    "dxxxdxddd->d",
+    "dxdxxxddd->d",
+    "xxdxxxddd->d",
+    "dxxxxxddd->d",
+    "xxxxxxddd->d",
+	"xxx->x",
+	"xxxd->x",
+	"xxxxd->x",
+	"xdxxd->x",
+	"xxdxxd->x",
+	"xxxdxxd->x",
+	"dxd->x",
+	"dxxxx->x",
+	"dddddd->x",
+
+	"xdx->d",
+	"dddx->d",
+	"ddddx->d",
+	"dxddx->d",
+	"ddxddx->d",
+	"dddxddx->d",
+	"xdddd->d",
+	"xxxxxx->d",
 ];
 
 function changeWayV2() {
