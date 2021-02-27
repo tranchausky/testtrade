@@ -29,22 +29,16 @@ function cors() {
 cors();
 
 
-$servername = "194.59.164.2";
-$username = "u327570649_remote";
-$password = "@R9W~VEWnTp";
-$dbname = "u327570649_remote";
+$file_save = 'data.db';
+if(!file_exists($file_save)){
+	copy("test.db",$file_save);
+}
 
-$dsn = "mysql:host=$servername;dbname=$dbname";
-
-
-$GLOBALS['db'] = new PDO($dsn, $username, $password);
-
-//$GLOBALS['db'] = new SQLite3($file_save);
+$GLOBALS['db'] = new SQLite3($file_save);
 
 
 $idDevice = getSetDevice();
-$idLog = logevent($idDevice);
-logRequest($idLog);
+logevent($idDevice);
 
 function getSetDevice(){
 	$ip = getUserIP();
@@ -53,20 +47,18 @@ function getSetDevice(){
 	//var_dump($query);die;
 	$res = $GLOBALS['db']->query($query);
 	$idDevice = '';
-	//$rows = $stm->fetchAll(PDO::FETCH_NUM);
-
-	foreach($res->fetchAll(PDO::FETCH_ASSOC) as $row) {
+	while ($row = $res->fetchArray()) {
+		//var_dump($row);die;
+		//echo "{$row['id']} {$row['name']} {$row['price']} \n";
 		$idDevice = $row['id'];
 	}
 	if($idDevice ==''){
 		//save device
 		$GLOBALS['db']->exec("INSERT INTO `tb_device` (`ip`, `info_device`) VALUES ('$ip', '$device');");
-		$idDevice = $GLOBALS['db']->lastInsertId();
+		$idDevice = $GLOBALS['db']->lastInsertRowID();
 	}
 	return $idDevice;
-	//var_dump($idDevice);
-	//var_dump($device);
-	//die;
+	//var_dump($device);die;
 }
 
 function logevent($idDevice=''){
@@ -81,36 +73,20 @@ function logevent($idDevice=''){
 	//var_dump($str);
 	$arr =json_decode($str, true);
 	//var_dump($arr);die;
-
+	//var_dump(base64_decode($value));
+	//die;
 	$id_device = $idDevice;
-	//$version = isset($arr['version'])?$arr['version']:'';
-	$way = isset($arr['way'])?$arr['way']:'0';
-	$is_win = isset($arr['is_win'])?$arr['is_win']:0;
-	$is_win = ($is_win)?1:0;
-	
-	$logdata = $arr['log'];
-	$numberFalse = isset($logdata['numberFalse'])?$logdata['numberFalse']:'';
-	$lastPrices = isset($logdata['lastPrices'])?$logdata['lastPrices']:'';
-	
-	$money = isset($logdata['account'])?$logdata['account']:'0';
-	
+	$version = isset($arr['version'])?$arr['version']:'';
+	$way = isset($arr['way'])?$arr['way']:'';
+	$is_win = isset($arr['is_win'])?$arr['is_win']:'';
 	date_default_timezone_set("Asia/Ho_Chi_Minh");
 	$time = date("Y/m/d h:i:sa");
 	$log = $str;
-	//$request = json_encode($data);
-	$query = "INSERT INTO `tb_logs` (`id_device`, `numberFalse`, `lastPrices`, `money`, `way`, `is_win`, `time`, `log`) VALUES ('$id_device', '$numberFalse', '$lastPrices', '$money', '$way', '$is_win', '$time', '$log');";
-	//var_dump($query);die;
-	$GLOBALS['db']->exec($query);
-	return $GLOBALS['db']->lastInsertId();
-	//$idDevice = $GLOBALS['db']->lastInsertRowID();
-}
-
-function logRequest($idLog=''){
-	$data = $_POST;
 	$request = json_encode($data);
-	$query = "INSERT INTO `tb_request` (`id_log`, `request`) VALUES ('$idLog', '$request');";
+	$query = "INSERT INTO `tb_logs` (`id_device`, `version`, `way`, `is_win`, 'time', `log`, `request`) VALUES ('$id_device', '$version', '$way', '$is_win', '$time', '$log' , '$request');";
 	//var_dump($query);die;
 	$GLOBALS['db']->exec($query);
+	//$idDevice = $GLOBALS['db']->lastInsertRowID();
 }
 
 // Function to get the user IP address

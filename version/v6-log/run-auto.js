@@ -114,6 +114,12 @@ tem.maxWin = 50;
 tem.status = {}
 tem.waychoose = '';
 tem.isLastWin = '';
+//total lost last
+tem.numberFalse = 0;
+tem.lastPrices = 0;
+tem.listRule = null;
+tem.listLostSet = null;
+tem.account = null;
 
 function reloadIsWin() {
     tem.new = getMoney();
@@ -131,6 +137,7 @@ function reloadIsWin() {
 function setPrice(conso) {
     conso = conso.toString();
     jQuery("#InputNumber").val(conso);
+	tem.lastPrices = conso;
     $(function() {
         $('#InputNumber').keydown();
         $('#InputNumber').keypress();
@@ -203,23 +210,27 @@ function colorAt(at) {
 
 //status last win/lost
 var atLastWin = false;
-//total lost last
-var numberLastFalse = 0;
+
 //value set auto
 var lostValueSet = {
     0: 1,
     1: 2,
     2: 4,
-    3: 6
+    3: 8,
+    4: 16,
+    5: 32,
+    6: 64,
+    7: 128,
+    8: 256,
 };
 //get money back
 function getValueSet() {
     var valueSet = 1;
     if (atLastWin != true) {
-        if (typeof lostValueSet[numberLastFalse] !== 'undefined') {
-            valueSet = lostValueSet[numberLastFalse];
+        if (typeof lostValueSet[tem.numberFalse] !== 'undefined') {
+            valueSet = lostValueSet[tem.numberFalse];
         } else {
-            numberLastFalse = 0;
+            tem.numberFalse = 0;
             valueSet = 1;
         }
 
@@ -232,16 +243,19 @@ function setHistory() {
     //console.log(se)
     atLastWin = reloadIsWin();
 
+	tem.listRule = listRule;
+	tem.listLostSet = lostValueSet;
 	tem.isLastWin = atLastWin;
+	tem.account = $('.d-flex.flex-column.mr-lg-2.mr-2').text();
 	
     switch (atLastWin) {
         case false:
-            numberLastFalse++;
-			postLog()
+			postLog();
+            tem.numberFalse++;
             break;
         case true:
-            numberLastFalse = 0;
-			postLog()
+			postLog();
+            tem.numberFalse = 0;
             break;
         default:
             break;
@@ -250,10 +264,10 @@ function setHistory() {
     
 
     clog('last_event:' + atLastWin)
-    clog('number lost:' + numberLastFalse)
+    clog('number lost:' + tem.numberFalse)
         //resert value, alot of lost, back to 0
-    if (numberLastFalse > parseInt(lostValueSet.length) - 1) {
-        numberLastFalse = 0;
+    if (tem.numberFalse > parseInt(lostValueSet.length) - 1) {
+        tem.numberFalse = 0;
     }
 }
 
@@ -380,7 +394,8 @@ function postLog() {
             //document.getElementById("demo").innerHTML = this.responseText;
         }
     };
-    xhttp.open("POST", "https://tranquil-fjord-14350.herokuapp.com/version/v6-log/run.php", true);
+	var linksend ="https://chau.link/logs/run.php";
+    xhttp.open("POST", linksend, true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     //xhttp.send("fname=Henry&lname=Ford");
     xhttp.send("v=" + strSend);
