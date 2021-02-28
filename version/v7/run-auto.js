@@ -18,6 +18,9 @@ function getInView() {
 var timeLoopMain;
 function setTimeoutAgain() {
 
+	if(tem.is_run != true){
+		return;
+	}
 
     var timeLoopMain = setTimeout(function() {
         var se = getSecond();
@@ -122,6 +125,7 @@ tem.listRule = null;
 tem.listLostSet = null;
 tem.account = null;
 tem.is_new ='New--';
+tem.is_run = true;
 
 
 var configPauseTime = 2; //minus
@@ -267,7 +271,11 @@ function setHistory() {
 				//pase and will try call
 				tem.numberFalse = 0;
 				clearTimeout(timeLoopMain) //stop
-				setTimeout(function () { setTimeoutAgain() }, configPauseTime*1000); //wake up main function
+				tem.is_run = false;
+				setTimeout(function () { 
+					tem.is_run = true;
+					setTimeoutAgain()
+				}, configPauseTime*1000); //wake up main function
 			}
             break;
         case true:
