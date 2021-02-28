@@ -19,6 +19,9 @@ var lostValueSet = {
     10: 20
 };
 
+var configPauseTime = 10; //minus
+var configPauseWillLost = 2; //number false and after will resert =0
+
 
 Open web
 Goto wefinex
@@ -30,6 +33,9 @@ Remember way if lost
 
 3s cuoi danh
 //check lost more > 3
+
+pause 10 minus || >1 minus
+number lost will pause >1
 
 var fileref=document.createElement('script')
 fileref.setAttribute("type","text/javascript")
