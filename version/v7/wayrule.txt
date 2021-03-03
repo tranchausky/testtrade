@@ -19,8 +19,6 @@ var lostValueSet = {
     10: 20
 };
 
-var configPauseTime = 10; //minus
-var configPauseWillLost = 2; //number false and after will resert =0
 
 
 Open web
@@ -28,8 +26,6 @@ Goto wefinex
 F12/Right Click ->Inspect
 Pase here to console
 
----
-Remember way if lost
 
 3s cuoi danh
 //check lost more > 3

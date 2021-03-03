@@ -16,11 +16,12 @@ function getInView() {
 }
 
 var timeLoopMain;
+
 function setTimeoutAgain() {
 
-	if(tem.is_run != true){
-		return;
-	}
+    if (tem.is_run != true) {
+        return;
+    }
 
     var timeLoopMain = setTimeout(function() {
         var se = getSecond();
@@ -35,12 +36,12 @@ function setTimeoutAgain() {
                 break;
             case 1:
 
-                if (info.time > 20 && info.time <= 25 && tem.status.setHistory == 0) {
+                if (info.time > 13 && info.time <= 15 && tem.status.setHistory == 0) {
                     tem.status.setHistory = 1;
                     clog('run-setHistory');
                     setHistory();
                 }
-                if (info.time > 15 && info.time <= 20 && tem.status.setPrice == 0) {
+                if (info.time > 8 && info.time <= 12 && tem.status.setPrice == 0) {
                     clog('run- set prices')
                     tem.status.setPrice = 1;
                     var numberSet = getValueSet();
@@ -124,16 +125,31 @@ tem.lastPrices = 0;
 tem.listRule = null;
 tem.listLostSet = null;
 tem.account = null;
-tem.is_new ='New--';
+tem.is_new = 'New--';
 tem.is_run = true;
+tem.lastChoose = '';
 
 
-var configPauseTime = 2; //minus
-var configPauseWillLost = 2; //number false and after will resert =0
+// var configPauseTime = 2; //minus
+// var configPauseWillLost = 2; //number false and after will resert =0
 
 function reloadIsWin() {
+
+    //tem.lastChoose
+
+    var lastColor = colorAt(1);
+    if (tem.lastChoose != '') {
+        if (tem.lastChoose == lastColor) {
+            return true
+        } else {
+            return false
+        }
+    }
+    return '';
+
+    /*
     tem.new = getMoney();
-    var status = '';
+    var status = 'no-change';
     if (tem.new > tem.old) {
         status = true;
     }
@@ -142,12 +158,13 @@ function reloadIsWin() {
     }
     tem.old = tem.new;
     return status;
+    */
 }
 
 function setPrice(conso) {
     conso = conso.toString();
     jQuery("#InputNumber").val(conso);
-	tem.lastPrices = conso;
+    tem.lastPrices = conso;
     $(function() {
         $('#InputNumber').keydown();
         $('#InputNumber').keypress();
@@ -223,7 +240,7 @@ var atLastWin = false;
 
 //value set auto
 var lostValueSet = {
-  	0: 1,
+    0: 1,
     1: 2,
     2: 4,
     3: 6,
@@ -255,38 +272,40 @@ function setHistory() {
     //console.log(se)
     atLastWin = reloadIsWin();
 
-	tem.listRule = listRule;
-	tem.listLostSet = lostValueSet;
-	tem.isLastWin = atLastWin;
-	
-	tem.account = tem.is_new+$('.d-flex.flex-column.mr-lg-2.mr-2').text();
-	tem.configPauseTime = configPauseTime
-	tem.configPauseWillLost = configPauseWillLost
-	
+    tem.listRule = listRule;
+    tem.listLostSet = lostValueSet;
+    tem.isLastWin = atLastWin;
+
+    tem.account = tem.is_new.toString() + $('.d-flex.flex-column.mr-lg-2.mr-2').text();
+    // tem.configPauseTime = configPauseTime
+    // tem.configPauseWillLost = configPauseWillLost
+
     switch (atLastWin) {
         case false:
-			postLog();
+            postLog();
+            tem.is_new = ''
             tem.numberFalse++;
-			if(tem.numberFalse > configPauseWillLost){
-				//pase and will try call
-				tem.numberFalse = 0;
-				clearTimeout(timeLoopMain) //stop
-				tem.is_run = false;
-				setTimeout(function () { 
-					tem.is_run = true;
-					setTimeoutAgain()
-				}, configPauseTime*1000); //wake up main function
-			}
+            // if (tem.numberFalse > configPauseWillLost) {
+            //     //pase and will try call
+            //     tem.numberFalse = 0;
+            //     clearTimeout(timeLoopMain) //stop
+            //     tem.is_run = false;
+            //     setTimeout(function() {
+            //         tem.is_run = true;
+            //         setTimeoutAgain()
+            //     }, configPauseTime * 1000); //wake up main function
+            // }
             break;
         case true:
-			postLog();
+            postLog();
             tem.numberFalse = 0;
+            tem.is_new = ''
             break;
         default:
             break;
     }
-    
-    
+
+
 
     clog('last_event:' + atLastWin)
     clog('number lost:' + tem.numberFalse)
@@ -301,7 +320,7 @@ var listRule = [
 ];
 
 function changeWayV2() {
-
+    tem.lastChoose = '';
     listRule = listRule.sort((a, b) => b.length - a.length);
     tem.waychoose = '';
     for (var property in listRule) {
@@ -318,6 +337,7 @@ function changeWayV2() {
                 }
             }
             if (isCheck == true) {
+                tem.lastChoose = (way == 'x') ? true : false;
                 clog(listCheck + "->" + way);
                 tem.waychoose = listCheck + "->" + way;
                 return way;
@@ -361,7 +381,7 @@ function postLog() {
     datasend.way = tem.waychoose;
     datasend.is_win = tem.isLastWin;
     datasend.version = '';
-	datasend.log = tem;
+    datasend.log = tem;
     datasend.user = getCookie("userTime");
     var obj = JSON.stringify(datasend)
 
@@ -373,7 +393,7 @@ function postLog() {
             //document.getElementById("demo").innerHTML = this.responseText;
         }
     };
-	var linksend ="https://chau.link/logs/run.php";
+    var linksend = "https://chau.link/logs/run.php";
     xhttp.open("POST", linksend, true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     //xhttp.send("fname=Henry&lname=Ford");
@@ -391,34 +411,33 @@ function b64EncodeUnicode(str) {
 checkCookie()
 
 function setCookie(cname, cvalue, exdays) {
-  var d = new Date();
-  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-  var expires = "expires="+d.toUTCString();
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
 function getCookie(cname) {
-  var name = cname + "=";
-  var ca = document.cookie.split(';');
-  for(var i = 0; i < ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
     }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
+    return "";
 }
 
 function checkCookie() {
-  var user = getCookie("userTime");
-  if (user != "") {
-  } else {
-	  user = Date.now()
-      setCookie("userTime", user, 365);
-  }
+    var user = getCookie("userTime");
+    if (user != "") {} else {
+        user = Date.now()
+        setCookie("userTime", user, 365);
+    }
 }
 
 //check have internet

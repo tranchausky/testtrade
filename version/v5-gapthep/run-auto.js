@@ -31,12 +31,12 @@ function setTimeoutAgain() {
                 break;
             case 1:
 
-                if (info.time > 20 && info.time <= 25 && tem.status.setHistory == 0) {
+                if (info.time > 13 && info.time <= 15 && tem.status.setHistory == 0) {
                     tem.status.setHistory = 1;
                     clog('run-setHistory');
                     setHistory();
                 }
-                if (info.time > 15 && info.time <= 20 && tem.status.setPrice == 0) {
+                if (info.time > 8 && info.time <= 12 && tem.status.setPrice == 0) {
                     clog('run- set prices')
                     tem.status.setPrice = 1;
                     var numberSet = getValueSet();
@@ -111,10 +111,25 @@ tem.is_show_first = true;
 tem.time_old = new Date().toLocaleTimeString();
 tem.time_win = '';
 tem.maxWin = 50;
+tem.lastChoose = '';
 
 tem.status = {}
 
 function reloadIsWin() {
+
+    //tem.lastChoose
+
+    var lastColor = colorAt(1);
+    if (tem.lastChoose != '') {
+        if (tem.lastChoose == lastColor) {
+            return true
+        } else {
+            return false
+        }
+    }
+    return '';
+
+    /*
     tem.new = getMoney();
     var status = 'no-change';
     if (tem.new > tem.old) {
@@ -125,6 +140,11 @@ function reloadIsWin() {
     }
     tem.old = tem.new;
     return status;
+    */
+}
+
+function lastWayColor() {
+    //
 }
 
 function setPrice(conso) {
@@ -209,7 +229,10 @@ var lostValueSet = {
     0: 1,
     1: 2,
     2: 4,
-    3: 6
+    3: 8,
+    4: 16,
+    5: 32,
+    6: 64
 };
 //get money back
 function getValueSet() {
@@ -249,25 +272,14 @@ function setHistory() {
     }
 }
 var listRule = [
-    "ddd->d",
-    "dxddd->d",
-    "xxddd->d",
-    "dxdxddd->d",
-    "xxdxddd->d",
-    "dxxxddd->d",
-    "xxxxddd->d",
-    "dxdxdxddd->d",
-    "xxdxdxddd->d",
-    "xxxxdxddd->d",
-    "dxxxdxddd->d",
-    "dxdxxxddd->d",
-    "xxdxxxddd->d",
-    "dxxxxxddd->d",
-    "xxxxxxddd->d",
+    "x->d",
+    "xx-> ",
+    "xxx-> ",
+    "xxxx-> "
 ];
 
 function changeWayV2() {
-
+    tem.lastChoose = '';
     listRule = listRule.sort((a, b) => b.length - a.length);
 
     for (var property in listRule) {
@@ -284,6 +296,7 @@ function changeWayV2() {
                 }
             }
             if (isCheck == true) {
+                tem.lastChoose = (way == 'x') ? true : false;
                 clog(listCheck + "->" + way);
                 return way;
             }
