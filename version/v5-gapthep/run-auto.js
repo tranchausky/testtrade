@@ -31,12 +31,12 @@ function setTimeoutAgain() {
                 break;
             case 1:
 
-                if (info.time > 13 && info.time <= 15 && tem.status.setHistory == 0) {
+                if (info.time > 8 && info.time <= 10 && tem.status.setHistory == 0) {
                     tem.status.setHistory = 1;
                     clog('run-setHistory');
                     setHistory();
                 }
-                if (info.time > 8 && info.time <= 12 && tem.status.setPrice == 0) {
+                if (info.time > 6 && info.time <= 8 && tem.status.setPrice == 0) {
                     clog('run- set prices')
                     tem.status.setPrice = 1;
                     var numberSet = getValueSet();
@@ -119,17 +119,16 @@ function reloadIsWin() {
 
     //tem.lastChoose
 
-    var lastColor = colorAt(1);
-    if (tem.lastChoose != '') {
-        if (tem.lastChoose == lastColor) {
-            return true
-        } else {
-            return false
-        }
-    }
-    return '';
+    // var lastColor = colorAt(1);
+    // if (tem.lastChoose != '') {
+    //     if (tem.lastChoose == lastColor) {
+    //         return true
+    //     } else {
+    //         return false
+    //     }
+    // }
+    // return '';
 
-    /*
     tem.new = getMoney();
     var status = 'no-change';
     if (tem.new > tem.old) {
@@ -140,7 +139,7 @@ function reloadIsWin() {
     }
     tem.old = tem.new;
     return status;
-    */
+
 }
 
 function lastWayColor() {

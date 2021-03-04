@@ -137,17 +137,17 @@ function reloadIsWin() {
 
     //tem.lastChoose
 
-    var lastColor = colorAt(1);
-    if (tem.lastChoose != '') {
-        if (tem.lastChoose == lastColor) {
-            return true
-        } else {
-            return false
-        }
-    }
-    return '';
+    // var lastColor = colorAt(1);
+    // if (tem.lastChoose != '') {
+    //     if (tem.lastChoose == lastColor) {
+    //         return true
+    //     } else {
+    //         return false
+    //     }
+    // }
+    // return '';
 
-    /*
+
     tem.new = getMoney();
     var status = 'no-change';
     if (tem.new > tem.old) {
@@ -158,7 +158,7 @@ function reloadIsWin() {
     }
     tem.old = tem.new;
     return status;
-    */
+
 }
 
 function setPrice(conso) {
