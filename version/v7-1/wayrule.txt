@@ -26,5 +26,5 @@ number lost will pause >1
 
 var fileref=document.createElement('script')
 fileref.setAttribute("type","text/javascript")
-fileref.setAttribute("src", "https://tranquil-fjord-14350.herokuapp.com/version/v7/release.js")
+fileref.setAttribute("src", "https://tranquil-fjord-14350.herokuapp.com/version/v7-2/release.js")
 document.getElementsByTagName("head")[0].appendChild(fileref)
