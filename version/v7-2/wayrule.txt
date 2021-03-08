@@ -2,17 +2,14 @@
 FLow rule
 
 var listRule = [
-    "x->d",
-    "xx-> ",
-    "xxx-> ",
-    "xxxx-> "
+    "xxx->x"
 ];
 
 var lostValueSet = {
-    0: 5,
-    1: 10,
-    2: 15
+  	0: 10,
+    1: 20
 };
+
 
 
 Open web
@@ -20,12 +17,14 @@ Goto wefinex
 F12/Right Click ->Inspect
 Pase here to console
 
-3s cuoi danh
 
+3s cuoi danh
 //check lost more > 3
 
+pause 10 minus || >1 minus
+number lost will pause >1
 
 var fileref=document.createElement('script')
 fileref.setAttribute("type","text/javascript")
-fileref.setAttribute("src", "https://tranquil-fjord-14350.herokuapp.com/version/v5-gapthep/release.js")
+fileref.setAttribute("src", "https://tranquil-fjord-14350.herokuapp.com/version/v7/release.js")
 document.getElementsByTagName("head")[0].appendChild(fileref)

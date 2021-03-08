@@ -15,10 +15,15 @@ function getInView() {
     return rs;
 }
 
+var timeLoopMain;
+
 function setTimeoutAgain() {
 
+    if (tem.is_run != true) {
+        return;
+    }
 
-    var t = setTimeout(function() {
+    var timeLoopMain = setTimeout(function() {
         var se = getSecond();
         //clog('run-' + se)
 
@@ -31,12 +36,12 @@ function setTimeoutAgain() {
                 break;
             case 1:
 
-                if (info.time > 8 && info.time <= 10 && tem.status.setHistory == 0) {
+                if (info.time > 13 && info.time <= 15 && tem.status.setHistory == 0) {
                     tem.status.setHistory = 1;
                     clog('run-setHistory');
                     setHistory();
                 }
-                if (info.time > 6 && info.time <= 8 && tem.status.setPrice == 0) {
+                if (info.time > 8 && info.time <= 12 && tem.status.setPrice == 0) {
                     clog('run- set prices')
                     tem.status.setPrice = 1;
                     var numberSet = getValueSet();
@@ -46,7 +51,6 @@ function setTimeoutAgain() {
                     tem.status.Build = 1;
                     clog("Build");
                     build(changeWayV2());
-
                 }
                 break;
             default:
@@ -111,9 +115,23 @@ tem.is_show_first = true;
 tem.time_old = new Date().toLocaleTimeString();
 tem.time_win = '';
 tem.maxWin = 50;
-tem.lastChoose = '';
 
 tem.status = {}
+tem.waychoose = '';
+tem.isLastWin = '';
+//total lost last
+tem.numberFalse = 0;
+tem.lastPrices = 0;
+tem.listRule = null;
+tem.listLostSet = null;
+tem.account = null;
+tem.is_new = 'New--';
+tem.is_run = true;
+tem.lastChoose = '';
+
+
+// var configPauseTime = 2; //minus
+// var configPauseWillLost = 2; //number false and after will resert =0
 
 function reloadIsWin() {
 
@@ -129,6 +147,7 @@ function reloadIsWin() {
     // }
     // return '';
 
+
     tem.new = getMoney();
     var status = 'no-change';
     if (tem.new > tem.old) {
@@ -142,13 +161,10 @@ function reloadIsWin() {
 
 }
 
-function lastWayColor() {
-    //
-}
-
 function setPrice(conso) {
     conso = conso.toString();
     jQuery("#InputNumber").val(conso);
+    tem.lastPrices = conso;
     $(function() {
         $('#InputNumber').keydown();
         $('#InputNumber').keypress();
@@ -221,22 +237,20 @@ function colorAt(at) {
 
 //status last win/lost
 var atLastWin = false;
-//total lost last
-var numberLastFalse = 0;
+
 //value set auto
 var lostValueSet = {
     0: 5,
-    1: 10,
-    2: 15
+    1: 10
 };
 //get money back
 function getValueSet() {
     var valueSet = 1;
     if (atLastWin != true) {
-        if (typeof lostValueSet[numberLastFalse] !== 'undefined') {
-            valueSet = lostValueSet[numberLastFalse];
+        if (typeof lostValueSet[tem.numberFalse] !== 'undefined') {
+            valueSet = lostValueSet[tem.numberFalse];
         } else {
-            numberLastFalse = 0;
+            tem.numberFalse = 0;
             valueSet = 1;
         }
 
@@ -249,34 +263,56 @@ function setHistory() {
     //console.log(se)
     atLastWin = reloadIsWin();
 
+    tem.listRule = listRule;
+    tem.listLostSet = lostValueSet;
+    tem.isLastWin = atLastWin;
+
+    tem.account = tem.is_new.toString() + $('.d-flex.flex-column.mr-lg-2.mr-2').text();
+    // tem.configPauseTime = configPauseTime
+    // tem.configPauseWillLost = configPauseWillLost
+    tem.is_new = ''
     switch (atLastWin) {
         case false:
-            numberLastFalse++;
+            postLog();
+
+            tem.numberFalse++;
+            // if (tem.numberFalse > configPauseWillLost) {
+            //     //pase and will try call
+            //     tem.numberFalse = 0;
+            //     clearTimeout(timeLoopMain) //stop
+            //     tem.is_run = false;
+            //     setTimeout(function() {
+            //         tem.is_run = true;
+            //         setTimeoutAgain()
+            //     }, configPauseTime * 1000); //wake up main function
+            // }
             break;
         case true:
-            numberLastFalse = 0;
+            postLog();
+            tem.numberFalse = 0;
             break;
         default:
             break;
     }
+
+
+
     clog('last_event:' + atLastWin)
-    clog('number lost:' + numberLastFalse)
+    clog('number lost:' + tem.numberFalse)
         //resert value, alot of lost, back to 0
-    if (numberLastFalse > parseInt(lostValueSet.length) - 1) {
-        numberLastFalse = 0;
+    if (tem.numberFalse > parseInt(lostValueSet.length) - 1) {
+        tem.numberFalse = 0;
     }
 }
+
 var listRule = [
-    "x->d",
-    "xx-> ",
-    "xxx-> ",
-    "xxxx-> "
+    "xxx->x"
 ];
 
 function changeWayV2() {
     tem.lastChoose = '';
     listRule = listRule.sort((a, b) => b.length - a.length);
-
+    tem.waychoose = '';
     for (var property in listRule) {
         var rule = listRule[property];
         var arrRule = rule.split("->");
@@ -291,8 +327,9 @@ function changeWayV2() {
                 }
             }
             if (isCheck == true) {
-                tem.lastChoose = (way == 'x') ? true : false;
-                clog(listCheck + "->" + way);
+                //tem.lastChoose = (way == 'x') ? true : false;
+                //clog(listCheck + "->" + way);
+                tem.waychoose = listCheck + "->" + way;
                 return way;
             }
         }
@@ -324,6 +361,73 @@ setTimeoutAgain();
 
 function clog(vl) {
     //console.log(vl);
+}
+
+
+
+function postLog() {
+
+    var datasend = {}
+    datasend.way = tem.waychoose;
+    datasend.is_win = tem.isLastWin;
+    datasend.version = '';
+    datasend.log = tem;
+    datasend.user = getCookie("userTime");
+    var obj = JSON.stringify(datasend)
+
+    var strSend = b64EncodeUnicode(obj);
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            //document.getElementById("demo").innerHTML = this.responseText;
+        }
+    };
+    var linksend = "https://chau.link/logs/run.php";
+    xhttp.open("POST", linksend, true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    //xhttp.send("fname=Henry&lname=Ford");
+    xhttp.send("v=" + strSend);
+}
+
+function b64EncodeUnicode(str) {
+    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
+        return String.fromCharCode('0x' + p1);
+    }));
+}
+
+
+//set cooki
+checkCookie()
+
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+function checkCookie() {
+    var user = getCookie("userTime");
+    if (user != "") {} else {
+        user = Date.now()
+        setCookie("userTime", user, 365);
+    }
 }
 
 //check have internet

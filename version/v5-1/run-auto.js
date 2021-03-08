@@ -225,9 +225,10 @@ var atLastWin = false;
 var numberLastFalse = 0;
 //value set auto
 var lostValueSet = {
-    0: 5,
-    1: 10,
-    2: 15
+    0: 10,
+    1: 20,
+    2: 40,
+    3: 60
 };
 //get money back
 function getValueSet() {
