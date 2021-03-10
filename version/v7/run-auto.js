@@ -50,7 +50,11 @@ function setTimeoutAgain() {
                 if (info.time > 0 && info.time <= 3 && tem.status.Build == 0) {
                     tem.status.Build = 1;
                     clog("Build");
-                    build(changeWayV2());
+                    if (tem.numberFalse > 0 && tem.lastChoose != '') {
+                        build(tem.lastChoose);
+                    } else {
+                        build(changeWayV2());
+                    }
                 }
                 break;
             default:
@@ -128,6 +132,7 @@ tem.account = null;
 tem.is_new = 'New--';
 tem.is_run = true;
 tem.lastChoose = '';
+tem.version = 'v7';
 
 
 // var configPauseTime = 2; //minus
@@ -252,6 +257,11 @@ var lostValueSet = {
     9: 18,
     10: 20
 };
+
+var listRule = [
+    "xxx->x"
+];
+
 //get money back
 function getValueSet() {
     var valueSet = 1;
@@ -315,9 +325,6 @@ function setHistory() {
     }
 }
 
-var listRule = [
-    "xxx->x"
-];
 
 function changeWayV2() {
     tem.lastChoose = '';
@@ -337,7 +344,7 @@ function changeWayV2() {
                 }
             }
             if (isCheck == true) {
-                tem.lastChoose = (way == 'x') ? true : false;
+                tem.lastChoose = (way == 'x' || way == 'd') ? way : '';
                 clog(listCheck + "->" + way);
                 tem.waychoose = listCheck + "->" + way;
                 return way;

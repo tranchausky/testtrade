@@ -2,14 +2,23 @@
 FLow rule
 
 var listRule = [
-    "xxx->x"
+    "xx->d",  
+    "dd->x", 
+    "dddd-> ",
+    "xxxx-> ", 
 ];
 
 var lostValueSet = {
-  	0: 10,
-    1: 20
+       0: 1,
+    1: 2,
+    2: 4,
+    3: 8,
+    4: 16,
+    5: 32,
+    6: 64,
+    7: 128,
+    8: 250,
 };
-
 
 
 Open web
@@ -21,8 +30,7 @@ Pase here to console
 3s cuoi danh
 //check lost more > 3
 
-pause 10 minus || >1 minus
-number lost will pause >1
+Remember last choose and "gap thep" if lost money
 
 var fileref=document.createElement('script')
 fileref.setAttribute("type","text/javascript")

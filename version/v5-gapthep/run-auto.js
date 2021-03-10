@@ -224,11 +224,28 @@ var atLastWin = false;
 //total lost last
 var numberLastFalse = 0;
 //value set auto
+var listRule = [
+    "x->d",
+    "d->x",
+    "xxx->",
+    "xxxx->",
+    "xdxx->",
+    "ddd->",
+    "dddd->",
+    "dxdd->",
+];
+
 var lostValueSet = {
-    0: 5,
-    1: 10,
-    2: 15
+    0: 1,
+    1: 3,
+    2: 7,
+    3: 11,
+    4: 17,
+    5: 25,
+    6: 32,
+    7: 42,
 };
+
 //get money back
 function getValueSet() {
     var valueSet = 1;
@@ -266,12 +283,6 @@ function setHistory() {
         numberLastFalse = 0;
     }
 }
-var listRule = [
-    "x->d",
-    "xx-> ",
-    "xxx-> ",
-    "xxxx-> "
-];
 
 function changeWayV2() {
     tem.lastChoose = '';

@@ -30,8 +30,8 @@ Pase here to console
 3s cuoi danh
 //check lost more > 3
 
-pause 10 minus || >1 minus
-number lost will pause >1
+Remember last choose and "gap thep" if lost money
+
 
 var fileref=document.createElement('script')
 fileref.setAttribute("type","text/javascript")

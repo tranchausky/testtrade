@@ -2,14 +2,53 @@
 FLow rule
 
 var listRule = [
-    "xxx->x"
+    "x->d",  
+    "d->d",
+    "xxx-> ",
+    "xxxx-> ",
+    "xxxxx-> ",
+    "dxxx-> ",
+    "xxdxxx-> ",
+    "ddxxx-> ",
+    "xdxxx-> ",
+    "xdxxx-> ",
+    "dxxxx-> ",
+    "xdxxxx-> ",
+    "xdxxxx-> ",
+    "dxxxxx-> ",
+    "xdxxxxx-> ",
+    "xdxxxxx-> ",
+    "xdxdxxx-> ",
+    "xdxxdxxx-> ",
+    "xdxdxxdxxx-> ",
+  
+    "dxdx-> ",
+    "dxdx-> ",
+    "dxdxd-> ",
+    "dxdxdx-> ",
+    "dxdxdxd-> ",
+    "dxdxdxdx-> ",
+    "dxdxdxdxd-> ",
+    "xxxdx-> ",
+    "xxddd-> ",
+     "xddxx-> ",
+     "xxddxx-> ",
+     "dxxdd-> ",
+     "xddxxddxx-> ",
+     "xxdx-> ",
 ];
 
 var lostValueSet = {
-    0: 5,
-    1: 10
+       0: 1,
+    1: 2,
+    2: 4,
+    3: 8,
+    4: 16,
+    5: 32,
+    6: 64,
+    7: 128,
+    8: 250,
 };
-
 
 
 Open web
@@ -21,10 +60,9 @@ Pase here to console
 3s cuoi danh
 //check lost more > 3
 
-pause 10 minus || >1 minus
-number lost will pause >1
+Remember last choose and "gap thep" if lost money
 
 var fileref=document.createElement('script')
 fileref.setAttribute("type","text/javascript")
-fileref.setAttribute("src", "https://tranquil-fjord-14350.herokuapp.com/version/v7-2/release.js")
+fileref.setAttribute("src", "https://tranquil-fjord-14350.herokuapp.com/version/v7-1/release.js")
 document.getElementsByTagName("head")[0].appendChild(fileref)

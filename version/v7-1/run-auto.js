@@ -50,7 +50,11 @@ function setTimeoutAgain() {
                 if (info.time > 0 && info.time <= 3 && tem.status.Build == 0) {
                     tem.status.Build = 1;
                     clog("Build");
-                    build(changeWayV2());
+                    if (tem.numberFalse > 0 && tem.lastChoose != '') {
+                        build(tem.lastChoose);
+                    } else {
+                        build(changeWayV2());
+                    }
                 }
                 break;
             default:
@@ -128,6 +132,7 @@ tem.account = null;
 tem.is_new = 'New--';
 tem.is_run = true;
 tem.lastChoose = '';
+tem.version = 'v7-1';
 
 
 // var configPauseTime = 2; //minus
@@ -239,10 +244,55 @@ function colorAt(at) {
 var atLastWin = false;
 
 //value set auto
+var listRule = [
+    "x->d",
+    "d->d",
+    "xxx-> ",
+    "xxxx-> ",
+    "xxxxx-> ",
+    "dxxx-> ",
+    "xxdxxx-> ",
+    "ddxxx-> ",
+    "xdxxx-> ",
+    "xdxxx-> ",
+    "dxxxx-> ",
+    "xdxxxx-> ",
+    "xdxxxx-> ",
+    "dxxxxx-> ",
+    "xdxxxxx-> ",
+    "xdxxxxx-> ",
+    "xdxdxxx-> ",
+    "xdxxdxxx-> ",
+    "xdxdxxdxxx-> ",
+
+    "dxdx-> ",
+    "dxdx-> ",
+    "dxdxd-> ",
+    "dxdxdx-> ",
+    "dxdxdxd-> ",
+    "dxdxdxdx-> ",
+    "dxdxdxdxd-> ",
+    "xxxdx-> ",
+    "xxddd-> ",
+    "xddxx-> ",
+    "xxddxx-> ",
+    "dxxdd-> ",
+    "xddxxddxx-> ",
+    "xxdx-> ",
+];
+
 var lostValueSet = {
-    0: 5,
-    1: 10
+    0: 1,
+    1: 2,
+    2: 4,
+    3: 8,
+    4: 16,
+    5: 32,
+    6: 64,
+    7: 128,
+    8: 250,
 };
+
 //get money back
 function getValueSet() {
     var valueSet = 1;
@@ -270,11 +320,11 @@ function setHistory() {
     tem.account = tem.is_new.toString() + $('.d-flex.flex-column.mr-lg-2.mr-2').text();
     // tem.configPauseTime = configPauseTime
     // tem.configPauseWillLost = configPauseWillLost
-    tem.is_new = ''
+
     switch (atLastWin) {
         case false:
             postLog();
-
+            tem.is_new = ''
             tem.numberFalse++;
             // if (tem.numberFalse > configPauseWillLost) {
             //     //pase and will try call
@@ -290,6 +340,7 @@ function setHistory() {
         case true:
             postLog();
             tem.numberFalse = 0;
+            tem.is_new = ''
             break;
         default:
             break;
@@ -305,9 +356,6 @@ function setHistory() {
     }
 }
 
-var listRule = [
-    "xxx->x"
-];
 
 function changeWayV2() {
     tem.lastChoose = '';
@@ -327,8 +375,8 @@ function changeWayV2() {
                 }
             }
             if (isCheck == true) {
-                //tem.lastChoose = (way == 'x') ? true : false;
-                //clog(listCheck + "->" + way);
+                tem.lastChoose = (way == 'x' || way == 'd') ? way : '';
+                clog(listCheck + "->" + way);
                 tem.waychoose = listCheck + "->" + way;
                 return way;
             }
