@@ -1,0 +1,32 @@
+
+----------------------------------------------------
+https://tranquil-fjord-14350.herokuapp.com/version/v5-gapthep/wayrule.txt
+
+https://tranquil-fjord-14350.herokuapp.com/version/v5-gapthep/release.js
+clog('run it version: 11:45 AM 13/3/2021')
+
+---13/03
+Random number from 3-9 second to trade
+
+
+
+----------------------------------------------------
+https://tranquil-fjord-14350.herokuapp.com/version/v7-1/release.js
+
+clog('run it version: 11:43 AM 13/3/2021')
+https://tranquil-fjord-14350.herokuapp.com/version/v7-1/wayrule.txt
+
+(update same email)
+
+---13/03
+Random number from 3-9 second to trade
+
+
+
+----------------------------------------------------
+https://tranquil-fjord-14350.herokuapp.com/version/v7-2/release.js
+clog('run it version: 11:44 AM 13/3/2021')
+
+https://tranquil-fjord-14350.herokuapp.com/version/v7-2/wayrule.txt
+
+----------------------------------------------------
