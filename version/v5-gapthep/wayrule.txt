@@ -28,7 +28,8 @@ Goto wefinex
 F12/Right Click ->Inspect
 Pase here to console
 
-3s cuoi danh
+---13/03
+Random number from 3-9 second to trade
 
 //check lost more > 3
 

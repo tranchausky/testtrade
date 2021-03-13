@@ -41,20 +41,30 @@ function setTimeoutAgain() {
                     clog('run-setHistory');
                     setHistory();
                 }
-                if (info.time > 8 && info.time <= 12 && tem.status.setPrice == 0) {
+                if (info.time > 10 && info.time <= 12 && tem.status.setPrice == 0) {
                     clog('run- set prices')
                     tem.status.setPrice = 1;
                     var numberSet = getValueSet();
                     setPrice(numberSet);
                 }
-                if (info.time > 0 && info.time <= 3 && tem.status.Build == 0) {
+                var seconrandom = randomFromTo()
+                if (info.time > 0 && info.time <= seconrandom && tem.status.Build == 0) {
                     tem.status.Build = 1;
                     clog("Build");
-                    if (tem.numberFalse > 0 && tem.lastChoose != '') {
-                        build(tem.lastChoose);
+                    var waynow = changeWayV2();
+                    if (waynow == 'x' || waynow == 'd') {
+                        build(waynow);
                     } else {
-                        build(changeWayV2());
+                        if (tem.numberFalse > 0 && tem.lastChoose != '') {
+                            build(tem.lastChoose);
+                        }
                     }
+
+                    // if (tem.numberFalse > 0 && tem.lastChoose != '') {
+                    //     build(tem.lastChoose);
+                    // } else {
+                    //     build(changeWayV2());
+                    // }
                 }
                 break;
             default:
@@ -445,6 +455,11 @@ function checkCookie() {
         user = Date.now()
         setCookie("userTime", user, 365);
     }
+}
+
+function randomFromTo() {
+    //3-9 second
+    return Math.floor(Math.random() * 7) + 3;
 }
 
 //check have internet

@@ -31,18 +31,19 @@ function setTimeoutAgain() {
                 break;
             case 1:
 
-                if (info.time > 8 && info.time <= 10 && tem.status.setHistory == 0) {
+                if (info.time > 13 && info.time <= 15 && tem.status.setHistory == 0) {
                     tem.status.setHistory = 1;
                     clog('run-setHistory');
                     setHistory();
                 }
-                if (info.time > 6 && info.time <= 8 && tem.status.setPrice == 0) {
+                if (info.time > 10 && info.time <= 13 && tem.status.setPrice == 0) {
                     clog('run- set prices')
                     tem.status.setPrice = 1;
                     var numberSet = getValueSet();
                     setPrice(numberSet);
                 }
-                if (info.time > 0 && info.time <= 3 && tem.status.Build == 0) {
+                var seconrandom = randomFromTo()
+                if (info.time > 0 && info.time <= seconrandom && tem.status.Build == 0) {
                     tem.status.Build = 1;
                     clog("Build");
                     build(changeWayV2());
@@ -335,6 +336,11 @@ setTimeoutAgain();
 
 function clog(vl) {
     //console.log(vl);
+}
+
+function randomFromTo() {
+    //3-9 second
+    return Math.floor(Math.random() * 7) + 3;
 }
 
 //check have internet
