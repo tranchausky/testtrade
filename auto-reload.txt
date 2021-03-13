@@ -1,0 +1,17 @@
+﻿https://chrome.google.com/webstore/detail/user-javascript-and-css/nbhcbdghjpllgmfilhnhkllmkecfmpld
+User JavaScript and CSS
+
+-------copy pass dưới, đổi file v7-2/release.js
+
+
+
+
+var fileref=document.createElement('script')
+fileref.setAttribute("type","text/javascript")
+fileref.setAttribute("src", "https://tranquil-fjord-14350.herokuapp.com/version/v7-2/release.js")
+document.getElementsByTagName("head")[0].appendChild(fileref)
+
+
+setTimeout(function(){
+   window.location.reload(1);
+}, 60*60*1000);
