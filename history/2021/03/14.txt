@@ -1,0 +1,18 @@
+https://tranquil-fjord-14350.herokuapp.com/version/v8-1/release.js
+clog('run it version: 9:27 PM 14/3/2021')
+https://tranquil-fjord-14350.herokuapp.com/version/v8-1/wayrule.txt
+
+2 sai
+
+
+https://tranquil-fjord-14350.herokuapp.com/version/v8-2/release.js
+clog('run it version: 9:27 PM 14/3/2021')
+https://tranquil-fjord-14350.herokuapp.com/version/v8-2/wayrule.txt
+
+3 sai
+
+https://tranquil-fjord-14350.herokuapp.com/version/v8-3/release.js
+clog('run it version: 9:28 PM 14/3/2021')
+https://tranquil-fjord-14350.herokuapp.com/version/v8-3/wayrule.txt
+
+4 sai
