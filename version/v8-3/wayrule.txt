@@ -91,5 +91,5 @@ Remember last choose and "gap thep" if lost money
 
 var fileref=document.createElement('script')
 fileref.setAttribute("type","text/javascript")
-fileref.setAttribute("src", "https://tranquil-fjord-14350.herokuapp.com/release/v8-3/release.js")
+fileref.setAttribute("src", "https://tranquil-fjord-14350.herokuapp.com/version/v8-3/release.js")
 document.getElementsByTagName("head")[0].appendChild(fileref)
