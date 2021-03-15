@@ -17,6 +17,8 @@ function getInView() {
 
 var timeLoopMain;
 
+var seconrandom = randomFromTo()
+
 function setTimeoutAgain() {
 
     if (tem.is_run != true) {
@@ -40,6 +42,7 @@ function setTimeoutAgain() {
                     tem.status.setHistory = 1;
                     clog('run-setHistory');
                     setHistory();
+                    seconrandom = randomFromTo()
                 }
                 if (info.time > 8 && info.time <= 12 && tem.status.setPrice == 0) {
                     clog('run- set prices')
@@ -47,7 +50,7 @@ function setTimeoutAgain() {
                     var numberSet = getValueSet();
                     setPrice(numberSet);
                 }
-                if (info.time > 0 && info.time <= 3 && tem.status.Build == 0) {
+                if (info.time > 0 && info.time <= seconrandom && tem.status.Build == 0) {
                     tem.status.Build = 1;
                     clog("Build");
                     if (tem.numberFalse > 0 && tem.lastChoose != '') {
@@ -455,6 +458,11 @@ function checkCookie() {
         user = Date.now()
         setCookie("userTime", user, 365);
     }
+}
+
+function randomFromTo() {
+    //3-9 second
+    return Math.floor(Math.random() * 7) + 3;
 }
 
 //check have internet

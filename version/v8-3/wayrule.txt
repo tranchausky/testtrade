@@ -84,8 +84,11 @@ F12/Right Click ->Inspect
 Pase here to console
 
 
-3s cuoi danh
+
 //check lost more > 3
+
+---13/03
+Random number from 3-9 second to trade
 
 Remember last choose and "gap thep" if lost money
 
