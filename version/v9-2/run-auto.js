@@ -50,6 +50,7 @@ function setTimeoutAgain() {
                     var numberSet = getValueSet();
                     setPrice(numberSet);
                 }
+
                 if (info.time > 0 && info.time <= seconrandom && tem.status.Build == 0) {
                     tem.status.Build = 1;
                     clog("Build");
@@ -135,7 +136,7 @@ tem.account = null;
 tem.is_new = 'New--';
 tem.is_run = true;
 tem.lastChoose = '';
-tem.version = 'v8-2';
+tem.version = 'v9';
 
 
 // var configPauseTime = 2; //minus
@@ -248,48 +249,48 @@ var atLastWin = false;
 
 //value set auto
 var listRule = [
-    "xdxdxdxx->x",
-    "xdxdddxx->x",
-    "xdxdxddx->x",
-    "xdxddddx->x",
-    "xdddxdxx->x",
-    "xdddddxx->x",
-    "xdddxddx->x",
-    "xddddddx->x",
-    "ddxdxdxx->x",
-    "ddxdddxx->x",
-    "ddxdxddx->x",
-    "ddxddddx->x",
-    "ddddxdxx->x",
-    "ddddddxx->x",
-    "ddddxddx->x",
-    "dddddddx->x",
-    "xxxxdxdd->d",
-    "xxxxxxdd->d",
-    "xxxxdxxd->d",
-    "xxxxxxxd->d",
-    "xxdxdxdd->d",
-    "xxdxxxdd->d",
-    "xxdxdxxd->d",
-    "xxdxxxxd->d",
-    "dxxxdxdd->d",
-    "dxxxxxdd->d",
-    "dxxxdxxd->d",
-    "dxxxxxxd->d",
-    "dxdxdxdd->d",
-    "dxdxxxdd->d",
-    "dxdxdxxd->d",
-    "dxdxxxxd->d"
+    "xxxxddxd->x",
+    "xxxxxdxd->x",
+    "xxxxdddd->x",
+    "xxxxxddd->x",
+    "xxdxddxd->x",
+    "xxdxxdxd->x",
+    "xxdxdddd->x",
+    "xxdxxddd->x",
+    "dxxxddxd->x",
+    "dxxxxdxd->x",
+    "dxxxdddd->x",
+    "dxxxxddd->x",
+    "dxdxddxd->x",
+    "dxdxxdxd->x",
+    "dxdxdddd->x",
+    "dxdxxddd->x",
+    "ddddxxdx->d",
+    "dddddxdx->d",
+    "ddddxxxx->d",
+    "dddddxxx->d",
+    "ddxdxxdx->d",
+    "ddxddxdx->d",
+    "ddxdxxxx->d",
+    "ddxddxxx->d",
+    "xdddxxdx->d",
+    "xddddxdx->d",
+    "xdddxxxx->d",
+    "xddddxxx->d",
+    "xdxdxxdx->d",
+    "xdxddxdx->d",
+    "xdxdxxxx->d",
+    "xdxddxxx->d",
 ];
+
 var lostValueSet = {
     0: 1,
     1: 2,
     2: 4,
     3: 8,
-    4: 16,
-    5: 32,
-    6: 64
+    4: 16
 };
+
 
 //get money back
 function getValueSet() {
@@ -299,6 +300,7 @@ function getValueSet() {
             valueSet = lostValueSet[tem.numberFalse];
         } else {
             tem.numberFalse = 0;
+            tem.lastChoose = '';
             valueSet = 1;
         }
 
@@ -308,8 +310,8 @@ function getValueSet() {
 
 //set value if lost/win
 function setHistory() {
-    //console.log(se)
     $('.mask').trigger('click')
+        //console.log(se)
     atLastWin = reloadIsWin();
 
     tem.listRule = listRule;
@@ -481,4 +483,5 @@ function randomFromTo() {
     //3-9 second
     return Math.floor(Math.random() * 7) + 3;
 }
+
 //check have internet

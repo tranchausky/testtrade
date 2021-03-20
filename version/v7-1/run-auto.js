@@ -313,6 +313,7 @@ function getValueSet() {
 //set value if lost/win
 function setHistory() {
     //console.log(se)
+    $('.mask').trigger('click')
     atLastWin = reloadIsWin();
 
     tem.listRule = listRule;
