@@ -33,6 +33,9 @@ Random number from 3-9 second to trade
 --28/03
 Auto danh (d) o bong bong so 1 va so 5(9 stt)
 
+https://thuthuattienich.com/thu-thuat-may-tinh/hien-giay-windows-10/
+add de hien thi so s tren win 10
+
 var fileref=document.createElement('script')
 fileref.setAttribute("type","text/javascript")
 fileref.setAttribute("src", "https://tranquil-fjord-14350.herokuapp.com/version/v13-bongbong/release.js")
