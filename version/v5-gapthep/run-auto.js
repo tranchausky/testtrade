@@ -255,7 +255,7 @@ function getValueSet() {
             valueSet = lostValueSet[numberLastFalse];
         } else {
             numberLastFalse = 0;
-            valueSet = 1;
+            valueSet = lostValueSet[numberLastFalse];
         }
 
     }
@@ -265,6 +265,7 @@ function getValueSet() {
 //set value if lost/win
 function setHistory() {
     //console.log(se)
+    $('.mask').trigger('click')
     atLastWin = reloadIsWin();
 
     switch (atLastWin) {

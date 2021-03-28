@@ -15,20 +15,12 @@ function getInView() {
     return rs;
 }
 
-var timeLoopMain;
-
-var seconrandom = randomFromTo()
-
 function setTimeoutAgain() {
 
-    if (tem.is_run != true) {
-        return;
-    }
 
-    var timeLoopMain = setTimeout(function() {
+    var t = setTimeout(function() {
         var se = getSecond();
         //clog('run-' + se)
-
 
         var info = getInView()
         switch (info.way) {
@@ -43,32 +35,19 @@ function setTimeoutAgain() {
                     tem.status.setHistory = 1;
                     clog('run-setHistory');
                     setHistory();
-                    seconrandom = randomFromTo()
                 }
-                if (info.time > 8 && info.time <= 12 && tem.status.setPrice == 0) {
+                if (info.time > 10 && info.time <= 13 && tem.status.setPrice == 0) {
                     clog('run- set prices')
                     tem.status.setPrice = 1;
                     var numberSet = getValueSet();
                     setPrice(numberSet);
                 }
-
-                var objectTime = getTimeNow();
-                var isMinus = objectTime.m
-                var isTradeTime = false;
-                var at1 = ((isMinus + 1 - 7) % 10 == 0) ? 1 : 0;
-                var at9 = ((isMinus + 1 - 11) % 10 == 0) ? 1 : 0;
-                if (at1 == 1 || at9 == 1) {
-                    var isTradeTime = true;
-                }
-                if (info.time > 0 && info.time <= seconrandom && tem.status.Build == 0 && isTradeTime) {
+                var seconrandom = randomFromTo()
+                if (info.time > 0 && info.time <= seconrandom && tem.status.Build == 0) {
                     tem.status.Build = 1;
-                    // clog("Build");
-                    // if (tem.numberFalse > 0 && tem.lastChoose != '') {
-                    //     build(tem.lastChoose);
-                    // } else {
-                    //     build(changeWayV2());
-                    // }
-                    build('d');
+                    clog("Build");
+                    build(changeWayV2());
+
                 }
                 break;
             default:
@@ -133,24 +112,9 @@ tem.is_show_first = true;
 tem.time_old = new Date().toLocaleTimeString();
 tem.time_win = '';
 tem.maxWin = 50;
+tem.lastChoose = '';
 
 tem.status = {}
-tem.waychoose = '';
-tem.isLastWin = '';
-//total lost last
-tem.numberFalse = 0;
-tem.lastPrices = 0;
-tem.listRule = null;
-tem.listLostSet = null;
-tem.account = null;
-tem.is_new = 'New--';
-tem.is_run = true;
-tem.lastChoose = '';
-tem.version = 'v9';
-
-
-// var configPauseTime = 2; //minus
-// var configPauseWillLost = 2; //number false and after will resert =0
 
 function reloadIsWin() {
 
@@ -166,7 +130,6 @@ function reloadIsWin() {
     // }
     // return '';
 
-
     tem.new = getMoney();
     var status = 'no-change';
     if (tem.new > tem.old) {
@@ -180,10 +143,13 @@ function reloadIsWin() {
 
 }
 
+function lastWayColor() {
+    //
+}
+
 function setPrice(conso) {
     conso = conso.toString();
     jQuery("#InputNumber").val(conso);
-    tem.lastPrices = conso;
     $(function() {
         $('#InputNumber').keydown();
         $('#InputNumber').keypress();
@@ -235,14 +201,6 @@ function getSecond() {
     return s;
 }
 
-function getTimeNow() {
-    var rs = {}
-    var d = new Date();
-    //rs.s = addZero(d.getSeconds());
-    rs.m = d.getMinutes();
-    return rs;
-}
-
 //48,49,50
 var clGreen = "#31BAA0";
 var clRed = "#FC5F5F";
@@ -264,46 +222,32 @@ function colorAt(at) {
 
 //status last win/lost
 var atLastWin = false;
-
+//total lost last
+var numberLastFalse = 0;
 //value set auto
 var listRule = [
-    "xdxdxx->x",
-    "xdddxx->x",
-    "xdxddx->x",
-    "xddddx->x",
-    "ddxdxx->x",
-    "ddddxx->x",
-    "ddxddx->x",
-    "dddddx->x",
-    "xxdxdd->d",
-    "xxxxdd->d",
-    "xxdxxd->d",
-    "xxxxxd->d",
-    "dxdxdd->d",
-    "dxxxdd->d",
-    "dxdxxd->d",
-    "dxxxxd->d"
+    "x->d",
+    "d->x",
+    "xxx->",
+    "xxxx->",
+    "xdxx->",
+    "ddd->",
+    "dddd->",
+    "dxdd->",
 ];
+
 var lostValueSet = {
-    0: 1,
-    1: 2,
-    2: 4,
-    3: 8,
-    4: 16,
-    5: 32,
-    6: 64
+    0: 5
 };
 
 //get money back
 function getValueSet() {
     var valueSet = 1;
     if (atLastWin != true) {
-        if (typeof lostValueSet[tem.numberFalse] !== 'undefined') {
-            valueSet = lostValueSet[tem.numberFalse];
+        if (typeof lostValueSet[numberLastFalse] !== 'undefined') {
+            valueSet = lostValueSet[numberLastFalse];
         } else {
-            tem.numberFalse = 0;
-            tem.lastChoose = '';
-
+            numberLastFalse = 0;
             valueSet = lostValueSet[numberLastFalse];
         }
 
@@ -313,58 +257,32 @@ function getValueSet() {
 
 //set value if lost/win
 function setHistory() {
+    //console.log(se)
     $('.mask').trigger('click')
-        //console.log(se)
     atLastWin = reloadIsWin();
-
-    tem.listRule = listRule;
-    tem.listLostSet = lostValueSet;
-    tem.isLastWin = atLastWin;
-
-    tem.account = tem.is_new.toString() + $('.d-flex.flex-column.mr-lg-2.mr-2').text();
-    // tem.configPauseTime = configPauseTime
-    // tem.configPauseWillLost = configPauseWillLost
 
     switch (atLastWin) {
         case false:
-            postLog();
-            tem.is_new = ''
-            tem.numberFalse++;
-            // if (tem.numberFalse > configPauseWillLost) {
-            //     //pase and will try call
-            //     tem.numberFalse = 0;
-            //     clearTimeout(timeLoopMain) //stop
-            //     tem.is_run = false;
-            //     setTimeout(function() {
-            //         tem.is_run = true;
-            //         setTimeoutAgain()
-            //     }, configPauseTime * 1000); //wake up main function
-            // }
+            numberLastFalse++;
             break;
         case true:
-            postLog();
-            tem.numberFalse = 0;
-            tem.is_new = ''
+            numberLastFalse = 0;
             break;
         default:
             break;
     }
-
-
-
     clog('last_event:' + atLastWin)
-    clog('number lost:' + tem.numberFalse)
+    clog('number lost:' + numberLastFalse)
         //resert value, alot of lost, back to 0
-    if (tem.numberFalse > parseInt(lostValueSet.length) - 1) {
-        tem.numberFalse = 0;
+    if (numberLastFalse > parseInt(lostValueSet.length) - 1) {
+        numberLastFalse = 0;
     }
 }
-
 
 function changeWayV2() {
     tem.lastChoose = '';
     listRule = listRule.sort((a, b) => b.length - a.length);
-    tem.waychoose = '';
+
     for (var property in listRule) {
         var rule = listRule[property];
         var arrRule = rule.split("->");
@@ -379,9 +297,8 @@ function changeWayV2() {
                 }
             }
             if (isCheck == true) {
-                tem.lastChoose = (way == 'x' || way == 'd') ? way : '';
+                tem.lastChoose = (way == 'x') ? true : false;
                 clog(listCheck + "->" + way);
-                tem.waychoose = listCheck + "->" + way;
                 return way;
             }
         }
@@ -413,73 +330,6 @@ setTimeoutAgain();
 
 function clog(vl) {
     //console.log(vl);
-}
-
-
-
-function postLog() {
-
-    var datasend = {}
-    datasend.way = tem.waychoose;
-    datasend.is_win = tem.isLastWin;
-    datasend.version = '';
-    datasend.log = tem;
-    datasend.user = getCookie("userTime");
-    var obj = JSON.stringify(datasend)
-
-    var strSend = b64EncodeUnicode(obj);
-
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            //document.getElementById("demo").innerHTML = this.responseText;
-        }
-    };
-    var linksend = "https://chau.link/logs/run.php";
-    xhttp.open("POST", linksend, true);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    //xhttp.send("fname=Henry&lname=Ford");
-    xhttp.send("v=" + strSend);
-}
-
-function b64EncodeUnicode(str) {
-    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
-        return String.fromCharCode('0x' + p1);
-    }));
-}
-
-
-//set cooki
-checkCookie()
-
-function setCookie(cname, cvalue, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    var expires = "expires=" + d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-function getCookie(cname) {
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
-
-function checkCookie() {
-    var user = getCookie("userTime");
-    if (user != "") {} else {
-        user = Date.now()
-        setCookie("userTime", user, 365);
-    }
 }
 
 function randomFromTo() {
