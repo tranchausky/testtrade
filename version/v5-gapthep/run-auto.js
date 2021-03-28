@@ -249,7 +249,7 @@ var lostValueSet = {
 
 //get money back
 function getValueSet() {
-    var valueSet = 1;
+    var valueSet = lostValueSet[0] ? lostValueSet[0] : 1;
     if (atLastWin != true) {
         if (typeof lostValueSet[numberLastFalse] !== 'undefined') {
             valueSet = lostValueSet[numberLastFalse];

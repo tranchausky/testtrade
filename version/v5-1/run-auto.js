@@ -232,13 +232,13 @@ var lostValueSet = {
 };
 //get money back
 function getValueSet() {
-    var valueSet = 1;
+    var valueSet = lostValueSet[0] ? lostValueSet[0] : 1;
     if (atLastWin != true) {
         if (typeof lostValueSet[numberLastFalse] !== 'undefined') {
             valueSet = lostValueSet[numberLastFalse];
         } else {
             numberLastFalse = 0;
-            valueSet = 1;
+            valueSet = lostValueSet[numberLastFalse];
         }
 
     }
@@ -248,6 +248,7 @@ function getValueSet() {
 //set value if lost/win
 function setHistory() {
     //console.log(se)
+    $('.mask').trigger('click')
     atLastWin = reloadIsWin();
 
     switch (atLastWin) {
