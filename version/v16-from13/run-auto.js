@@ -288,7 +288,7 @@ function getValueSet() {
             tem.numberFalse = 0;
             tem.lastChoose = '';
 
-            valueSet = lostValueSet[numberLastFalse];
+            valueSet = lostValueSet[tem.numberFalse];
         }
 
     }

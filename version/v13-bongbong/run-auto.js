@@ -296,7 +296,7 @@ var lostValueSet = {
 
 //get money back
 function getValueSet() {
-    var valueSet = 1;
+    var valueSet = lostValueSet[0] ? lostValueSet[0] : 1;
     if (atLastWin != true) {
         if (typeof lostValueSet[tem.numberFalse] !== 'undefined') {
             valueSet = lostValueSet[tem.numberFalse];
@@ -304,7 +304,7 @@ function getValueSet() {
             tem.numberFalse = 0;
             tem.lastChoose = '';
 
-            valueSet = lostValueSet[numberLastFalse];
+            valueSet = lostValueSet[tem.numberFalse];
         }
 
     }
