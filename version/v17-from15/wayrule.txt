@@ -31,7 +31,7 @@ Remember last choose and "gap thep" if lost money
 Random number from 3-9 second to trade
 
 --30/03
-Auto danh x (1,6,9)
+Auto danh d (1,6,9)
 --31/3 danh (1,6,9) khi chua thang, thang roi thi cho 10 phut tiep
 
 https://thuthuattienich.com/thu-thuat-may-tinh/hien-giay-windows-10/
