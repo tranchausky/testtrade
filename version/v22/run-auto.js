@@ -65,8 +65,6 @@ function setTimeoutAgain() {
                         setPrice(numberSet);
                     }
 
-
-
                 }
 
                 if (info.time > 0 && info.time <= seconrandom && tem.status.Build == 0 && tem.status.setPrice == 1) {
@@ -156,7 +154,7 @@ tem.account = null;
 tem.is_new = 'New--';
 tem.is_run = true;
 tem.lastChoose = '';
-tem.version = 'v21';
+tem.version = '22';
 
 
 // var configPauseTime = 2; //minus
@@ -396,9 +394,34 @@ function changeWayV2() {
 function changeWayV20step() {
     tem.lastChoose = '';
     var colors = getListColor();
-    if (colors[2] != undefined) {
-        tem.lastChoose = colors[2]
+    // if (colors[19] != undefined) {
+    //     tem.lastChoose = colors[19]
+    // }
+    var color1 = colors[21] != undefined ? colors[21] : '';
+    var color2 = colors[1] != undefined ? colors[1] : '';
+    var color3 = colors[23] != undefined ? colors[23] : '';
+    var color4 = colors[3] != undefined ? colors[3] : '';
+    var color5 = colors[25] != undefined ? colors[25] : '';
+    var color6 = colors[5] != undefined ? colors[5] : '';
+
+    if (color1 == color2 && color3 == color4 && color5 == color6) {
+        if (color2 == 'x') {
+            tem.lastChoose == 'd'
+        }
+        if (color2 == 'd') {
+            tem.lastChoose = 'x'
+        }
     }
+    if (color1 != color2 && color3 != color4 && color5 != color6) {
+        if (color2 == 'x') {
+            tem.lastChoose = 'x'
+        }
+        if (color2 == 'd') {
+            tem.lastChoose = 'd'
+        }
+    }
+
+
     return tem.lastChoose
 }
 
