@@ -403,20 +403,21 @@ function changeWayV20step() {
     var color4 = colors[3] != undefined ? colors[3] : '';
     var color5 = colors[25] != undefined ? colors[25] : '';
     var color6 = colors[5] != undefined ? colors[5] : '';
+    var color7 = colors[19] != undefined ? colors[19] : '';
 
     if (color1 == color2 && color3 == color4 && color5 == color6) {
-        if (color2 == 'x') {
+        if (color7 == 'x') {
             tem.lastChoose == 'd'
         }
-        if (color2 == 'd') {
+        if (color7 == 'd') {
             tem.lastChoose = 'x'
         }
     }
     if (color1 != color2 && color3 != color4 && color5 != color6) {
-        if (color2 == 'x') {
+        if (color7 == 'x') {
             tem.lastChoose = 'x'
         }
-        if (color2 == 'd') {
+        if (color7 == 'd') {
             tem.lastChoose = 'd'
         }
     }
