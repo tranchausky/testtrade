@@ -17,7 +17,7 @@ function getInView() {
 
 var timeLoopMain;
 
-var seconrandom = randomFromTo()
+var seconrandom = randomFromTo(5, 10)
 
 function setTimeoutAgain() {
 
@@ -42,11 +42,11 @@ function setTimeoutAgain() {
                     tem.status.setHistory = 1;
                     clog('run-setHistory');
                     setHistory();
-                    seconrandom = randomFromTo()
+                    seconrandom = randomFromTo(6, 10)
 
 
                 }
-                if (info.time > 8 && info.time <= 12 && tem.status.setPrice == 0) {
+                if (info.time > 10 && info.time <= 12 && tem.status.setPrice == 0) {
 
                     tem.maxWin = setMaxWinTotal
                     tem.maxLost = setMaxMinTotal
@@ -519,9 +519,9 @@ function checkCookie() {
     }
 }
 
-function randomFromTo() {
-    //3-9 second
-    return Math.floor(Math.random() * 7) + 3;
+
+function randomFromTo(vfrom, vto) {
+    return Math.floor(Math.random() * (vto - vfrom + 1)) + vfrom;
 }
 
 //check have internet
