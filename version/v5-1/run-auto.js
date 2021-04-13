@@ -37,10 +37,16 @@ function setTimeoutAgain() {
                     setHistory();
                 }
                 if (info.time > 6 && info.time <= 8 && tem.status.setPrice == 0) {
-                    clog('run- set prices')
-                    tem.status.setPrice = 1;
-                    var numberSet = getValueSet();
-                    setPrice(numberSet);
+
+                    tem.maxWin = setMaxWinTotal
+                    tem.maxLost = setMaxMinTotal
+                    var current = getMoney();
+                    if (current - tem.first <= tem.maxWin && tem.first - current <= tem.maxLost) {
+                        clog('run- set prices')
+                        tem.status.setPrice = 1;
+                        var numberSet = getValueSet();
+                        setPrice(numberSet);
+                    }
                 }
                 if (info.time > 0 && info.time <= 3 && tem.status.Build == 0) {
                     tem.status.Build = 1;
@@ -114,6 +120,9 @@ tem.maxWin = 50;
 tem.lastChoose = '';
 
 tem.status = {}
+
+var setMaxWinTotal = 32;
+var setMaxMinTotal = 32;
 
 function reloadIsWin() {
 

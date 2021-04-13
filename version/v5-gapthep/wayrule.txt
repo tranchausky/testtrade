@@ -22,6 +22,9 @@ var lostValueSet = {
     6: 32,
     7: 42,
 };
+var setMaxWinTotal = 32;
+var setMaxMinTotal = 32;
+
 
 Open web
 Goto wefinex
@@ -32,6 +35,10 @@ Pase here to console
 Random number from 3-9 second to trade
 
 //check lost more > 3
+
+13/4
+var setMaxWinTotal = 32;
+var setMaxMinTotal = 32;
 
 
 var fileref=document.createElement('script')
