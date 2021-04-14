@@ -35,6 +35,7 @@ function setTimeoutAgain() {
                 tem.status.setPrice = 0;
                 tem.status.Build = 0;
                 tem.status.setHistory = 0;
+                tem.status.color_set_first = '';
                 break;
             case 1:
 
@@ -43,7 +44,7 @@ function setTimeoutAgain() {
                     clog('run-setHistory');
                     setHistory();
                     seconrandom = randomFromTo(6, 10)
-
+                    tem.status.color_set_first = changeWayV20step()
 
                 }
                 if (info.time > 10 && info.time <= 12 && tem.status.setPrice == 0) {
@@ -76,7 +77,7 @@ function setTimeoutAgain() {
 
                     // }
                     // build(changeWayV2());
-                    build(changeWayV20step());
+                    build(tem.status.color_set_first);
                 }
                 break;
             default:
