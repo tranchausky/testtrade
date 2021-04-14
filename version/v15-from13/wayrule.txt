@@ -33,6 +33,12 @@ Random number from 3-9 second to trade
 --30/03
 Auto danh x (1,6,9)
 
+14/4
+set max, win, max min lost
+var setMaxWinTotal = 10;
+var setMaxMinTotal = 10;
+
+
 https://thuthuattienich.com/thu-thuat-may-tinh/hien-giay-windows-10/
 add de hien thi so s tren win 10
 

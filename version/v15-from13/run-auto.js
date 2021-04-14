@@ -46,10 +46,22 @@ function setTimeoutAgain() {
                     seconrandom = randomFromTo()
                 }
                 if (info.time > 8 && info.time <= 12 && tem.status.setPrice == 0) {
-                    clog('run- set prices')
-                    tem.status.setPrice = 1;
-                    var numberSet = getValueSet();
-                    setPrice(numberSet);
+
+
+                    tem.maxWin = setMaxWinTotal
+                    tem.maxLost = setMaxMinTotal
+                    var current = getMoney();
+                    if (current - tem.first <= tem.maxWin && tem.first - current <= tem.maxLost) {
+                        clog('run- set prices')
+                        tem.status.setPrice = 1;
+                        var numberSet = getValueSet();
+                        setPrice(numberSet);
+                    }
+
+                    // clog('run- set prices')
+                    // tem.status.setPrice = 1;
+                    // var numberSet = getValueSet();
+                    // setPrice(numberSet);
                 }
 
                 var objectTime = getTimeNow();
@@ -61,7 +73,7 @@ function setTimeoutAgain() {
                 if (at1 == 1 || at12 == 1 || at17 == 1) {
                     var isTradeTime = true;
                 }
-                if (info.time > 0 && info.time <= seconrandom && tem.status.Build == 0 && isTradeTime) {
+                if (info.time > 0 && info.time <= seconrandom && tem.status.Build == 0 && isTradeTime && tem.status.setPrice == 1) {
                     tem.status.Build = 1;
                     // clog("Build");
                     // if (tem.numberFalse > 0 && tem.lastChoose != '') {
@@ -149,6 +161,8 @@ tem.is_run = true;
 tem.lastChoose = '';
 tem.version = 'v15from13';
 
+var setMaxWinTotal = 10;
+var setMaxMinTotal = 10;
 
 // var configPauseTime = 2; //minus
 // var configPauseWillLost = 2; //number false and after will resert =0
