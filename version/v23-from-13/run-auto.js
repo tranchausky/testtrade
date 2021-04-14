@@ -52,24 +52,35 @@ function setTimeoutAgain() {
                     setPrice(numberSet);
                 }
 
+
                 var objectTime = getTimeNow();
                 var isMinus = objectTime.m
-                var isTradeTime = false;
-                var at1 = ((isMinus + 1 - 7) % 10 == 0) ? 1 : 0;
-                var at9 = ((isMinus + 1 - 11) % 10 == 0) ? 1 : 0;
-                if (at1 == 1 || at9 == 1) {
-                    var isTradeTime = true;
+                    //check bong bong have time same rul
+                if (isMinus < 56 && isMinus >= 6) {
+                    var isTradeTime = false;
+                    var at1 = ((isMinus + 1 - 7) % 10 == 0) ? 1 : 0;
+                    var at3 = ((isMinus + 1 - 9) % 10 == 0) ? 1 : 0;
+                    var at5 = ((isMinus + 1 - 11) % 10 == 0) ? 1 : 0;
+                    var at7 = ((isMinus + 1 - 13) % 10 == 0) ? 1 : 0;
+                    var at9 = ((isMinus + 1 - 15) % 10 == 0) ? 1 : 0;
+                    if (at1 == 1) {
+                        tem.status.pharse = 1;
+                    }
+                    if (at1 == 1 || at3 == 1 || at5 == 1 || at7 == 1 || at9 == 1) {
+                        var isTradeTime = true;
+                    }
+                    if (info.time > 0 && info.time <= seconrandom && tem.status.Build == 0 && isTradeTime && tem.status.pharse == 1) {
+                        tem.status.Build = 1;
+                        // clog("Build");
+                        // if (tem.numberFalse > 0 && tem.lastChoose != '') {
+                        //     build(tem.lastChoose);
+                        // } else {
+                        //     build(changeWayV2());
+                        // }
+                        build('d');
+                    }
                 }
-                if (info.time > 0 && info.time <= seconrandom && tem.status.Build == 0 && isTradeTime) {
-                    tem.status.Build = 1;
-                    // clog("Build");
-                    // if (tem.numberFalse > 0 && tem.lastChoose != '') {
-                    //     build(tem.lastChoose);
-                    // } else {
-                    //     build(changeWayV2());
-                    // }
-                    build('d');
-                }
+
                 break;
             default:
                 break;
@@ -146,7 +157,8 @@ tem.account = null;
 tem.is_new = 'New--';
 tem.is_run = true;
 tem.lastChoose = '';
-tem.version = 'v9';
+tem.version = 'v23-from13';
+tem.status.pharse = 0
 
 
 // var configPauseTime = 2; //minus
@@ -326,6 +338,7 @@ function setHistory() {
             break;
         case true:
             postLog();
+            tem.status.pharse = 0
             tem.numberFalse = 0;
             tem.is_new = ''
             break;
