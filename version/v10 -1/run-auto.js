@@ -47,10 +47,11 @@ function setTimeoutAgain() {
                 }
                 if (tem.is_run == true && info.time > 8 && info.time <= 12 && tem.status.setPrice == 0) {
 
-                    tem.maxWin = maxMoneyStop
+                    tem.maxWin = setMaxWinTotal
+                    tem.minLostMax = setMaxMinTotal
                     var current = getMoney();
                     //console.log('change money from ' + tem.first + ' to ' + current + ' =' + (current - tem.first))
-                    if (current - tem.first > tem.maxWin) {
+                    if (current - tem.first > tem.maxWin || tem.first - current > tem.minLostMax) {
                         tem.is_run = false;
                         //loop one day
                         setTimeout(function() {
@@ -259,7 +260,9 @@ function colorAt(at) {
 
 //status last win/lost
 var atLastWin = false;
-var maxMoneyStop = 10;
+// var maxMoneyStop = 10;
+var setMaxWinTotal = 10;
+var setMaxMinTotal = 20;
 
 //value set auto
 var listRule = [
@@ -272,7 +275,7 @@ var listRule = [
 ];
 var lostValueSet = {
     0: 1,
-    1:2,
+    1: 2,
     2: 4,
     3: 8,
     4: 16,

@@ -18,7 +18,8 @@ var lostValueSet = {
     6: 64,
 };
 
-var maxMoneyStop = 10;
+var setMaxWinTotal = 10;
+var setMaxMinTotal = 20;
 
 
 
@@ -48,6 +49,10 @@ Copy From v9-1
 
 
 9/4 cau xanh
+
+16/4
+- setMaxWinTotal (tong tien lo`i se~ du`ng)
+- setMaxMinTotal (tong tien lo^~ se~ du`ng)
 
 var fileref=document.createElement('script')
 fileref.setAttribute("type","text/javascript")
