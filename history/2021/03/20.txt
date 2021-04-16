@@ -1,9 +1,0 @@
-
-https://tranquil-fjord-14350.herokuapp.com/version/v9-1/wayrule.txt
-https://tranquil-fjord-14350.herokuapp.com/version/v9-1/release.js
-clog('run it version: 3:54 PM 20/3/2021')
-
-https://tranquil-fjord-14350.herokuapp.com/version/v9-2/wayrule.txt
-https://tranquil-fjord-14350.herokuapp.com/version/v9-2/release.js
-clog('run it version: 3:57 PM 20/3/2021')
-

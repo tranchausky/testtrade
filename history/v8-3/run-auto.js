@@ -17,6 +17,8 @@ function getInView() {
 
 var timeLoopMain;
 
+var seconrandom = randomFromTo()
+
 function setTimeoutAgain() {
 
     if (tem.is_run != true) {
@@ -40,6 +42,7 @@ function setTimeoutAgain() {
                     tem.status.setHistory = 1;
                     clog('run-setHistory');
                     setHistory();
+                    seconrandom = randomFromTo()
                 }
                 if (info.time > 8 && info.time <= 12 && tem.status.setPrice == 0) {
                     clog('run- set prices')
@@ -47,7 +50,7 @@ function setTimeoutAgain() {
                     var numberSet = getValueSet();
                     setPrice(numberSet);
                 }
-                if (info.time > 0 && info.time <= 3 && tem.status.Build == 0) {
+                if (info.time > 0 && info.time <= seconrandom && tem.status.Build == 0) {
                     tem.status.Build = 1;
                     clog("Build");
                     if (tem.numberFalse > 0 && tem.lastChoose != '') {
@@ -132,7 +135,7 @@ tem.account = null;
 tem.is_new = 'New--';
 tem.is_run = true;
 tem.lastChoose = '';
-tem.version = 'v7-1';
+tem.version = 'v8-3';
 
 
 // var configPauseTime = 2; //minus
@@ -245,42 +248,71 @@ var atLastWin = false;
 
 //value set auto
 var listRule = [
-    "x->d",
-    "d->d",
-    "xxx-> ",
-    "xxxx-> ",
-    "xxxxx-> ",
-    "dxxx-> ",
-    "xxdxxx-> ",
-    "ddxxx-> ",
-    "xdxxx-> ",
-    "xdxxx-> ",
-    "dxxxx-> ",
-    "xdxxxx-> ",
-    "xdxxxx-> ",
-    "dxxxxx-> ",
-    "xdxxxxx-> ",
-    "xdxxxxx-> ",
-    "xdxdxxx-> ",
-    "xdxxdxxx-> ",
-    "xdxdxxdxxx-> ",
-
-    "dxdx-> ",
-    "dxdx-> ",
-    "dxdxd-> ",
-    "dxdxdx-> ",
-    "dxdxdxd-> ",
-    "dxdxdxdx-> ",
-    "dxdxdxdxd-> ",
-    "xxxdx-> ",
-    "xxddd-> ",
-    "xddxx-> ",
-    "xxddxx-> ",
-    "dxxdd-> ",
-    "xddxxddxx-> ",
-    "xxdx-> ",
+    "xdxdxdxdxx->x",
+    "xdxdxdddxx->x",
+    "xdxdxdxddx->x",
+    "xdxdxddddx->x",
+    "xdxdddxdxx->x",
+    "xdxdddddxx->x",
+    "xdxdddxddx->x",
+    "xdxddddddx->x",
+    "xdddxdxdxx->x",
+    "xdddxdddxx->x",
+    "xdddxdxddx->x",
+    "xdddxddddx->x",
+    "xdddddxdxx->x",
+    "xdddddddxx->x",
+    "xdddddxddx->x",
+    "xddddddddx->x",
+    "ddxdxdxdxx->x",
+    "ddxdxdddxx->x",
+    "ddxdxdxddx->x",
+    "ddxdxddddx->x",
+    "ddxdddxdxx->x",
+    "ddxdddddxx->x",
+    "ddxdddxddx->x",
+    "ddxddddddx->x",
+    "ddddxdxdxx->x",
+    "ddddxdddxx->x",
+    "ddddxdxddx->x",
+    "ddddxddddx->x",
+    "ddddddxdxx->x",
+    "ddddddddxx->x",
+    "ddddddxddx->x",
+    "dddddddddx->x",
+    "xxxxxxdxdd->d",
+    "xxxxxxxxdd->d",
+    "xxxxxxdxxd->d",
+    "xxxxxxxxxd->d",
+    "xxxxdxdxdd->d",
+    "xxxxdxxxdd->d",
+    "xxxxdxdxxd->d",
+    "xxxxdxxxxd->d",
+    "xxdxxxdxdd->d",
+    "xxdxxxxxdd->d",
+    "xxdxxxdxxd->d",
+    "xxdxxxxxxd->d",
+    "xxdxdxdxdd->d",
+    "xxdxdxxxdd->d",
+    "xxdxdxdxxd->d",
+    "xxdxdxxxxd->d",
+    "dxxxxxdxdd->d",
+    "dxxxxxxxdd->d",
+    "dxxxxxdxxd->d",
+    "dxxxxxxxxd->d",
+    "dxxxdxdxdd->d",
+    "dxxxdxxxdd->d",
+    "dxxxdxdxxd->d",
+    "dxxxdxxxxd->d",
+    "dxdxxxdxdd->d",
+    "dxdxxxxxdd->d",
+    "dxdxxxdxxd->d",
+    "dxdxxxxxxd->d",
+    "dxdxdxdxdd->d",
+    "dxdxdxxxdd->d",
+    "dxdxdxdxxd->d",
+    "dxdxdxxxxd->d"
 ];
-
 var lostValueSet = {
     0: 1,
     1: 2,
@@ -288,9 +320,7 @@ var lostValueSet = {
     3: 8,
     4: 16,
     5: 32,
-    6: 64,
-    7: 128,
-    8: 250,
+    6: 64
 };
 
 //get money back
@@ -310,7 +340,8 @@ function getValueSet() {
 
 //set value if lost/win
 function setHistory() {
-    //console.log(se)
+    $('.mask').trigger('click')
+        //console.log(se)
     atLastWin = reloadIsWin();
 
     tem.listRule = listRule;
@@ -478,4 +509,8 @@ function checkCookie() {
     }
 }
 
+function randomFromTo() {
+    //3-9 second
+    return Math.floor(Math.random() * 7) + 3;
+}
 //check have internet

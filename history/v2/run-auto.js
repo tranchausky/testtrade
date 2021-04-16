@@ -1,91 +1,38 @@
-function getInView() {
-    var idget = $('.bet-wrapper')
-    var text = idget.find('.font-14.mb-0').text()
-    var havetime = idget.find('.font-18.mb-0').text()
-    havetime = havetime.replace("s", "");
-    var rs = {}
-    rs.time = parseInt(havetime);
-    rs.way = '';
-    if (text == 'Hãy đặt lệnh') {
-        rs.way = 1; //cann buy
-    }
-    if (text == 'Chờ Kết quả') {
-        rs.way = 0;
-    }
-    return rs;
-}
-
 function setTimeoutAgain() {
-
-
     var t = setTimeout(function() {
         var se = getSecond();
-        //clog('run-' + se)
+        //clog('run-'+se)
 
-        var info = getInView()
-        switch (info.way) {
-            case 0:
-                tem.status.setPrice = 0;
-                tem.status.Build = 0;
-                tem.status.setHistory = 0;
-                break;
-            case 1:
+        //if(se ==22){
+        //clog('run-setHistory')
+        // setHistory()
 
-                if (info.time > 20 && info.time <= 25 && tem.status.setHistory == 0) {
-                    tem.status.setHistory = 1;
-                    clog('run-setHistory');
-                    setHistory();
-                }
-                if (info.time > 15 && info.time <= 20 && tem.status.setPrice == 0) {
-                    clog('run- set prices')
-                    tem.status.setPrice = 1;
-                    var numberSet = getValueSet();
-                    setPrice(numberSet);
-                }
-                if (info.time > 0 && info.time <= 3 && tem.status.Build == 0) {
-                    tem.status.Build = 1;
-                    clog("Build");
-                    build(changeWayV2());
-                }
-                break;
-            default:
-                break;
-        }
-
-        /*
-        if (se == 10 && tem.is_show_first == true) {
-            clog('run-setHistory')
-            setHistory()
-        }
-        if (se == 10 && tem.is_show_first == true) {
-            //clog('run- set prices')
-
+        //}
+        // if(se ==25){
+        //clog('run- set prices')
+        // var numberSet =getValueSet();
+        //  setPrice(numberSet);
+        //}
+        //var is_build = true;
+        if (se == 20 && tem.is_show_first == true) {
+            //stop win if get 50 usd
             var current = getMoney();
             console.log('change money from ' + tem.first + ' to ' + current + ' =' + (current - tem.first))
-            if (current - tem.first > tem.maxWin) {
-
+            if (current - tem.first > 50) {
                 //is_build = false;
                 tem.is_show_first = false;
                 tem.time_win = new Date().toLocaleTimeString();
                 clog('Win over 50usd from ' + tem.first + ' to ' + current)
                 clog("from " + tem.time_old + ' to ' + tem.time_win)
-            } else {
-                var numberSet = getValueSet();
-                setPrice(numberSet);
             }
         }
 
-        if (se == 26 && tem.is_show_first == true) {
-            var numberSet = getValueSet();
-            setPrice(numberSet);
-        }
-        if (se == 28 && tem.is_show_first == true) {
+        if (se == 27 && tem.is_show_first == true) {
             clog("Build");
             //changeWay()
             // build(changeWay())
             build(changeWayV2());
         }
-        */
         //if(se ==30){
         //console.log('30')
         //}
@@ -95,29 +42,17 @@ function setTimeoutAgain() {
 var isWIN = true;
 var glb_whatWay = true; //up/down
 var tem = {};
-
-tem.timeForBuy = 2;
-tem.timeSetPrice = 4;
-tem.timeSetHistory = 10;
-
-tem.keyBuy = 1; //key buy
-tem.keyCheck = 0; //key check
-
 tem.old = getMoney();
 tem.new = 0;
 tem.first = getMoney();
 tem.is_show_first = true;
 tem.time_old = new Date().toLocaleTimeString();
 tem.time_win = '';
-tem.maxWin = 50;
 
-tem.status = {}
-tem.waychoose = '';
-tem.isLastWin = '';
 
 function reloadIsWin() {
     tem.new = getMoney();
-    var status = '';
+    var status = 'no-change';
     if (tem.new > tem.old) {
         status = true;
     }
@@ -128,7 +63,7 @@ function reloadIsWin() {
     return status;
 }
 
-function setPrice(conso) {
+function setPrice(number) {
     conso = conso.toString();
     jQuery("#InputNumber").val(conso);
     $(function() {
@@ -148,6 +83,15 @@ function getMoney() {
 }
 
 function build(isWay) {
+    //var isOff = jQuery('#rightContent .btnSuccess').hasClass('colorDisable')
+    //if(isOff == false){
+    //    jQuery('#rightContent .btnSuccess').trigger('click')
+    //}
+
+    //glb_whatWay check to up/down
+
+    //setPrice()
+    //console.log("is win: "+reloadIsWin())
     clog("is--isWay:" + isWay);
     switch (isWay) {
         case 'x':
@@ -201,6 +145,14 @@ function colorAt(at) {
     //return attr;
 }
 
+function test() {
+    console.log(colorAt(0));
+    console.log(colorAt(1));
+    console.log(colorAt(2));
+    console.log(colorAt(3));
+    console.log(colorAt(4));
+}
+
 //status last win/lost
 var atLastWin = false;
 //total lost last
@@ -210,7 +162,10 @@ var lostValueSet = {
     0: 1,
     1: 2,
     2: 4,
-    3: 6
+    3: 8,
+    4: 16,
+    5: 32,
+    6: 64
 };
 //get money back
 function getValueSet() {
@@ -243,34 +198,113 @@ function setHistory() {
         default:
             break;
     }
-    tem.isLastWin = atLastWin;
-    clog('last_event:' + atLastWin)
-    clog('number lost:' + numberLastFalse)
+    console.log('last_event:' + atLastWin)
+    console.log('number lost:' + numberLastFalse)
         //resert value, alot of lost, back to 0
-    if (numberLastFalse > parseInt(lostValueSet.length) - 1) {
+    if (numberLastFalse == lostValueSet.length - 1) {
         numberLastFalse = 0;
     }
 }
 
-var listRule = [
-    "xxx->x",
-    "xdxxx->x",
-    "ddxxx->x",
-    "xdxdxxx->x",
-    "ddxdxxx->x",
-    "xdddxxx->x",
-    "ddddxxx->x",
-    "xdxdxdxxx->x",
-    "ddxdxdxxx->x",
-    "ddddxdxxx->x",
-    "xdddxdxxx->x",
-    "xdxdddxxx->x",
-    "ddxdddxxx->x",
-    "xdddddxxx->x",
-    "ddddddxxx->x",
-];
+function changeWay() {
+    var way = null;
+
+    //1-true
+    if (colorAt(0) == true && colorAt(1) == false && colorAt(2) == true && colorAt(3) == true && colorAt(4) == true) {
+        clog("xdxxx->x");
+        return true;
+    }
+
+    if (colorAt(0) == false && colorAt(1) == true && colorAt(2) == true && colorAt(3) == true && colorAt(4) == true) {
+        clog("dxxxx->x");
+        return true;
+    }
+
+    if (colorAt(0) == true && colorAt(1) == true && colorAt(2) == true && colorAt(3) == false) {
+        clog("xxxd->x");
+        return true;
+    }
+    if (colorAt(0) == true && colorAt(1) == true && colorAt(2) == true && colorAt(3) == true) {
+        clog("xxxx->x");
+        return true;
+    }
+    if (colorAt(0) == true && colorAt(1) == true && colorAt(2) == true) {
+        clog("xxx->x");
+        return true;
+    }
+    if (colorAt(0) == false && colorAt(1) == true && colorAt(2) == false) {
+        clog("dxd->x");
+        return true;
+    }
+    if (colorAt(0) == true && colorAt(1) == true && colorAt(2) == false) {
+        clog("xxd->x");
+        return true;
+    }
+    //2 false
+
+    if (colorAt(0) == false && colorAt(1) == true && colorAt(2) == false && colorAt(3) == false && colorAt(4) == false) {
+        clog("dxddd->d");
+        return false;
+    }
+    if (colorAt(0) == true && colorAt(1) == false && colorAt(2) == false && colorAt(3) == false && colorAt(4) == false) {
+        clog("xdddd->d");
+        return false;
+    }
+    if (colorAt(0) == false && colorAt(1) == false && colorAt(2) == false && colorAt(3) == true) {
+        clog("dddx->d");
+        return false;
+    }
+    if (colorAt(0) == false && colorAt(1) == false && colorAt(2) == false && colorAt(3) == false) {
+        clog("dddd->d");
+        return false;
+    }
+    if (colorAt(0) == false && colorAt(1) == false && colorAt(2) == false) {
+        clog("ddd->d");
+        return false;
+    }
+    if (colorAt(0) == true && colorAt(1) == false && colorAt(2) == true) {
+        clog("xdx->d");
+        return false;
+    }
+    if (colorAt(0) == false && colorAt(1) == false && colorAt(2) == true) {
+        clog("ddx->d");
+        return false;
+    }
+    return way;
+    //glb_whatWay = way
+    //return way
+}
 
 function changeWayV2() {
+    var listRule = [
+        "xxdd->0",
+        "ddxxdd->0",
+        "ddxx->0",
+        "xxddxx->0",
+        "xxd->0",
+        "ddx->0",
+        "dxx->0",
+        "xdd->0",
+
+        "xxx->x",
+        "xxxd->x",
+        "xxxxd->x",
+
+        "xxxdxxd->x",
+        "dxd->x",
+        "dxxxx->x",
+        "dddddd->x",
+
+        "xdx->d",
+        "ddd->d",
+        "dddx->d",
+        "ddddx->d",
+
+
+        "dddxddx->d",
+        "xdddd->d",
+        "xxxxxx->d"
+    ];
 
     listRule = listRule.sort((a, b) => b.length - a.length);
 
@@ -289,7 +323,6 @@ function changeWayV2() {
             }
             if (isCheck == true) {
                 clog(listCheck + "->" + way);
-                tem.waychoose = listCheck + "->" + way;
                 return way;
             }
         }
@@ -320,38 +353,7 @@ function getListColor() {
 setTimeoutAgain();
 
 function clog(vl) {
-    //console.log(vl);
-}
-
-
-
-function postLog() {
-
-    var datasend = {}
-    datasend.way = tem.waychoose;
-    datasend.is_win = tem.isLastWin;
-    datasend.version = tem.isLastWin;
-    datasend.log = tem;
-    var obj = JSON.stringify(datasend)
-
-    var strSend = b64EncodeUnicode(obj);
-
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            //document.getElementById("demo").innerHTML = this.responseText;
-        }
-    };
-    xhttp.open("POST", "./run.php", true);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    //xhttp.send("fname=Henry&lname=Ford");
-    xhttp.send("v=" + strSend);
-}
-
-function b64EncodeUnicode(str) {
-    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
-        return String.fromCharCode('0x' + p1);
-    }));
+    console.log(vl);
 }
 
 //check have internet

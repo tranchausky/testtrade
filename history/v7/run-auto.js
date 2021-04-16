@@ -41,20 +41,30 @@ function setTimeoutAgain() {
                     clog('run-setHistory');
                     setHistory();
                 }
-                if (info.time > 8 && info.time <= 12 && tem.status.setPrice == 0) {
+                if (info.time > 10 && info.time <= 12 && tem.status.setPrice == 0) {
                     clog('run- set prices')
                     tem.status.setPrice = 1;
                     var numberSet = getValueSet();
                     setPrice(numberSet);
                 }
-                if (info.time > 0 && info.time <= 3 && tem.status.Build == 0) {
+                var seconrandom = randomFromTo()
+                if (info.time > 0 && info.time <= seconrandom && tem.status.Build == 0) {
                     tem.status.Build = 1;
                     clog("Build");
-                    if (tem.numberFalse > 0 && tem.lastChoose != '') {
-                        build(tem.lastChoose);
+                    var waynow = changeWayV2();
+                    if (waynow == 'x' || waynow == 'd') {
+                        build(waynow);
                     } else {
-                        build(changeWayV2());
+                        if (tem.numberFalse > 0 && tem.lastChoose != '') {
+                            build(tem.lastChoose);
+                        }
                     }
+
+                    // if (tem.numberFalse > 0 && tem.lastChoose != '') {
+                    //     build(tem.lastChoose);
+                    // } else {
+                    //     build(changeWayV2());
+                    // }
                 }
                 break;
             default:
@@ -132,7 +142,7 @@ tem.account = null;
 tem.is_new = 'New--';
 tem.is_run = true;
 tem.lastChoose = '';
-tem.version = 'v7-1';
+tem.version = 'v7';
 
 
 // var configPauseTime = 2; //minus
@@ -244,54 +254,23 @@ function colorAt(at) {
 var atLastWin = false;
 
 //value set auto
-var listRule = [
-    "x->d",
-    "d->d",
-    "xxx-> ",
-    "xxxx-> ",
-    "xxxxx-> ",
-    "dxxx-> ",
-    "xxdxxx-> ",
-    "ddxxx-> ",
-    "xdxxx-> ",
-    "xdxxx-> ",
-    "dxxxx-> ",
-    "xdxxxx-> ",
-    "xdxxxx-> ",
-    "dxxxxx-> ",
-    "xdxxxxx-> ",
-    "xdxxxxx-> ",
-    "xdxdxxx-> ",
-    "xdxxdxxx-> ",
-    "xdxdxxdxxx-> ",
-
-    "dxdx-> ",
-    "dxdx-> ",
-    "dxdxd-> ",
-    "dxdxdx-> ",
-    "dxdxdxd-> ",
-    "dxdxdxdx-> ",
-    "dxdxdxdxd-> ",
-    "xxxdx-> ",
-    "xxddd-> ",
-    "xddxx-> ",
-    "xxddxx-> ",
-    "dxxdd-> ",
-    "xddxxddxx-> ",
-    "xxdx-> ",
-];
-
 var lostValueSet = {
     0: 1,
     1: 2,
     2: 4,
-    3: 8,
-    4: 16,
-    5: 32,
-    6: 64,
-    7: 128,
-    8: 250,
+    3: 6,
+    4: 8,
+    5: 10,
+    6: 12,
+    7: 14,
+    8: 16,
+    9: 18,
+    10: 20
 };
+
+var listRule = [
+    "xxx->x"
+];
 
 //get money back
 function getValueSet() {
@@ -311,6 +290,7 @@ function getValueSet() {
 //set value if lost/win
 function setHistory() {
     //console.log(se)
+    $('.mask').trigger('click')
     atLastWin = reloadIsWin();
 
     tem.listRule = listRule;
@@ -476,6 +456,11 @@ function checkCookie() {
         user = Date.now()
         setCookie("userTime", user, 365);
     }
+}
+
+function randomFromTo() {
+    //3-9 second
+    return Math.floor(Math.random() * 7) + 3;
 }
 
 //check have internet

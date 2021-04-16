@@ -15,7 +15,8 @@ function getInView() {
     return rs;
 }
 
-var timeLoopMain;
+
+var seconrandom = 20;
 
 function setTimeoutAgain() {
 
@@ -36,25 +37,34 @@ function setTimeoutAgain() {
                 break;
             case 1:
 
+                if (info.time > 15 && info.time <= 21 && tem.setWay == true) {
+                    tem.setWay = false
+                    tem.lastChoose = changeWayV3()
+                }
                 if (info.time > 13 && info.time <= 15 && tem.status.setHistory == 0) {
                     tem.status.setHistory = 1;
+
                     clog('run-setHistory');
                     setHistory();
+                    seconrandom = randomFromTo(3, 7)
+                    tem.seconrandom = seconrandom
                 }
-                if (info.time > 8 && info.time <= 12 && tem.status.setPrice == 0) {
+                if (info.time > 16 && info.time <= 18 && tem.status.setPrice == 0) {
                     clog('run- set prices')
                     tem.status.setPrice = 1;
                     var numberSet = getValueSet();
                     setPrice(numberSet);
                 }
-                if (info.time > 0 && info.time <= 3 && tem.status.Build == 0) {
+                if (info.time > 0 && info.time <= seconrandom && tem.status.Build == 0) {
                     tem.status.Build = 1;
-                    clog("Build");
-                    if (tem.numberFalse > 0 && tem.lastChoose != '') {
-                        build(tem.lastChoose);
-                    } else {
-                        build(changeWayV2());
-                    }
+                    tem.setWay = true
+                        //clog("Build");
+                        //if (tem.numberFalse > 0 && tem.lastChoose != '') {
+                        //    build(tem.lastChoose);
+                        //} else {
+                        //    build(changeWayV2());
+                        //}
+                    build(tem.lastChoose)
                 }
                 break;
             default:
@@ -132,7 +142,8 @@ tem.account = null;
 tem.is_new = 'New--';
 tem.is_run = true;
 tem.lastChoose = '';
-tem.version = 'v7-1';
+tem.version = 'v12';
+
 
 
 // var configPauseTime = 2; //minus
@@ -244,43 +255,8 @@ function colorAt(at) {
 var atLastWin = false;
 
 //value set auto
-var listRule = [
-    "x->d",
-    "d->d",
-    "xxx-> ",
-    "xxxx-> ",
-    "xxxxx-> ",
-    "dxxx-> ",
-    "xxdxxx-> ",
-    "ddxxx-> ",
-    "xdxxx-> ",
-    "xdxxx-> ",
-    "dxxxx-> ",
-    "xdxxxx-> ",
-    "xdxxxx-> ",
-    "dxxxxx-> ",
-    "xdxxxxx-> ",
-    "xdxxxxx-> ",
-    "xdxdxxx-> ",
-    "xdxxdxxx-> ",
-    "xdxdxxdxxx-> ",
-
-    "dxdx-> ",
-    "dxdx-> ",
-    "dxdxd-> ",
-    "dxdxdx-> ",
-    "dxdxdxd-> ",
-    "dxdxdxdx-> ",
-    "dxdxdxdxd-> ",
-    "xxxdx-> ",
-    "xxddd-> ",
-    "xddxx-> ",
-    "xxddxx-> ",
-    "dxxdd-> ",
-    "xddxxddxx-> ",
-    "xxdx-> ",
-];
-
+var listRule = [];
+var percentRule = 20;
 var lostValueSet = {
     0: 1,
     1: 2,
@@ -288,9 +264,7 @@ var lostValueSet = {
     3: 8,
     4: 16,
     5: 32,
-    6: 64,
-    7: 128,
-    8: 250,
+    6: 64
 };
 
 //get money back
@@ -310,7 +284,8 @@ function getValueSet() {
 
 //set value if lost/win
 function setHistory() {
-    //console.log(se)
+    $('.mask').trigger('click')
+        //console.log(se)
     atLastWin = reloadIsWin();
 
     tem.listRule = listRule;
@@ -383,6 +358,25 @@ function changeWayV2() {
         }
     }
     return null
+}
+
+function changeWayV3() {
+
+    var color_do = $('.justify-content-between .colorDown').text()
+    var color_xanh = $('.justify-content-between .colorUp').text()
+    color_do = parseInt(color_do.replace("%", ""));
+    color_xanh = parseInt(color_xanh.replace("%", ""));
+
+    tem.color_do = color_do
+    tem.color_xanh = color_xanh
+    tem.percentRule = percentRule
+    if (color_do - color_xanh >= percentRule) {
+        return 'd';
+    }
+    if (color_xanh - color_do >= percentRule) {
+        return 'x';
+    }
+    return null;
 }
 
 function getListColor() {
@@ -478,4 +472,8 @@ function checkCookie() {
     }
 }
 
+//15-22(20)
+function randomFromTo(vfrom, vto) {
+    return Math.floor(Math.random() * (vto - vfrom + 1)) + vfrom;
+}
 //check have internet

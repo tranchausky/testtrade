@@ -17,6 +17,8 @@ function getInView() {
 
 var timeLoopMain;
 
+var seconrandom = randomFromTo()
+
 function setTimeoutAgain() {
 
     if (tem.is_run != true) {
@@ -36,18 +38,33 @@ function setTimeoutAgain() {
                 break;
             case 1:
 
-                if (info.time > 13 && info.time <= 15 && tem.status.setHistory == 0) {
+                if (tem.is_run == true && info.time > 13 && info.time <= 15 && tem.status.setHistory == 0) {
                     tem.status.setHistory = 1;
                     clog('run-setHistory');
                     setHistory();
+
+                    seconrandom = randomFromTo()
                 }
-                if (info.time > 8 && info.time <= 12 && tem.status.setPrice == 0) {
+                if (tem.is_run == true && info.time > 8 && info.time <= 12 && tem.status.setPrice == 0) {
+
+                    tem.maxWin = maxMoneyStop
+                    var current = getMoney();
+                    //console.log('change money from ' + tem.first + ' to ' + current + ' =' + (current - tem.first))
+                    if (current - tem.first > tem.maxWin) {
+                        tem.is_run = false;
+                        //loop one day
+                        setTimeout(function() {
+                            window.location.reload(1);
+                        }, 24 * 60 * 60 * 1000); //1day
+                        return;
+                    }
                     clog('run- set prices')
                     tem.status.setPrice = 1;
                     var numberSet = getValueSet();
                     setPrice(numberSet);
                 }
-                if (info.time > 0 && info.time <= 3 && tem.status.Build == 0) {
+
+                if (tem.is_run == true && info.time > 0 && info.time <= seconrandom && tem.status.Build == 0) {
                     tem.status.Build = 1;
                     clog("Build");
                     if (tem.numberFalse > 0 && tem.lastChoose != '') {
@@ -132,7 +149,7 @@ tem.account = null;
 tem.is_new = 'New--';
 tem.is_run = true;
 tem.lastChoose = '';
-tem.version = 'v7-1';
+tem.version = 'v9';
 
 
 // var configPauseTime = 2; //minus
@@ -242,56 +259,32 @@ function colorAt(at) {
 
 //status last win/lost
 var atLastWin = false;
+var maxMoneyStop = 10;
+
+var setMaxWinTotal = 32;
+var setMaxMinTotal = 32;
 
 //value set auto
 var listRule = [
-    "x->d",
-    "d->d",
-    "xxx-> ",
-    "xxxx-> ",
-    "xxxxx-> ",
-    "dxxx-> ",
-    "xxdxxx-> ",
-    "ddxxx-> ",
-    "xdxxx-> ",
-    "xdxxx-> ",
-    "dxxxx-> ",
-    "xdxxxx-> ",
-    "xdxxxx-> ",
-    "dxxxxx-> ",
-    "xdxxxxx-> ",
-    "xdxxxxx-> ",
-    "xdxdxxx-> ",
-    "xdxxdxxx-> ",
-    "xdxdxxdxxx-> ",
-
-    "dxdx-> ",
-    "dxdx-> ",
-    "dxdxd-> ",
-    "dxdxdx-> ",
-    "dxdxdxd-> ",
-    "dxdxdxdx-> ",
-    "dxdxdxdxd-> ",
-    "xxxdx-> ",
-    "xxddd-> ",
-    "xddxx-> ",
-    "xxddxx-> ",
-    "dxxdd-> ",
-    "xddxxddxx-> ",
-    "xxdx-> ",
+    "xxxxdddd->x",
+    "xxxxxddd->x",
+    "xxdxxddd->x",
+    "dxxxdddd->x",
+    "dxxxxddd->x",
+    "ddddxxxx->d",
+    "dddddxxx->d",
+    "ddxddxxx->d",
+    "xdddxxxx->d",
+    "xddddxxx->d",
 ];
 
 var lostValueSet = {
     0: 1,
     1: 2,
     2: 4,
-    3: 8,
-    4: 16,
-    5: 32,
-    6: 64,
-    7: 128,
-    8: 250,
+    3: 8
 };
+
 
 //get money back
 function getValueSet() {
@@ -301,6 +294,7 @@ function getValueSet() {
             valueSet = lostValueSet[tem.numberFalse];
         } else {
             tem.numberFalse = 0;
+            tem.lastChoose = '';
             valueSet = lostValueSet[tem.numberFalse];
         }
 
@@ -310,7 +304,8 @@ function getValueSet() {
 
 //set value if lost/win
 function setHistory() {
-    //console.log(se)
+    $('.mask').trigger('click')
+        //console.log(se)
     atLastWin = reloadIsWin();
 
     tem.listRule = listRule;
@@ -476,6 +471,11 @@ function checkCookie() {
         user = Date.now()
         setCookie("userTime", user, 365);
     }
+}
+
+function randomFromTo() {
+    //3-9 second
+    return Math.floor(Math.random() * 7) + 3;
 }
 
 //check have internet

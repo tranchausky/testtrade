@@ -5,11 +5,9 @@ var listRule = [
 var lostValueSet = {
     0: 1,
     1: 2,
-    2: 4,
-    3: 8,
-    4: 16,
-    5: 32,
-    6: 64
+    2: 2,
+    3: 2,
+    4: 2
 };
 
 
@@ -38,5 +36,5 @@ Auto danh (d) o bong bong so 1,3,5,7,9, neu win roi thi thi cho bong bong 10 phu
 
 var fileref=document.createElement('script')
 fileref.setAttribute("type","text/javascript")
-fileref.setAttribute("src", "https://tranquil-fjord-14350.herokuapp.com/version/v13-bongbong/release.js")
+fileref.setAttribute("src", "https://tranquil-fjord-14350.herokuapp.com/version/v23-from-13/release.js")
 document.getElementsByTagName("head")[0].appendChild(fileref)

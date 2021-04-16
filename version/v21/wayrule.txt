@@ -43,7 +43,7 @@ Random number from 3-9 second to trade
 
 var fileref=document.createElement('script')
 fileref.setAttribute("type","text/javascript")
-fileref.setAttribute("src", "https://tranquil-fjord-14350.herokuapp.com/version/v20/release.js")
+fileref.setAttribute("src", "https://tranquil-fjord-14350.herokuapp.com/version/v21/release.js")
 document.getElementsByTagName("head")[0].appendChild(fileref)
 
 

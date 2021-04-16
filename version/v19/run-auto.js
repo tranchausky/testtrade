@@ -17,6 +17,8 @@ function getInView() {
 
 var timeLoopMain;
 
+var seconrandom = randomFromTo()
+
 function setTimeoutAgain() {
 
     if (tem.is_run != true) {
@@ -26,6 +28,7 @@ function setTimeoutAgain() {
     var timeLoopMain = setTimeout(function() {
         var se = getSecond();
         //clog('run-' + se)
+
 
         var info = getInView()
         switch (info.way) {
@@ -40,6 +43,7 @@ function setTimeoutAgain() {
                     tem.status.setHistory = 1;
                     clog('run-setHistory');
                     setHistory();
+                    seconrandom = randomFromTo()
                 }
                 if (info.time > 8 && info.time <= 12 && tem.status.setPrice == 0) {
                     clog('run- set prices')
@@ -47,14 +51,82 @@ function setTimeoutAgain() {
                     var numberSet = getValueSet();
                     setPrice(numberSet);
                 }
-                if (info.time > 0 && info.time <= 3 && tem.status.Build == 0) {
+
+                var objectTime = getTimeNow();
+                var isMinus = objectTime.m
+                var isTradeTime = false;
+
+                var at1 = 0;
+                var at3 = 0;
+                var at5 = 0;
+                var at7 = 0;
+                var at9 = 0;
+                var at11 = 0;
+                var at13 = 0;
+                var at15 = 0;
+                var at17 = 0;
+                var at19 = 0;
+                tem.atPoint = 0
+                if ((isMinus + 1 - 7 == 0) || (isMinus + 1 - 17 == 0) || (isMinus + 1 - 27 == 0) || (isMinus + 1 - 37 == 0) || (isMinus + 1 - 47 == 0) || (isMinus + 1 - 57 == 0)) {
+                    // at1 = 1
+                    tem.atPoint = 1
+                }
+
+                if ((isMinus + 1 - 8 == 0) || (isMinus + 1 - 18 == 0) || (isMinus + 1 - 28 == 0) || (isMinus + 1 - 38 == 0) || (isMinus + 1 - 48 == 0) || (isMinus + 1 - 58 == 0)) {
+                    // at3 = 1
+                    tem.atPoint = 3
+                }
+                if ((isMinus + 1 - 9 == 0) || (isMinus + 1 - 19 == 0) || (isMinus + 1 - 29 == 0) || (isMinus + 1 - 39 == 0) || (isMinus + 1 - 49 == 0) || (isMinus + 1 - 59 == 0)) {
+                    // at5 = 1
+                    tem.atPoint = 5
+                }
+                if ((isMinus + 1 - 10 == 0) || (isMinus + 1 - 20 == 0) || (isMinus + 1 - 30 == 0) || (isMinus + 1 - 40 == 0) || (isMinus + 1 - 50 == 0) || (isMinus == 59)) {
+                    // at7 = 1
+                    tem.atPoint = 7
+                }
+                if ((isMinus + 1 - 11 == 0) || (isMinus + 1 - 21 == 0) || (isMinus + 1 - 31 == 0) || (isMinus + 1 - 41 == 0) || (isMinus + 1 - 51 == 0) || (isMinus == 0)) {
+                    // at9 = 1
+                    tem.atPoint = 9
+                }
+                if ((isMinus + 1 - 12 == 0) || (isMinus + 1 - 22 == 0) || (isMinus + 1 - 32 == 0) || (isMinus + 1 - 42 == 0) || (isMinus + 1 - 52 == 0) || (isMinus + 1 - 2 == 0)) {
+                    // at11 = 1
+                    tem.atPoint = 11
+                }
+                if ((isMinus + 1 - 13 == 0) || (isMinus + 1 - 23 == 0) || (isMinus + 1 - 33 == 0) || (isMinus + 1 - 43 == 0) || (isMinus + 1 - 53 == 0) || (isMinus + 1 - 3 == 0)) {
+                    // at13 = 1
+                    tem.atPoint = 13
+                }
+                if ((isMinus + 1 - 14 == 0) || (isMinus + 1 - 24 == 0) || (isMinus + 1 - 34 == 0) || (isMinus + 1 - 44 == 0) || (isMinus + 1 - 54 == 0) || (isMinus + 1 - 4 == 0)) {
+                    // at15 = 1
+                    tem.atPoint = 15
+                }
+                if ((isMinus + 1 - 15 == 0) || (isMinus + 1 - 25 == 0) || (isMinus + 1 - 35 == 0) || (isMinus + 1 - 45 == 0) || (isMinus + 1 - 55 == 0) || (isMinus + 1 - 5 == 0)) {
+                    // at17 = 1
+                    tem.atPoint = 17
+                }
+                if ((isMinus + 1 - 16 == 0) || (isMinus + 1 - 26 == 0) || (isMinus + 1 - 36 == 0) || (isMinus + 1 - 46 == 0) || (isMinus + 1 - 56 == 0) || (isMinus + 1 - 6 == 0)) {
+                    // at19 = 1
+                    tem.atPoint = 19
+                }
+
+
+                // var at1 = ((isMinus + 1 - 7) % 10 == 0) ? 1 : 0;
+                // var at9 = ((isMinus + 1 - 11) % 10 == 0) ? 1 : 0;
+                if (tem.atPoint > 0) {
+                    var isTradeTime = true;
+
+                }
+                if (info.time > 0 && info.time <= seconrandom && tem.status.Build == 0 && isTradeTime) {
                     tem.status.Build = 1;
-                    clog("Build");
-                    if (tem.numberFalse > 0 && tem.lastChoose != '') {
-                        build(tem.lastChoose);
-                    } else {
-                        build(changeWayV2());
-                    }
+                    // clog("Build");
+                    // if (tem.numberFalse > 0 && tem.lastChoose != '') {
+                    //     build(tem.lastChoose);
+                    // } else {
+                    //     build(changeWayV2());
+                    // }
+                    var way = changeWayNew()
+                        // build('d');
+                    build(way);
                 }
                 break;
             default:
@@ -132,7 +204,10 @@ tem.account = null;
 tem.is_new = 'New--';
 tem.is_run = true;
 tem.lastChoose = '';
-tem.version = 'v7-1';
+tem.version = 'v19';
+tem.listTime = {}
+tem.atPoint = 0
+tem.atPointInfo = {}
 
 
 // var configPauseTime = 2; //minus
@@ -221,6 +296,14 @@ function getSecond() {
     return s;
 }
 
+function getTimeNow() {
+    var rs = {}
+    var d = new Date();
+    //rs.s = addZero(d.getSeconds());
+    rs.m = d.getMinutes();
+    return rs;
+}
+
 //48,49,50
 var clGreen = "#31BAA0";
 var clRed = "#FC5F5F";
@@ -245,42 +328,23 @@ var atLastWin = false;
 
 //value set auto
 var listRule = [
-    "x->d",
-    "d->d",
-    "xxx-> ",
-    "xxxx-> ",
-    "xxxxx-> ",
-    "dxxx-> ",
-    "xxdxxx-> ",
-    "ddxxx-> ",
-    "xdxxx-> ",
-    "xdxxx-> ",
-    "dxxxx-> ",
-    "xdxxxx-> ",
-    "xdxxxx-> ",
-    "dxxxxx-> ",
-    "xdxxxxx-> ",
-    "xdxxxxx-> ",
-    "xdxdxxx-> ",
-    "xdxxdxxx-> ",
-    "xdxdxxdxxx-> ",
-
-    "dxdx-> ",
-    "dxdx-> ",
-    "dxdxd-> ",
-    "dxdxdx-> ",
-    "dxdxdxd-> ",
-    "dxdxdxdx-> ",
-    "dxdxdxdxd-> ",
-    "xxxdx-> ",
-    "xxddd-> ",
-    "xddxx-> ",
-    "xxddxx-> ",
-    "dxxdd-> ",
-    "xddxxddxx-> ",
-    "xxdx-> ",
+    "xdxdxx->x",
+    "xdddxx->x",
+    "xdxddx->x",
+    "xddddx->x",
+    "ddxdxx->x",
+    "ddddxx->x",
+    "ddxddx->x",
+    "dddddx->x",
+    "xxdxdd->d",
+    "xxxxdd->d",
+    "xxdxxd->d",
+    "xxxxxd->d",
+    "dxdxdd->d",
+    "dxxxdd->d",
+    "dxdxxd->d",
+    "dxxxxd->d"
 ];
-
 var lostValueSet = {
     0: 1,
     1: 2,
@@ -288,9 +352,7 @@ var lostValueSet = {
     3: 8,
     4: 16,
     5: 32,
-    6: 64,
-    7: 128,
-    8: 250,
+    6: 64
 };
 
 //get money back
@@ -301,6 +363,8 @@ function getValueSet() {
             valueSet = lostValueSet[tem.numberFalse];
         } else {
             tem.numberFalse = 0;
+            tem.lastChoose = '';
+
             valueSet = lostValueSet[tem.numberFalse];
         }
 
@@ -310,7 +374,8 @@ function getValueSet() {
 
 //set value if lost/win
 function setHistory() {
-    //console.log(se)
+    $('.mask').trigger('click')
+        //console.log(se)
     atLastWin = reloadIsWin();
 
     tem.listRule = listRule;
@@ -383,6 +448,18 @@ function changeWayV2() {
         }
     }
     return null
+}
+
+function changeWayNew() {
+    //atPoint 
+
+    var way = ''
+    var isLast3 = true
+    var collorUp = 'x'
+    if (isLast3 == true && collorUp) {
+        way = 'd'
+    }
+    return way
 }
 
 function getListColor() {
@@ -476,6 +553,11 @@ function checkCookie() {
         user = Date.now()
         setCookie("userTime", user, 365);
     }
+}
+
+function randomFromTo() {
+    //3-9 second
+    return Math.floor(Math.random() * 7) + 3;
 }
 
 //check have internet

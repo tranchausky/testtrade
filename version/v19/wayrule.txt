@@ -1,7 +1,7 @@
-﻿FLow rule
+FLow rule
 
-var listRule = [];
-
+var listRule = [
+];
 var lostValueSet = {
     0: 1,
     1: 2,
@@ -9,10 +9,9 @@ var lostValueSet = {
     3: 8,
     4: 16,
     5: 32,
+    6: 64
 };
 
-var setMaxWinTotal = 32;
-var setMaxMinTotal = 32;
 
 
 Open web
@@ -31,25 +30,17 @@ Remember last choose and "gap thep" if lost money
 ---13/03
 Random number from 3-9 second to trade
 
+--28/03
+Auto danh (d) o bong bong so 1 va so 5(9 stt)
 
-7/4
-- setMaxWinTotal (tong tien lo`i se~ du`ng)
-- setMaxMinTotal (tong tien lo^~ se~ du`ng)
-- phuong phap so sanh lui 20 step
+-- 2/4
+Auto danh khi kiem tra lich su tai diem do 3 lan cung mau
+Gap thep tai diem do
 
-14/4
-- if (x -> d) and d -> x
-
-
-
+https://thuthuattienich.com/thu-thuat-may-tinh/hien-giay-windows-10/
+add de hien thi so s tren win 10
 
 var fileref=document.createElement('script')
 fileref.setAttribute("type","text/javascript")
-fileref.setAttribute("src", "https://tranquil-fjord-14350.herokuapp.com/version/v20-1/release.js")
+fileref.setAttribute("src", "https://tranquil-fjord-14350.herokuapp.com/version/v13-bongbong/release.js")
 document.getElementsByTagName("head")[0].appendChild(fileref)
-
-
-
-test 11 v5 3 cau moi xxx.txt
-
-
