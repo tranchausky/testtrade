@@ -15,12 +15,17 @@ function getInView() {
     return rs;
 }
 
-var seconrandom = randomFromTo(2, 4)
+var timeLoopMain;
+
+var seconrandom = randomFromTo(5, 10)
 
 function setTimeoutAgain() {
 
+    if (tem.is_run != true) {
+        return;
+    }
 
-    var t = setTimeout(function() {
+    var timeLoopMain = setTimeout(function() {
         var se = getSecond();
         //clog('run-' + se)
 
@@ -30,6 +35,7 @@ function setTimeoutAgain() {
                 tem.status.setPrice = 0;
                 tem.status.Build = 0;
                 tem.status.setHistory = 0;
+                tem.status.color_set_first = '';
                 break;
             case 1:
 
@@ -37,25 +43,41 @@ function setTimeoutAgain() {
                     tem.status.setHistory = 1;
                     clog('run-setHistory');
                     setHistory();
+                    seconrandom = randomFromTo(6, 10)
+                    tem.status.color_set_first = changeWayV20step()
+
                 }
-                if (info.time > 10 && info.time <= 13 && tem.status.setPrice == 0) {
+                if (info.time > 10 && info.time <= 12 && tem.status.setPrice == 0) {
+
                     tem.maxWin = setMaxWinTotal
                     tem.maxLost = setMaxMinTotal
                     var current = getMoney();
+                    //console.log('change money from ' + tem.first + ' to ' + current + ' =' + (current - tem.first))
                     if (current - tem.first <= tem.maxWin && tem.first - current <= tem.maxLost) {
+                        //tem.round2 = true;
+                        //loop one day
+                        // setTimeout(function() {
+                        //     window.location.reload(1);
+                        // }, 24 * 60 * 60 * 1000); //1day
+                        // return;
                         clog('run- set prices')
                         tem.status.setPrice = 1;
                         var numberSet = getValueSet();
                         setPrice(numberSet);
                     }
-                    seconrandom = randomFromTo(2, 4)
+
                 }
 
-                if (info.time > 0 && info.time <= seconrandom && tem.status.Build == 0) {
+                if (info.time > 0 && info.time <= seconrandom && tem.status.Build == 0 && tem.status.setPrice == 1) {
                     tem.status.Build = 1;
-                    clog("Build");
-                    build(changeWayV2());
+                    // clog("Build");
+                    // if (tem.numberFalse > 0 && tem.lastChoose != '') {
+                    //     build(tem.lastChoose);
+                    // } else {
 
+                    // }
+                    // build(changeWayV2());
+                    build(tem.status.color_set_first);
                 }
                 break;
             default:
@@ -120,12 +142,24 @@ tem.is_show_first = true;
 tem.time_old = new Date().toLocaleTimeString();
 tem.time_win = '';
 tem.maxWin = 50;
-tem.lastChoose = '';
 
 tem.status = {}
+tem.waychoose = '';
+tem.isLastWin = '';
+//total lost last
+tem.numberFalse = 0;
+tem.lastPrices = 0;
+tem.listRule = null;
+tem.listLostSet = null;
+tem.account = null;
+tem.is_new = 'New--';
+tem.is_run = true;
+tem.lastChoose = '';
+tem.version = '22';
 
-var setMaxWinTotal = 32;
-var setMaxMinTotal = 32;
+
+// var configPauseTime = 2; //minus
+// var configPauseWillLost = 2; //number false and after will resert =0
 
 function reloadIsWin() {
 
@@ -141,6 +175,7 @@ function reloadIsWin() {
     // }
     // return '';
 
+
     tem.new = getMoney();
     var status = 'no-change';
     if (tem.new > tem.old) {
@@ -154,13 +189,10 @@ function reloadIsWin() {
 
 }
 
-function lastWayColor() {
-    //
-}
-
 function setPrice(conso) {
     conso = conso.toString();
     jQuery("#InputNumber").val(conso);
+    tem.lastPrices = conso;
     $(function() {
         $('#InputNumber').keydown();
         $('#InputNumber').keypress();
@@ -233,19 +265,10 @@ function colorAt(at) {
 
 //status last win/lost
 var atLastWin = false;
-//total lost last
-var numberLastFalse = 0;
+// tem.round2 = false;
+
 //value set auto
-var listRule = [
-    "x->d",
-    "d->x",
-    "xxx->",
-    "xxxx->",
-    "xdxx->",
-    "ddd->",
-    "dddd->",
-    "dxdd->",
-];
+var listRule = [];
 
 var lostValueSet = {
     0: 1,
@@ -253,23 +276,38 @@ var lostValueSet = {
     2: 4,
     3: 8,
     4: 16,
-    5: 8,
-    6: 16,
-    7: 32,
-    8: 16,
-    9: 32,
-    10: 64,
+    5: 32,
 };
 
+
+var setMaxWinTotal = 32;
+var setMaxMinTotal = 32;
+// var lostValueSetRound2 = {
+//     0: 1,
+//     1: 2,
+//     2: 4,
+//     3: 8
+// };
+
+
+// tem.lostValueSetRound2 = lostValueSetRound2
 //get money back
 function getValueSet() {
-    var valueSet = lostValueSet[0] ? lostValueSet[0] : 1;
+
+    var lostArray = lostValueSet;
+
+    // if (tem.round2 == true) {
+    //     lostArray = lostValueSetRound2
+    // }
+
+    var valueSet = lostValueSet[0] != undefined ? lostValueSet[0] : 1;
     if (atLastWin != true) {
-        if (typeof lostValueSet[numberLastFalse] !== 'undefined') {
-            valueSet = lostValueSet[numberLastFalse];
+        if (typeof lostArray[tem.numberFalse] !== 'undefined') {
+            valueSet = lostArray[tem.numberFalse];
         } else {
-            numberLastFalse = 0;
-            valueSet = lostValueSet[numberLastFalse];
+            tem.numberFalse = 0;
+            tem.lastChoose = '';
+            valueSet = lostValueSet[tem.numberFalse];
         }
 
     }
@@ -278,32 +316,58 @@ function getValueSet() {
 
 //set value if lost/win
 function setHistory() {
-    //console.log(se)
     $('.mask').trigger('click')
+        //console.log(se)
     atLastWin = reloadIsWin();
+
+    tem.listRule = listRule;
+    tem.listLostSet = lostValueSet;
+    tem.isLastWin = atLastWin;
+
+    tem.account = tem.is_new.toString() + $('.d-flex.flex-column.mr-lg-2.mr-2').text();
+    // tem.configPauseTime = configPauseTime
+    // tem.configPauseWillLost = configPauseWillLost
 
     switch (atLastWin) {
         case false:
-            numberLastFalse++;
+            postLog();
+            tem.is_new = ''
+            tem.numberFalse++;
+            // if (tem.numberFalse > configPauseWillLost) {
+            //     //pase and will try call
+            //     tem.numberFalse = 0;
+            //     clearTimeout(timeLoopMain) //stop
+            //     tem.is_run = false;
+            //     setTimeout(function() {
+            //         tem.is_run = true;
+            //         setTimeoutAgain()
+            //     }, configPauseTime * 1000); //wake up main function
+            // }
             break;
         case true:
-            numberLastFalse = 0;
+            postLog();
+            tem.numberFalse = 0;
+            tem.is_new = ''
             break;
         default:
             break;
     }
+
+
+
     clog('last_event:' + atLastWin)
-    clog('number lost:' + numberLastFalse)
+    clog('number lost:' + tem.numberFalse)
         //resert value, alot of lost, back to 0
-    if (numberLastFalse > parseInt(lostValueSet.length) - 1) {
-        numberLastFalse = 0;
+    if (tem.numberFalse > parseInt(lostValueSet.length) - 1) {
+        tem.numberFalse = 0;
     }
 }
+
 
 function changeWayV2() {
     tem.lastChoose = '';
     listRule = listRule.sort((a, b) => b.length - a.length);
-
+    tem.waychoose = '';
     for (var property in listRule) {
         var rule = listRule[property];
         var arrRule = rule.split("->");
@@ -318,13 +382,49 @@ function changeWayV2() {
                 }
             }
             if (isCheck == true) {
-                tem.lastChoose = (way == 'x') ? true : false;
+                tem.lastChoose = (way == 'x' || way == 'd') ? way : '';
                 clog(listCheck + "->" + way);
+                tem.waychoose = listCheck + "->" + way;
                 return way;
             }
         }
     }
     return null
+}
+
+function changeWayV20step() {
+    tem.lastChoose = '';
+    var colors = getListColor();
+    // if (colors[19] != undefined) {
+    //     tem.lastChoose = colors[19]
+    // }
+    var color1 = colors[21] != undefined ? colors[21] : '';
+    var color2 = colors[1] != undefined ? colors[1] : '';
+    var color3 = colors[23] != undefined ? colors[23] : '';
+    var color4 = colors[3] != undefined ? colors[3] : '';
+    var color5 = colors[25] != undefined ? colors[25] : '';
+    var color6 = colors[5] != undefined ? colors[5] : '';
+    var color7 = colors[19] != undefined ? colors[19] : '';
+
+    if (color1 == color2 && color3 == color4 && color5 == color6) {
+        if (color7 == 'x') {
+            tem.lastChoose == 'd'
+        }
+        if (color7 == 'd') {
+            tem.lastChoose = 'x'
+        }
+    }
+    if (color1 != color2 && color3 != color4 && color5 != color6) {
+        if (color7 == 'x') {
+            tem.lastChoose = 'x'
+        }
+        if (color7 == 'd') {
+            tem.lastChoose = 'd'
+        }
+    }
+
+
+    return tem.lastChoose
 }
 
 function getListColor() {
@@ -353,10 +453,74 @@ function clog(vl) {
     //console.log(vl);
 }
 
-// function randomFromTo() {
-//     //3-9 second
-//     return Math.floor(Math.random() * 7) + 3;
-// }
+
+
+function postLog() {
+
+    var datasend = {}
+    datasend.way = tem.waychoose;
+    datasend.is_win = tem.isLastWin;
+    datasend.version = '';
+    datasend.log = tem;
+    datasend.user = getCookie("userTime");
+    var obj = JSON.stringify(datasend)
+
+    var strSend = b64EncodeUnicode(obj);
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            //document.getElementById("demo").innerHTML = this.responseText;
+        }
+    };
+    var linksend = "https://chau.link/logs/run.php";
+    xhttp.open("POST", linksend, true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    //xhttp.send("fname=Henry&lname=Ford");
+    xhttp.send("v=" + strSend);
+}
+
+function b64EncodeUnicode(str) {
+    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
+        return String.fromCharCode('0x' + p1);
+    }));
+}
+
+
+//set cooki
+checkCookie()
+
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+function checkCookie() {
+    var user = getCookie("userTime");
+    if (user != "") {} else {
+        user = Date.now()
+        setCookie("userTime", user, 365);
+    }
+}
+
+
 function randomFromTo(vfrom, vto) {
     return Math.floor(Math.random() * (vto - vfrom + 1)) + vfrom;
 }
