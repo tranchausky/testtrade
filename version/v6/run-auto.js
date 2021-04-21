@@ -51,6 +51,7 @@ function setTimeoutAgain() {
                                 tem.isRun = true;
                                 tem.numberLostCurrent = 0;
                                 tem.status.timeLoopLostNumber = 0;
+                                setTimeoutAgain(); //back run
                             }, timeStopWaiting * 1000 * 60);
                         } else {
                             //time for waiting
