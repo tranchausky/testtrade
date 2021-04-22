@@ -39,7 +39,7 @@ function setTimeoutAgain() {
                 break;
             case 1:
 
-                if (info.time > 13 && info.time <= 15 && tem.status.setHistory == 0) {
+                if (info.time > 15 && info.time <= 20 && tem.status.setHistory == 0) {
                     tem.status.setHistory = 1;
                     clog('run-setHistory');
                     setHistory();
