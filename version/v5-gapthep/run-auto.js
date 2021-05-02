@@ -51,7 +51,7 @@ function setTimeoutAgain() {
                     seconrandom = randomFromTo(2, 4)
                 }
 
-                if (info.time > 0 && info.time <= seconrandom && tem.status.Build == 0) {
+                if (info.time > 0 && info.time <= seconrandom && tem.status.Build == 0 && tem.status.setPrice == 1) {
                     tem.status.Build = 1;
                     clog("Build");
                     build(changeWayV2());
