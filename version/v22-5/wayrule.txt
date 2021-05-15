@@ -4,11 +4,7 @@ var listRule = [];
 
 var lostValueSet = {
     0: 1,
-    1: 2,
-    2: 4,
-    3: 8,
-    4: 16,
-    5: 32,
+    1: 2
 };
 
 var setMaxWinTotal = 32;
@@ -36,15 +32,22 @@ Random number from 6,10 second to trade
 - setMaxWinTotal (tong tien lo`i se~ du`ng)
 - setMaxMinTotal (tong tien lo^~ se~ du`ng)
 
-10/04
-- phuong phap so sanh 3 con sai, danh cung mau cai cung cung
-- (remove) phuong phap so sanh 3 con dung, danh khac mau cai cuoi cung
+18/04
+- phuong phap so sanh 4 con sai, danh cung mau cai cung cung
+- phuong phap so sanh 4 con dung, danh khac mau cai cuoi cung
 
+
+20/4
+- same version-22-1
+- update gap thep [1,2]
+- thua 3 lan thi dung 10 phut
+    var numberStopWaiting = 3
+    var timeStopWaiting = 10
 
 
 
 var fileref=document.createElement('script')
 fileref.setAttribute("type","text/javascript")
-fileref.setAttribute("src", "https://tranquil-fjord-14350.herokuapp.com/version/v22/release.js")
+fileref.setAttribute("src", "https://tranquil-fjord-14350.herokuapp.com/version/v22-1/release.js")
 document.getElementsByTagName("head")[0].appendChild(fileref)
 

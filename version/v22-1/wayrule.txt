@@ -38,7 +38,7 @@ Random number from 6,10 second to trade
 
 18/04
 - phuong phap so sanh 4 con sai, danh cung mau cai cung cung
-- phuong phap so sanh 4 con dung, danh khac mau cai cuoi cung
+- (remove) phuong phap so sanh 4 con dung, danh khac mau cai cuoi cung
 
 
 

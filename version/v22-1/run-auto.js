@@ -410,6 +410,7 @@ function changeWayV20step() {
 
     var color7 = colors[19] != undefined ? colors[19] : '';
 
+    /*
     if (color1 == color2 && color3 == color4 && color5 == color6 && color8 == color9) {
         if (color7 == 'x') {
             tem.lastChoose == 'd'
@@ -418,6 +419,7 @@ function changeWayV20step() {
             tem.lastChoose = 'x'
         }
     }
+    */
     if (color1 != color2 && color3 != color4 && color5 != color6 && color8 != color9) {
         if (color7 == 'x') {
             tem.lastChoose = 'x'

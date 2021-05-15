@@ -36,15 +36,36 @@ function setTimeoutAgain() {
                 tem.status.Build = 0;
                 tem.status.setHistory = 0;
                 tem.status.color_set_first = '';
+                tem.status.timeLoopLostNumber = 0;
                 break;
             case 1:
 
-                if (info.time > 15 && info.time <= 20 && tem.status.setHistory == 0) {
-                    tem.status.setHistory = 1;
-                    clog('run-setHistory');
-                    setHistory();
-                    seconrandom = randomFromTo(6, 10)
-                    tem.status.color_set_first = changeWayV20step()
+                if (info.time > 13 && info.time <= 15 && tem.status.setHistory == 0) {
+
+                    if (tem.numberLostCurrent > numberStopWaiting) {
+                        tem.is_run = false;
+                        //pause
+                        //back
+
+                        if (tem.status.timeLoopLostNumber == 0) {
+                            tem.status.timeLoopLostNumber = 1;
+                            setTimeout(() => {
+                                tem.is_run = true;
+                                tem.numberLostCurrent = 0;
+                                tem.status.timeLoopLostNumber = 0;
+                                setTimeoutAgain(); //back run
+                            }, timeStopWaiting * 1000 * 60);
+                        } else {
+                            //time for waiting
+                            //and time tem.isRun ==false
+                        }
+                    } else {
+                        tem.status.setHistory = 1;
+                        clog('run-setHistory');
+                        setHistory();
+                        seconrandom = randomFromTo(6, 10)
+                        tem.status.color_set_first = changeWayV20step()
+                    }
 
                 }
                 if (info.time > 10 && info.time <= 12 && tem.status.setPrice == 0) {
@@ -155,8 +176,9 @@ tem.account = null;
 tem.is_new = 'New--';
 tem.is_run = true;
 tem.lastChoose = '';
-tem.version = '22-2';
+tem.version = '22-5';
 
+tem.numberLostCurrent = 0;
 
 // var configPauseTime = 2; //minus
 // var configPauseWillLost = 2; //number false and after will resert =0
@@ -273,15 +295,15 @@ var listRule = [];
 var lostValueSet = {
     0: 1,
     1: 2,
-    2: 4,
-    3: 8,
-    4: 16,
-    5: 32,
 };
 
 
 var setMaxWinTotal = 32;
 var setMaxMinTotal = 32;
+
+var numberStopWaiting = 3; //so lan  thua se dung
+var timeStopWaiting = 10; //thoi gia se dung khi thua nhieu
+
 // var lostValueSetRound2 = {
 //     0: 1,
 //     1: 2,
@@ -333,6 +355,7 @@ function setHistory() {
             postLog();
             tem.is_new = ''
             tem.numberFalse++;
+            tem.numberLostCurrent++;
             // if (tem.numberFalse > configPauseWillLost) {
             //     //pase and will try call
             //     tem.numberFalse = 0;
@@ -348,6 +371,7 @@ function setHistory() {
             postLog();
             tem.numberFalse = 0;
             tem.is_new = ''
+            tem.numberLostCurrent = '';
             break;
         default:
             break;
@@ -355,9 +379,9 @@ function setHistory() {
 
 
 
-    //clog('last_event:' + atLastWin)
-    //clog('number lost:' + tem.numberFalse)
-    //resert value, alot of lost, back to 0
+    clog('last_event:' + atLastWin)
+    clog('number lost:' + tem.numberFalse)
+        //resert value, alot of lost, back to 0
     if (tem.numberFalse > parseInt(lostValueSet.length) - 1) {
         tem.numberFalse = 0;
     }
@@ -408,20 +432,17 @@ function changeWayV20step() {
     var color8 = colors[27] != undefined ? colors[27] : '';
     var color9 = colors[7] != undefined ? colors[7] : '';
 
-    var color10 = colors[29] != undefined ? colors[29] : '';
-    var color11 = colors[9] != undefined ? colors[9] : '';
-
     var color7 = colors[19] != undefined ? colors[19] : '';
 
-    // if (color1 == color2 && color3 == color4 && color5 == color6 && color8 == color9 && color10 == color11) {
-    //     if (color7 == 'x') {
-    //         tem.lastChoose == 'd'
-    //     }
-    //     if (color7 == 'd') {
-    //         tem.lastChoose = 'x'
-    //     }
-    // }
-    if (color1 != color2 && color3 != color4 && color5 != color6 && color8 != color9 && color10 != color11) {
+    if (color1 == color2 && color3 == color4 && color5 == color6 && color8 == color9) {
+        if (color7 == 'x') {
+            tem.lastChoose == 'd'
+        }
+        if (color7 == 'd') {
+            tem.lastChoose = 'x'
+        }
+    }
+    if (color1 != color2 && color3 != color4 && color5 != color6 && color8 != color9) {
         if (color7 == 'x') {
             tem.lastChoose = 'x'
         }
