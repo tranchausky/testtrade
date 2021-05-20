@@ -68,7 +68,7 @@ function setTimeoutAgain() {
 
                 }
 
-                if (info.time > 0 && info.time <= seconrandom && tem.status.Build == 0 && tem.status.setPrice == 1) {
+                if (info.time > 0 && info.time <= seconrandom && tem.status.Build == 0 && tem.status.setPrice == 1 && tem.status.setHistory == 1) {
                     tem.status.Build = 1;
                     // clog("Build");
                     // if (tem.numberFalse > 0 && tem.lastChoose != '') {
