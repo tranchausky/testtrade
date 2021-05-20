@@ -39,7 +39,7 @@ function setTimeoutAgain() {
                 break;
             case 1:
 
-                if (info.time > 15 && info.time <= 20 && tem.status.setHistory == 0) {
+                if (info.time > 17 && info.time <= 25 && tem.status.setHistory == 0) {
                     tem.status.setHistory = 1;
                     clog('run-setHistory');
                     setHistory();
@@ -47,7 +47,7 @@ function setTimeoutAgain() {
                     tem.status.color_set_first = changeWayV20step()
 
                 }
-                if (info.time > 10 && info.time <= 12 && tem.status.setPrice == 0) {
+                if (info.time > 13 && info.time <= 15 && tem.status.setPrice == 0) {
 
                     tem.maxWin = setMaxWinTotal
                     tem.maxLost = setMaxMinTotal
@@ -275,8 +275,6 @@ var lostValueSet = {
     1: 2,
     2: 4,
     3: 8,
-    4: 16,
-    5: 32,
 };
 
 
@@ -464,6 +462,7 @@ function clog(vl) {
 
 function postLog() {
 
+    return;
     var datasend = {}
     datasend.way = tem.waychoose;
     datasend.is_win = tem.isLastWin;
