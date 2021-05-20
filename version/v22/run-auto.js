@@ -456,7 +456,7 @@ function clog(vl) {
 
 
 function postLog() {
-
+    return;
     var datasend = {}
     datasend.way = tem.waychoose;
     datasend.is_win = tem.isLastWin;
