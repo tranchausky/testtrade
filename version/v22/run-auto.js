@@ -39,15 +39,15 @@ function setTimeoutAgain() {
                 break;
             case 1:
 
-                if (info.time > 13 && info.time <= 15 && tem.status.setHistory == 0) {
+                if (info.time > 20 && info.time <= 25 && tem.status.setHistory == 0) {
                     tem.status.setHistory = 1;
                     clog('run-setHistory');
                     setHistory();
-                    seconrandom = randomFromTo(6, 10)
+                    seconrandom = randomFromTo(4, 10)
                     tem.status.color_set_first = changeWayV20step()
 
                 }
-                if (info.time > 10 && info.time <= 12 && tem.status.setPrice == 0) {
+                if (info.time > 10 && info.time <= 18 && tem.status.setPrice == 0) {
 
                     tem.maxWin = setMaxWinTotal
                     tem.maxLost = setMaxMinTotal
