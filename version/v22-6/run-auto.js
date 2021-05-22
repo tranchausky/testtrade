@@ -36,11 +36,10 @@ function setTimeoutAgain() {
                 tem.status.Build = 0;
                 tem.status.setHistory = 0;
                 tem.status.color_set_first = '';
-                tem.status.timeLoopLostNumber = 0;
                 break;
             case 1:
 
-                if (info.time > 13 && info.time <= 15 && tem.status.setHistory == 0) {
+                if (info.time > 20 && info.time <= 25 && tem.status.setHistory == 0) {
 
                     if (tem.numberLostCurrent > numberStopWaiting) {
                         tem.is_run = false;
@@ -60,15 +59,16 @@ function setTimeoutAgain() {
                             //and time tem.isRun ==false
                         }
                     } else {
+
                         tem.status.setHistory = 1;
                         clog('run-setHistory');
                         setHistory();
-                        seconrandom = randomFromTo(6, 10)
+                        seconrandom = randomFromTo(4, 10)
                         tem.status.color_set_first = changeWayV20step()
                     }
 
                 }
-                if (info.time > 10 && info.time <= 12 && tem.status.setPrice == 0) {
+                if (info.time > 10 && info.time <= 18 && tem.status.setPrice == 0) {
 
                     tem.maxWin = setMaxWinTotal
                     tem.maxLost = setMaxMinTotal
@@ -89,7 +89,7 @@ function setTimeoutAgain() {
 
                 }
 
-                if (info.time > 0 && info.time <= seconrandom && tem.status.Build == 0 && tem.status.setPrice == 1) {
+                if (info.time > 0 && info.time <= seconrandom && tem.status.Build == 0 && tem.status.setPrice == 1 && tem.status.setHistory == 1) {
                     tem.status.Build = 1;
                     // clog("Build");
                     // if (tem.numberFalse > 0 && tem.lastChoose != '') {
@@ -176,7 +176,7 @@ tem.account = null;
 tem.is_new = 'New--';
 tem.is_run = true;
 tem.lastChoose = '';
-tem.version = '22-5';
+tem.version = '22';
 
 tem.numberLostCurrent = 0;
 
@@ -300,16 +300,15 @@ var lostValueSet = {
 
 var setMaxWinTotal = 32;
 var setMaxMinTotal = 32;
-
-var numberStopWaiting = 3; //so lan  thua se dung
-var timeStopWaiting = 10; //thoi gia se dung khi thua nhieu
-
 // var lostValueSetRound2 = {
 //     0: 1,
 //     1: 2,
 //     2: 4,
 //     3: 8
 // };
+
+var numberStopWaiting = 3; //so lan  thua se dung
+var timeStopWaiting = 10; //thoi gia se dung khi thua nhieu
 
 
 // tem.lostValueSetRound2 = lostValueSetRound2
@@ -370,8 +369,8 @@ function setHistory() {
         case true:
             postLog();
             tem.numberFalse = 0;
+            tem.numberLostCurrent = 0;
             tem.is_new = ''
-            tem.numberLostCurrent = '';
             break;
         default:
             break;
@@ -428,21 +427,17 @@ function changeWayV20step() {
     var color4 = colors[3] != undefined ? colors[3] : '';
     var color5 = colors[25] != undefined ? colors[25] : '';
     var color6 = colors[5] != undefined ? colors[5] : '';
-
-    var color8 = colors[27] != undefined ? colors[27] : '';
-    var color9 = colors[7] != undefined ? colors[7] : '';
-
     var color7 = colors[19] != undefined ? colors[19] : '';
 
-    if (color1 == color2 && color3 == color4 && color5 == color6 && color8 == color9) {
-        if (color7 == 'x') {
-            tem.lastChoose == 'd'
-        }
-        if (color7 == 'd') {
-            tem.lastChoose = 'x'
-        }
-    }
-    if (color1 != color2 && color3 != color4 && color5 != color6 && color8 != color9) {
+    // if (color1 == color2 && color3 == color4 && color5 == color6) {
+    //     if (color7 == 'x') {
+    //         tem.lastChoose == 'd'
+    //     }
+    //     if (color7 == 'd') {
+    //         tem.lastChoose = 'x'
+    //     }
+    // }
+    if (color1 != color2 && color3 != color4 && color5 != color6) {
         if (color7 == 'x') {
             tem.lastChoose = 'x'
         }
@@ -485,7 +480,6 @@ function clog(vl) {
 
 function postLog() {
     return;
-
     var datasend = {}
     datasend.way = tem.waychoose;
     datasend.is_win = tem.isLastWin;
